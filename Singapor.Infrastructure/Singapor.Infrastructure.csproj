@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F61F11A8-7D5F-41CD-9717-3D20FAC7FFDC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Singapor.Infrastructure</RootNamespace>
+    <AssemblyName>Singapor.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Globalization" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationContainer.cs" />
+    <Compile Include="DependencyInjection\Modules\ApplicationServiceModule.cs" />
+    <Compile Include="DependencyInjection\Modules\ContextModule.cs" />
+    <Compile Include="DependencyInjection\Modules\EventSystemModule.cs" />
+    <Compile Include="DependencyInjection\Modules\MappersModule.cs" />
+    <Compile Include="DependencyInjection\Modules\RepositoryModule.cs" />
+    <Compile Include="DependencyInjection\Modules\FiltersModule.cs" />
+    <Compile Include="DependencyInjection\Modules\ServiceModule.cs" />
+    <Compile Include="Listeners\ListenerBase.cs" />
+    <Compile Include="Listeners\UserCreatedListener.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Singapor.ApplicationServices\Singapor.ApplicationServices.csproj">
+      <Project>{FFCDC36D-0831-4138-8648-FA4689283F78}</Project>
+      <Name>Singapor.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Common\Singapor.Common.csproj">
+      <Project>{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}</Project>
+      <Name>Singapor.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
+      <Project>{9396c057-f78d-41f7-aa46-7e2743e58150}</Project>
+      <Name>Singapor.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Model\Singapor.Model.csproj">
+      <Project>{a511af82-ee61-4704-816d-bf0779fad21e}</Project>
+      <Name>Singapor.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Services\Singapor.Services.csproj">
+      <Project>{eb9947e2-52d4-481a-9500-1f7d6a9ead46}</Project>
+      <Name>Singapor.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
+      <Project>{F7DB7DBC-C6C8-4836-8665-23C5545663A5}</Project>
+      <Name>Singapor.Texts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
