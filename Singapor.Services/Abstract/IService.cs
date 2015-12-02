@@ -2,11 +2,11 @@
 
 namespace Singapor.Services.Abstract
 {
-    public interface IService<TModel> where TModel : class
+    public interface IService<TModel> where TModel : ModelBase
     {
-        Guid Create(TModel companyModel);
+        Guid Create(TModel model);
         void Delete(Guid id);
-        Guid Update(TModel companyModel);
+        Guid Update(TModel model);
         TModel Get(Guid id);
     }
 }

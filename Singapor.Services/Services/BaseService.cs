@@ -22,9 +22,9 @@ namespace Singapor.Services.Services
             _repository = repository;
         }
 
-        public virtual Guid Create(TModel companyModel)
+        public virtual Guid Create(TModel model)
         {
-            var company = Mapper.Map(companyModel, Activator.CreateInstance<TEntity>());
+            var company = Mapper.Map(model, Activator.CreateInstance<TEntity>());
             var entity = _repository.Add(company);
             _repository.SaveChanges();
             return entity.Id;
@@ -39,11 +39,11 @@ namespace Singapor.Services.Services
             _repository.SaveChanges();
         }
 
-        public virtual Guid Update(TModel companyModel)
+        public virtual Guid Update(TModel model)
         {
-            var existingItem = _repository.GetById(companyModel.Id);
+            var existingItem = _repository.GetById(model.Id);
 
-            Mapper.Map(companyModel, existingItem);
+            Mapper.Map(model, existingItem);
             _repository.SaveChanges();
 
             return existingItem.Id;

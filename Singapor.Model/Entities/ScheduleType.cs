@@ -2,9 +2,8 @@
 {
     public enum ScheduleType
     {
-        WeekDay,
+        Weekday,
         Holiday,
-        Break,
         Event
     }
 }

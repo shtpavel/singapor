@@ -39,14 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IOrderService.cs" />
+    <Compile Include="Abstract\IUnitScheduleService.cs" />
     <Compile Include="Abstract\IUnitService.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
+    <Compile Include="Models\UnitScheduleModel.cs" />
     <Compile Include="Models\UnitTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Abstract\IService.cs" />
     <Compile Include="Abstract\ModelBase.cs" />
+    <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\UnitScheduleService.cs" />
     <Compile Include="Services\UnitService.cs" />
   </ItemGroup>
   <ItemGroup>

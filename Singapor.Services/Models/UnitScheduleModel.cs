@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Singapor.Model.Entities;
+using Singapor.Services.Abstract;
 
-namespace Singapor.Model.Entities
+namespace Singapor.Services.Models
 {
-    public class UnitSchedule : BaseEntity
+    public class UnitScheduleModel : ModelBase
     {
-        #region Properties
-
         public ScheduleType Type { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
         public DateTime ExactDate { get; set; }
@@ -16,7 +20,5 @@ namespace Singapor.Model.Entities
         public Guid UnitId { get; set; }
         public Unit Unit { get; set; }
         public string Description { get; set; }
-
-        #endregion
     }
 }
