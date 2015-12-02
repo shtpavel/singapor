@@ -15,7 +15,7 @@ namespace Singapor.Services.Services
 {
     public class BaseService<TModel, TEntity> : IService<TModel> where TModel : ModelBase where TEntity : BaseEntity
     {
-        private readonly IRepository<TEntity> _repository;
+        protected readonly IRepository<TEntity> _repository;
 
         public BaseService(IRepository<TEntity> repository)
         {

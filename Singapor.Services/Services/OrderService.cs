@@ -27,8 +27,44 @@ namespace Singapor.Services.Services
             return base.Create(model);
         }
 
-        private void VerifyOrder(OrderModel model)
+        private void VerifyOrder(OrderModel order)
         {
+            //Maybe someone deside to make this date special
+            var exactDateSchedule = _scheduleRepository
+                .FilterBy(x => x.UnitId == order.UnitId && x.ExactDate == order.StartTime)
+                .FirstOrDefault();
+            var regularDaySchedule = _scheduleRepository
+                .FilterBy(x => x.UnitId == order.UnitId && x.DayOfWeek == order.StartTime.DayOfWeek)
+                .FirstOrDefault();
+            var allOrders = _repository
+                .FilterBy(x => x.UnitId == order.UnitId && x.StartTime.Date == order.StartTime.Date);
+
+            var dateSchedule = exactDateSchedule ?? regularDaySchedule;
+
+            var dateOfOrder = order.StartTime.Date;
+            var ordersStartHour = order.StartTime.Hour;
+
+            //Break if order is not in the day schedule bounds
+            if (ordersStartHour < dateSchedule.OpenHour
+                || ordersStartHour > dateSchedule.CloseHour)
+            {
+                throw new Exception("Out of day schedule bounds");
+            }
+
+            //Do not work in the break hours
+            if (ordersStartHour == dateSchedule.BreakHour 
+                || (ordersStartHour > dateSchedule.BreakHour && ordersStartHour < dateSchedule.BreakHour + dateSchedule.BreakDuration))
+            {
+                throw new Exception("Close in this hour");
+            }
+
+            //Time already booked
+            if (allOrders.Any(x => x.StartTime == order.StartTime))
+            {
+                throw new Exception("We already have someone who booked this time.");
+            }
+
+
             //Todo: validate dates.
             //Todo: validate interceprion between other orders
             //Todo: marks with some tag like danger/ok/looksgood etc.
