@@ -40,10 +40,12 @@ namespace Singapor.Services.Services
                 .FilterBy(x => x.UnitId == order.UnitId && x.StartTime.Date == order.StartTime.Date);
 
             var dateSchedule = exactDateSchedule ?? regularDaySchedule;
-
-            var dateOfOrder = order.StartTime.Date;
             var ordersStartHour = order.StartTime.Hour;
 
+            if (dateSchedule == null)
+            {
+                throw new Exception("There is no schedule fot this day");
+            }
             //Break if order is not in the day schedule bounds
             if (ordersStartHour < dateSchedule.OpenHour
                 || ordersStartHour > dateSchedule.CloseHour)
@@ -61,7 +63,7 @@ namespace Singapor.Services.Services
             //Time already booked
             if (allOrders.Any(x => x.StartTime == order.StartTime))
             {
-                throw new Exception("We already have someone who booked this time.");
+                throw new Exception("We already have someone who booked this time");
             }
 
 

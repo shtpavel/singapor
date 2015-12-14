@@ -19,7 +19,8 @@ namespace Singapor.DAL.Repositories
 
         public virtual TEntity Add(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
+            var set = _context.Set<TEntity>();
+            set.Add(entity);
 
             return entity;
         }

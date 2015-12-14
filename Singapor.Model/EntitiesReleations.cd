@@ -38,7 +38,7 @@
   <Enum Name="Singapor.Model.Entities.ScheduleType" Collapsed="true">
     <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAAAAAAEAAgAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAgAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\ScheduleType.cs</FileName>
     </TypeIdentifier>
   </Enum>

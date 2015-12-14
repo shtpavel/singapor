@@ -24,5 +24,10 @@ namespace Singapor.DAL
             modelBuilder.Configurations.Add(new UnitConfiguration());
             modelBuilder.Configurations.Add(new UnitScheduleConfiguration());
         }
+
+        public IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
+        }
     }
 }

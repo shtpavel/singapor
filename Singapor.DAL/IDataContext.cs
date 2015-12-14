@@ -6,7 +6,7 @@ namespace Singapor.DAL
 {
     public interface IDataContext
     {
-        DbSet<T> Set<T>() where T: class ;
+        IDbSet<T> Set<T>() where T: class;
 
         int SaveChanges();
     }
