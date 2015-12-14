@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Singapor.Services.Abstract
 {
@@ -8,5 +9,6 @@ namespace Singapor.Services.Abstract
         void Delete(Guid id);
         Guid Update(TModel model);
         TModel Get(Guid id);
+        IEnumerable<TModel> Get();
     }
 }

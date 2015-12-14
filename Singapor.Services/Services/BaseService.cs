@@ -57,5 +57,10 @@ namespace Singapor.Services.Services
 
             return company;
         }
+
+        public IEnumerable<TModel> Get()
+        {
+            return _repository.GetAll().Select(x => Mapper.Map(x, Activator.CreateInstance<TModel>()));
+        }
     }
 }

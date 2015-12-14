@@ -9,6 +9,7 @@ namespace Singapor.Model.Entities
     public class Unit : BaseEntity
     {
         public UnitType Type { get; set; }
+        public string Name { get; set; }
         public Guid TypeId { get; set; }
         public string Description { get; set; }
         public Guid CompanyId { get; set; }
