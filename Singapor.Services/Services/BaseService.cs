@@ -5,62 +5,75 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
+using Singapor.Services.Helpers;
+using Singapor.Services.Models;
+using Singapor.Services.Responses;
 using Singapor.Utils;
 
 namespace Singapor.Services.Services
 {
     public class BaseService<TModel, TEntity> : IService<TModel> where TModel : ModelBase where TEntity : BaseEntity
     {
+        protected readonly IUnitOfWork _untOfWork;
         protected readonly IRepository<TEntity> _repository;
 
-        public BaseService(IRepository<TEntity> repository)
+        public BaseService(IUnitOfWork untOfWork, IRepository<TEntity> repository)
         {
+            _untOfWork = untOfWork;
             _repository = repository;
         }
 
-        public virtual Guid Create(TModel model)
+        public virtual SingleEntityResponse<TModel> Create(TModel model)
         {
-            var company = Mapper.Map(model, Activator.CreateInstance<TEntity>());
-            var entity = _repository.Add(company);
-            _repository.SaveChanges();
-            return entity.Id;
+            var data = Mapper.Map(model, Activator.CreateInstance<TEntity>());
+
+            var validationResult = new CommonValidator<TEntity>(_repository).Validate(data);
+            if (!validationResult.IsValid)
+                return new SingleEntityResponse<TModel>(model, validationResult.GetErrorsObjects().ToList());
+
+            var entity = _repository.Add(data);
+            
+            return new SingleEntityResponse<TModel>(Mapper.Map(entity, model));
         }
 
-        public virtual void Delete(Guid id)
+        public virtual EmptyResponse Delete(Guid id)
         {
+            var response = new EmptyResponse();
             var company = _repository.GetById(id);
             if (company == null)
-                return;
+            {
+                response.Errors.Add(new ErrorObject(new string[0], "Can't find company", ErrorType.NotFound));
+                return response;
+            }
             _repository.Delete(company);
-            _repository.SaveChanges();
+            _untOfWork.SaveChanges();
+            return new EmptyResponse();
         }
 
-        public virtual Guid Update(TModel model)
+        public virtual SingleEntityResponse<TModel> Update(TModel data)
         {
-            var existingItem = _repository.GetById(model.Id);
-
-            Mapper.Map(model, existingItem);
-            _repository.SaveChanges();
-
-            return existingItem.Id;
+            var existingItem = _repository.GetById(data.Id);
+            var model = Mapper.Map(data, existingItem);
+            
+            return new SingleEntityResponse<TModel>(Mapper.Map(existingItem, data));
         }
 
-        public virtual TModel Get(Guid id)
+        public virtual SingleEntityResponse<TModel> Get(Guid id)
         {
             var entity = _repository.GetById(id);
+            var model = Mapper.Map(entity, Activator.CreateInstance<TModel>());
 
-            var company = Mapper.Map(entity, Activator.CreateInstance<TModel>());
-
-            return company;
+            return new SingleEntityResponse<TModel>(model);
         }
 
-        public IEnumerable<TModel> Get()
+        public ListResponse<TModel> Get()
         {
-            return _repository.GetAll().Select(x => Mapper.Map(x, Activator.CreateInstance<TModel>()));
+            return new ListResponse<TModel>(_repository.GetAll().Select(x => Mapper.Map(x, Activator.CreateInstance<TModel>())));
         }
     }
 }

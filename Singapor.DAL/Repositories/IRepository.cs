@@ -15,6 +15,5 @@ namespace Singapor.DAL.Repositories
         TEntity GetById(Guid id);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate);
-        void SaveChanges();
     }
 }

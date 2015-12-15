@@ -25,6 +25,7 @@ namespace Singapor.Infrastructure
         {
             //register context
             container.RegisterType<IDataContext, DataContext>(new PerThreadLifetimeManager());
+            container.RegisterType<IUnitOfWork, DataContext>(new PerThreadLifetimeManager());
 
             //register repositories
             container.RegisterType<IRepository<Company>, CompanyRepository>();
@@ -34,6 +35,7 @@ namespace Singapor.Infrastructure
 
             //register services
             container.RegisterType<IOrderService, OrderService>();
+            container.RegisterType<ICompanyService, CompanyService>();
             container.RegisterType<IUnitScheduleService, UnitScheduleService>();
             container.RegisterType<IUnitService, UnitService>();
         }

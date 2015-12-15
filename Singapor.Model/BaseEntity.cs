@@ -15,6 +15,7 @@ namespace Singapor.Model
 
         public BaseEntity()
         {
+            Id = Guid.NewGuid();
             CreatedAt = DateTime.UtcNow;
         }
 

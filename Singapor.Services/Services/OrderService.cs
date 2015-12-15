@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
+using Singapor.Services.Responses;
 
 namespace Singapor.Services.Services
 {
@@ -15,13 +17,14 @@ namespace Singapor.Services.Services
         private readonly IRepository<UnitSchedule> _scheduleRepository;
 
         public OrderService(
+            IUnitOfWork unitOfWork,
             IRepository<Order> repository,
-            IRepository<UnitSchedule> scheduleRepository) : base(repository)
+            IRepository<UnitSchedule> scheduleRepository) : base(unitOfWork,repository)
         {
             _scheduleRepository = scheduleRepository;
         }
 
-        public override Guid Create(OrderModel model)
+        public override SingleEntityResponse<OrderModel> Create(OrderModel model)
         {
             VerifyOrder(model);
             return base.Create(model);

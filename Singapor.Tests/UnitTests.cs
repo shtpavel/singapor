@@ -22,7 +22,6 @@ namespace Singapor.Tests
         {
             var model = new UnitModel
             {
-                Id = Guid.NewGuid(),
                 Description = string.Empty,
                 Name = "Test unit",
                 IsParent = false
@@ -30,7 +29,7 @@ namespace Singapor.Tests
 
             _unitService.Create(model);
 
-            Assert.IsTrue(_unitService.Get().Any());
+            Assert.IsTrue(_unitService.Get().Data.Any());
         }
 
         [TestMethod]
@@ -38,7 +37,6 @@ namespace Singapor.Tests
         {
             var model = new UnitModel
             {
-                Id = Guid.NewGuid(),
                 Description = string.Empty,
                 Name = "Test unit",
                 IsParent = false
@@ -46,11 +44,11 @@ namespace Singapor.Tests
 
             _unitService.Create(model);
 
-            Assert.IsTrue(_unitService.Get().Any());
+            Assert.IsTrue(_unitService.Get().Data.Any());
 
             _unitService.Delete(model.Id);
 
-            Assert.IsFalse(_unitService.Get().Any());
+            Assert.IsFalse(_unitService.Get().Data.Any());
         }
 
         [TestMethod]
@@ -58,7 +56,6 @@ namespace Singapor.Tests
         {
             var model = new UnitModel
             {
-                Id = Guid.NewGuid(),
                 Description = string.Empty,
                 Name = "Test unit",
                 IsParent = false
@@ -66,9 +63,9 @@ namespace Singapor.Tests
 
             _unitService.Create(model);
 
-            Assert.IsTrue(_unitService.Get().Any());
+            Assert.IsTrue(_unitService.Get().Data.Any());
 
-            var oldModel = _unitService.Get(model.Id);
+            var oldModel = _unitService.Get(model.Id).Data;
 
             Assert.IsNotNull(oldModel);
 
@@ -78,7 +75,7 @@ namespace Singapor.Tests
 
             var updatedModel = _unitService.Get(model.Id);
 
-            Assert.AreEqual(updatedModel.Name, "Updated");
+            Assert.AreEqual(updatedModel.Data.Name, "Updated");
         }
 
         [TestInitialize]

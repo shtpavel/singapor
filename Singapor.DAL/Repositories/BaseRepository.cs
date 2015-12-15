@@ -44,10 +44,5 @@ namespace Singapor.DAL.Repositories
         {
             return _context.Set<TEntity>().Where(predicate);
         }
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
     }
 }

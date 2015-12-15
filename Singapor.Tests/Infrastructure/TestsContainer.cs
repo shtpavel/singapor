@@ -17,7 +17,9 @@ namespace Singapor.Tests
         protected override void RegisterDependencies(IUnityContainer container)
         {
             base.RegisterDependencies(container);
-            container.RegisterInstance(typeof (IDataContext), CreateDataContext());
+            var context = CreateDataContext();
+            container.RegisterInstance(typeof (IDataContext), context, new PerThreadLifetimeManager());
+            container.RegisterInstance(typeof(IUnitOfWork), context, new PerThreadLifetimeManager());
         }
 
         private IDataContext CreateDataContext()

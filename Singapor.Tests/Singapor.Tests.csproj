@@ -74,10 +74,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="FakeDbSet.cs" />
+    <Compile Include="CompanyTests.cs" />
+    <Compile Include="Infrastructure\FakeDbSet.cs" />
     <Compile Include="UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsContainer.cs" />
+    <Compile Include="Infrastructure\TestsContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
@@ -95,6 +96,10 @@
     <ProjectReference Include="..\Singapor.Services\Singapor.Services.csproj">
       <Project>{eb9947e2-52d4-481a-9500-1f7d6a9ead46}</Project>
       <Name>Singapor.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
+      <Project>{f7db7dbc-c6c8-4836-8665-23c5545663a5}</Project>
+      <Name>Singapor.Texts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Singapor.Utils\Singapor.Utils.csproj">
       <Project>{b5ff1265-17cc-4bc6-8723-1c7ad1aa13ba}</Project>
