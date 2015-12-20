@@ -48,8 +48,6 @@ namespace Singapor.Infrastructure
             container.RegisterType<IFieldValidatorService, FieldValidatorService>();
             container.RegisterType<IFieldService, FieldService>();
 
-
-
             //mappers
             container.RegisterType<IMapConfiguration, CompanyMapper>("CompanyMapper");
             container.RegisterType<IMapConfiguration, UnitMapper>("UnitMapper");
