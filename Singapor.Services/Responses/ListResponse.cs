@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Singapor.Services.Abstract;
 
 namespace Singapor.Services.Responses
 {
-    public class ListResponse<T> : ResponseBase
+    public class ListResponse<T> : ResponseBase where T : ModelBase
     {
-        public ListResponse(IEnumerable<T> data, List<ErrorObject> errors = null) : base(errors)
+        public ListResponse(IEnumerable<SingleEntityResponse<T>> data, List<ErrorObject> errors = null) : base(errors)
         {
             Data = data;
         }
 
-        public IEnumerable<T> Data { get; private set; }
+        public IEnumerable<SingleEntityResponse<T>> Data { get; private set; }
     }
 }

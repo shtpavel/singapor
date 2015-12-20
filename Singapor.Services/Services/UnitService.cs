@@ -37,5 +37,10 @@ namespace Singapor.Services.Services
                 return new SingleEntityResponse<UnitModel>(model, validationResult.GetErrorsObjects().ToList());
             return base.Create(model);
         }
+
+        public ListResponse<UnitModel> Create(IEnumerable<UnitModel> units)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

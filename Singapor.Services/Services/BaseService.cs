@@ -84,7 +84,7 @@ namespace Singapor.Services.Services
 
         public ListResponse<TModel> Get()
         {
-            return new ListResponse<TModel>(_repository.GetAll().Select(x => Mapper.Map(x, Activator.CreateInstance<TModel>())));
+            return new ListResponse<TModel>(_repository.GetAll().Select(x => new SingleEntityResponse<TModel>(Mapper.Map(x, Activator.CreateInstance<TModel>()))));
         }
     }
 }

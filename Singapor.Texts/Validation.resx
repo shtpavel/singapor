@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CantCreateMuchUnitsAtOneTime" xml:space="preserve">
+    <value>Can't create more then 20 units per request</value>
+  </data>
   <data name="CompanyNotFound" xml:space="preserve">
     <value>Can't find required company</value>
   </data>
   <data name="LengthBetween" xml:space="preserve">
     <value>This field should be from {0} to {1} charachers</value>
+  </data>
+  <data name="ParentUnitIsNotContainer" xml:space="preserve">
+    <value>Can't create child unit for non-container parent</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>This field is required</value>

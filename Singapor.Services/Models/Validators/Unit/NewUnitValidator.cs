@@ -24,7 +24,7 @@ namespace Singapor.Services.Models.Validators.Unit
                 if (x.HasValue)
                 {
                     var company = companyService.Get(x.Value);
-                    return company != null;
+                    return company.Data != null;
                 }
                 return true;
             }).WithMessage(Validation.CompanyNotFound);
@@ -34,7 +34,7 @@ namespace Singapor.Services.Models.Validators.Unit
                 if (x.HasValue)
                 {
                     var unit = unitService.Get(x.Value);
-                    return unit != null;
+                    return unit.Data != null;
                 }
                 return true;
             }).WithMessage(Validation.UnitNotFound);
@@ -44,7 +44,7 @@ namespace Singapor.Services.Models.Validators.Unit
                 if (x.HasValue)
                 {
                     var type = unitTypeService.Get(x.Value);
-                    return type != null;
+                    return type.Data != null;
                 }
                 return true;
             }).WithMessage(Validation.UnitTypeNotFound);

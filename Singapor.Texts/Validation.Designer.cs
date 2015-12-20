@@ -61,6 +61,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t create more then 20 units per request.
+        /// </summary>
+        public static string CantCreateMuchUnitsAtOneTime {
+            get {
+                return ResourceManager.GetString("CantCreateMuchUnitsAtOneTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t find required company.
         /// </summary>
         public static string CompanyNotFound {
@@ -75,6 +84,15 @@ namespace Singapor.Texts {
         public static string LengthBetween {
             get {
                 return ResourceManager.GetString("LengthBetween", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t create child unit for non-container parent.
+        /// </summary>
+        public static string ParentUnitIsNotContainer {
+            get {
+                return ResourceManager.GetString("ParentUnitIsNotContainer", resourceCulture);
             }
         }
         

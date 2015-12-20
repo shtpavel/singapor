@@ -24,15 +24,15 @@ namespace Singapor.Tests.Generators
         {
             var model = new UnitModel();
             model.Description = StringsGenerators.GenerateString(199);
-            model.IsParent = false;
+            model.IsContainer = false;
             model.Name = StringsGenerators.GenerateString(10);
             var companyModel = _companyService.Get().Data.FirstOrDefault();
             if (companyModel != null)
-                model.CompanyId = companyModel.Id;
+                model.CompanyId = companyModel.Data.Id;
 
             var unitTypeModel = _unitTypeService.Get().Data.FirstOrDefault();
             if (unitTypeModel != null)
-                model.TypeId = unitTypeModel.Id;
+                model.TypeId = unitTypeModel.Data.Id;
 
             return model;
         }

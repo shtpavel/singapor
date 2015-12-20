@@ -24,8 +24,8 @@ namespace Singapor.Tests.Generators
             model.Description = StringsGenerators.GenerateString(199);
             model.Name = StringsGenerators.GenerateString(10);
             var companyModel = _companyService.Get().Data.FirstOrDefault();
-            if (companyModel != null)
-                model.CompanyId = companyModel.Id.Value;
+            if (companyModel.Data != null)
+                model.CompanyId = companyModel.Data.Id.Value;
 
             return model;
         }
