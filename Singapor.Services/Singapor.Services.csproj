@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
@@ -50,6 +54,11 @@
     <Compile Include="Abstract\IUnitTypeService.cs" />
     <Compile Include="Helpers\ValidationResultExtensionMethods.cs" />
     <Compile Include="Models\CommonValidator.cs" />
+    <Compile Include="Models\FieldModel.cs" />
+    <Compile Include="Models\FieldValidatorModel.cs" />
+    <Compile Include="Models\Maps\CompanyMapper.cs" />
+    <Compile Include="Models\Maps\IMapConfiguration.cs" />
+    <Compile Include="Models\Maps\UnitMapper.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Models\UnitScheduleModel.cs" />
@@ -83,10 +92,6 @@
     <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
       <Project>{f7db7dbc-c6c8-4836-8665-23c5545663a5}</Project>
       <Name>Singapor.Texts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Singapor.Utils\Singapor.Utils.csproj">
-      <Project>{b5ff1265-17cc-4bc6-8723-1c7ad1aa13ba}</Project>
-      <Name>Singapor.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

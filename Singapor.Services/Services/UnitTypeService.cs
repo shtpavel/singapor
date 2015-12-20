@@ -13,7 +13,7 @@ namespace Singapor.Services.Services
 {
     public class UnitTypeService : BaseService<UnitTypeModel, UnitType>, IUnitTypeService
     {
-        public UnitTypeService(IUnitOfWork untOfWork, IRepository<UnitType> repository) : base(untOfWork, repository)
+        public UnitTypeService(IUnitOfWork unitOfWork, IRepository<UnitType> repository) : base(unitOfWork, repository)
         {
         }
     }

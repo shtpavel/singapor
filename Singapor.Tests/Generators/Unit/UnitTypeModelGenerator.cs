@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators.Helpers;
 
-namespace Singapor.Tests.Generators
+namespace Singapor.Tests.Generators.Unit
 {
-    internal class UnitTypeModelGenerator : IGenerator<UnitTypeModel>
+    internal class UnitTypeModelGenerator : IUnitTypeModelGenerator
     {
         private readonly ICompanyService _companyService;
 
@@ -23,12 +19,16 @@ namespace Singapor.Tests.Generators
             var model = new UnitTypeModel();
             model.Description = StringsGenerators.GenerateString(199);
             model.Name = StringsGenerators.GenerateString(10);
-            var companyModel = _companyService.Get().Data.FirstOrDefault();
-            if (companyModel.Data != null)
-                model.CompanyId = companyModel.Data.Id.Value;
 
             return model;
         }
 
+        public UnitTypeModel Get(CompanyModel companyModel)
+        {
+            var model = Get();
+            model.CompanyId = companyModel.Id;
+
+            return model;
+        }
     }
 }

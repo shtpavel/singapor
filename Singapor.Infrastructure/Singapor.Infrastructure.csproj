@@ -74,10 +74,6 @@
       <Project>{eb9947e2-52d4-481a-9500-1f7d6a9ead46}</Project>
       <Name>Singapor.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Singapor.Utils\Singapor.Utils.csproj">
-      <Project>{b5ff1265-17cc-4bc6-8723-1c7ad1aa13ba}</Project>
-      <Name>Singapor.Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

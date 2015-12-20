@@ -9,8 +9,15 @@ namespace Singapor.Services.Models
 {
     public class UnitTypeModel : ModelBase
     {
+        public UnitTypeModel()
+        {
+            Fields = new List<FieldModel>();
+        }
+
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid CompanyId { get; set; }
+        public Guid? CompanyId { get; set; }
+
+        public ICollection<FieldModel> Fields { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Singapor.Model.Entities
 {
-    public class Unit : BaseEntity
+    public class Unit : EntityBase
     {
         public string Name { get; set; }
         public string Description { get; set; }

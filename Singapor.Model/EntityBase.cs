@@ -2,7 +2,7 @@
 
 namespace Singapor.Model
 {
-    public class BaseEntity
+    public class EntityBase
     {
         #region Properties
 
@@ -13,7 +13,7 @@ namespace Singapor.Model
 
         #region Constructors
 
-        public BaseEntity()
+        public EntityBase()
         {
             Id = Guid.NewGuid();
             CreatedAt = DateTime.UtcNow;

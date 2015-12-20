@@ -38,6 +38,19 @@ namespace Singapor.Services.Models.Validators.Unit
                 }
                 return true;
             }).WithMessage(Validation.UnitNotFound);
+            RuleFor(x => x.ParentUnitId).Must(x =>
+            {
+                if (x.HasValue)
+                {
+                    var unit = unitService.Get(x.Value);
+
+                    if (unit.Data != null)
+                    {
+                        return unit.Data.IsContainer;
+                    }
+                }
+                return true;
+            }).WithMessage(Validation.ParentUnitIsNotContainer);
             RuleFor(x => x.TypeId).NotNull().WithMessage(Validation.Required);
             RuleFor(x => x.TypeId).Must(x =>
             {

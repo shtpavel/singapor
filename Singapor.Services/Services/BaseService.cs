@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model;
@@ -13,18 +14,17 @@ using Singapor.Services.Abstract;
 using Singapor.Services.Helpers;
 using Singapor.Services.Models;
 using Singapor.Services.Responses;
-using Singapor.Utils;
 
 namespace Singapor.Services.Services
 {
-    public class BaseService<TModel, TEntity> : IService<TModel> where TModel : ModelBase where TEntity : BaseEntity
+    public class BaseService<TModel, TEntity> : IService<TModel> where TModel : ModelBase where TEntity : EntityBase
     {
-        protected readonly IUnitOfWork _untOfWork;
+        protected readonly IUnitOfWork _unitOfWork;
         protected readonly IRepository<TEntity> _repository;
 
-        public BaseService(IUnitOfWork untOfWork, IRepository<TEntity> repository)
+        public BaseService(IUnitOfWork unitOfWork, IRepository<TEntity> repository)
         {
-            _untOfWork = untOfWork;
+            _unitOfWork = unitOfWork;
             _repository = repository;
         }
 
@@ -39,7 +39,7 @@ namespace Singapor.Services.Services
                 return new SingleEntityResponse<TModel>(model, validationResult.GetErrorsObjects().ToList());
 
             var entity = _repository.Add(data);
-            
+            _unitOfWork.SaveChanges();
             return new SingleEntityResponse<TModel>(Mapper.Map(entity, model));
         }
 
@@ -53,7 +53,7 @@ namespace Singapor.Services.Services
                 return response;
             }
             _repository.Delete(company);
-            _untOfWork.SaveChanges();
+            _unitOfWork.SaveChanges();
             return new EmptyResponse();
         }
 

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
@@ -11,10 +8,10 @@ using Singapor.Tests.Generators;
 using Singapor.Texts;
 using Unity;
 
-namespace Singapor.Tests
+namespace Singapor.Tests.Tests
 {
     [TestClass]
-    public class CompanyTests
+    public class CompanyTests : UnitTestBase
     {
         private ICompanyService _companyService;
         private IGenerator<CompanyModel> _companyGenerator;
@@ -22,9 +19,8 @@ namespace Singapor.Tests
         [TestInitialize]
         public void Setup()
         {
-            var container = new TestsContainer().CreateContainer();
-            _companyGenerator = container.Resolve<IGenerator<CompanyModel>>();
-            _companyService = container.Resolve<ICompanyService>();
+            _companyGenerator = _container.Resolve<IGenerator<CompanyModel>>();
+            _companyService = _container.Resolve<ICompanyService>();
         }
 
         [TestMethod]

@@ -8,7 +8,7 @@ using Singapor.Model;
 
 namespace Singapor.DAL.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : BaseEntity
+    public interface IRepository<TEntity> where TEntity : EntityBase
     {
         TEntity Add(TEntity entity);
         void Delete(TEntity entity);

@@ -8,7 +8,7 @@ using Singapor.Model;
 
 namespace Singapor.DAL.Repositories
 {
-    public class BaseRepository <TEntity>: IRepository<TEntity> where TEntity : BaseEntity
+    public class BaseRepository <TEntity>: IRepository<TEntity> where TEntity : EntityBase
     {
         private readonly IDataContext _context;
 

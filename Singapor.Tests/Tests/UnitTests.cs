@@ -8,16 +8,15 @@ using Singapor.Tests.Generators;
 using Singapor.Texts;
 using Unity;
 
-namespace Singapor.Tests
+namespace Singapor.Tests.Tests
 {
     [TestClass]
-    public class UnitTests
+    public class UnitTests : UnitTestBase
     {
         #region Fields
 
         private ICompanyService _companyService;
-        private IUnityContainer _container;
-        private IGenerator<UnitModel> _unitModelGenerator;
+        private IUnitModelGenerator _unitModelGenerator;
         private IUnitService _unitService;
 
         #endregion
@@ -27,19 +26,18 @@ namespace Singapor.Tests
         [TestInitialize]
         public void Setup()
         {
-            _container = new TestsContainer().CreateContainer();
             _companyService = _container.Resolve<ICompanyService>();
             _unitService = _container.Resolve<IUnitService>();
-            _unitModelGenerator = _container.Resolve<IGenerator<UnitModel>>();
+            _unitModelGenerator = _container.Resolve<IUnitModelGenerator>();
         }
 
         [TestMethod]
-        public void CanCreateUnit()
+        public void Can_creat_unit()
         {
-            CreateCompany();
-            CreateUnitType();
+            var companyModel = CreateCompany();
+            var unitTypeModel = CreateUnitType(companyModel);
 
-            var model = _unitModelGenerator.Get();
+            var model = _unitModelGenerator.Get(companyModel, unitTypeModel);
 
             var response = _unitService.Create(model);
 
@@ -76,14 +74,14 @@ namespace Singapor.Tests
         [TestMethod]
         public void Can_create_child_unit_for_container_unit()
         {
-            CreateCompany();
-            CreateUnitType();
+            var companyModel = CreateCompany();
+            var unitTypeModel = CreateUnitType(companyModel);
 
-            var model = _unitModelGenerator.Get();
+            var model = _unitModelGenerator.Get(companyModel, unitTypeModel);
             model.IsContainer = true;
             var response = _unitService.Create(model);
 
-            var childModel = _unitModelGenerator.Get();
+            var childModel = _unitModelGenerator.Get(companyModel, unitTypeModel);
             childModel.ParentUnitId = response.Data.Id;
 
             var childResponse = _unitService.Create(childModel);
@@ -94,16 +92,19 @@ namespace Singapor.Tests
         [TestMethod]
         public void Can_not_create_child_unit_for_non_container_unit()
         {
-            var model = _unitModelGenerator.Get();
+            var companyModel = CreateCompany();
+            var unitTypeModel = CreateUnitType(companyModel);
+
+            var model = _unitModelGenerator.Get(companyModel,unitTypeModel);
             var response = _unitService.Create(model);
 
-            var childModel = _unitModelGenerator.Get();
+            var childModel = _unitModelGenerator.Get(companyModel, unitTypeModel);
             childModel.ParentUnitId = response.Data.Id;
 
             var childResponse = _unitService.Create(childModel);
 
             Assert.IsFalse(childResponse.IsValid);
-            Assert.IsTrue(response.Errors.Any(x =>
+            Assert.IsTrue(childResponse.Errors.Any(x =>
                 x.Fields.Any(f => f.Equals("ParentUnitId", StringComparison.InvariantCultureIgnoreCase))
                 && x.Message.Equals(Validation.ParentUnitIsNotContainer, StringComparison.InvariantCultureIgnoreCase)));
         }
@@ -141,14 +142,14 @@ namespace Singapor.Tests
 
         #region Private methods
 
-        private void CreateCompany()
+        private CompanyModel CreateCompany()
         {
-            _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get());
+            return _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get()).Data;
         }
 
-        private void CreateUnitType()
+        private UnitTypeModel CreateUnitType(CompanyModel companyModel)
         {
-            _container.Resolve<IUnitTypeService>().Create(_container.Resolve<IGenerator<UnitTypeModel>>().Get());
+            return _container.Resolve<IUnitTypeService>().Create(_container.Resolve<IUnitTypeModelGenerator>().Get(companyModel)).Data;
         }
 
         #endregion

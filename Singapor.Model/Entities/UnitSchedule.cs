@@ -2,7 +2,7 @@
 
 namespace Singapor.Model.Entities
 {
-    public class UnitSchedule : BaseEntity
+    public class UnitSchedule : EntityBase
     {
         #region Properties
 

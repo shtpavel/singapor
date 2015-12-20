@@ -7,6 +7,7 @@ using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models.Maps;
 using Singapor.Services.Services;
 using Unity;
 
@@ -33,6 +34,9 @@ namespace Singapor.Infrastructure
             container.RegisterType<IRepository<UnitSchedule>, ScheduleRepository>();
             container.RegisterType<IRepository<Unit>, UnitRepository>();
             container.RegisterType<IRepository<UnitType>, BaseRepository<UnitType>>();
+            container.RegisterType<IRepository<FieldValidator>, BaseRepository<FieldValidator>>();
+            container.RegisterType<IRepository<Field>, BaseRepository<Field>>();
+            container.RegisterType<IRepository<FieldValue>, BaseRepository<FieldValue>>();
 
             //register services
             container.RegisterType<IOrderService, OrderService>();
@@ -40,6 +44,11 @@ namespace Singapor.Infrastructure
             container.RegisterType<IUnitScheduleService, UnitScheduleService>();
             container.RegisterType<IUnitService, UnitService>();
             container.RegisterType<IUnitTypeService, UnitTypeService>();
+
+
+            //mappers
+            container.RegisterType<IMapConfiguration, CompanyMapper>("CompanyMapper");
+            container.RegisterType<IMapConfiguration, UnitMapper>("UnitMapper");
         }
     }
 }

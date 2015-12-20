@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Entities\Field.cs" />
+    <Compile Include="Entities\FieldValidator.cs" />
+    <Compile Include="Entities\FieldValue.cs" />
+    <Compile Include="EntityBase.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\ScheduleType.cs" />
@@ -49,7 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EntitiesReleations.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,11 +11,12 @@ using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators;
+using Singapor.Tests.Generators.Unit;
 using Unity;
 
 namespace Singapor.Tests
 {
-    public class TestsContainer : ApplicationContainer
+    internal class TestsContainer : ApplicationContainer
     {
         protected override void RegisterDependencies(IUnityContainer container)
         {
@@ -24,8 +25,8 @@ namespace Singapor.Tests
             container.RegisterInstance(typeof (IDataContext), context, new PerThreadLifetimeManager());
             container.RegisterInstance(typeof(IUnitOfWork), context, new PerThreadLifetimeManager());
             container.RegisterType<IGenerator<CompanyModel>, CompanyModelGenerator>();
-            container.RegisterType<IGenerator<UnitModel>, UnitModelGenerator>();
-            container.RegisterType<IGenerator<UnitTypeModel>, UnitTypeModelGenerator>();
+            container.RegisterType<IUnitModelGenerator, UnitModelGenerator>();
+            container.RegisterType<IUnitTypeModelGenerator, UnitTypeModelGenerator>();
         }
 
         private IDataContext CreateDataContext()

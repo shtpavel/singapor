@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Singapor.Model.Entities
 {
-    public class Order : BaseEntity
+    public class Order : EntityBase
     {
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }

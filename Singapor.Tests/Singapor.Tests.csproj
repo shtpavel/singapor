@@ -74,16 +74,22 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CompanyTests.cs" />
+    <Compile Include="Generators\IFieldModelValidator.cs" />
+    <Compile Include="Generators\IUnitModelGenerator.cs" />
+    <Compile Include="Generators\IUnitTypeModelGenerator.cs" />
+    <Compile Include="Generators\Unit\FieldModelGenerator.cs" />
+    <Compile Include="Tests\CompanyTests.cs" />
     <Compile Include="Generators\CompanyGenerator.cs" />
     <Compile Include="Generators\Helpers\StringsGenerators.cs" />
     <Compile Include="Generators\IGenerator.cs" />
-    <Compile Include="Generators\UnitModelGenerator.cs" />
-    <Compile Include="Generators\UnitTypeModelGenerator.cs" />
+    <Compile Include="Generators\Unit\UnitModelGenerator.cs" />
+    <Compile Include="Generators\Unit\UnitTypeModelGenerator.cs" />
     <Compile Include="Infrastructure\FakeDbSet.cs" />
-    <Compile Include="UnitTests.cs" />
+    <Compile Include="Tests\UnitTypeTests.cs" />
+    <Compile Include="Tests\UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\TestsContainer.cs" />
+    <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
@@ -105,10 +111,6 @@
     <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
       <Project>{f7db7dbc-c6c8-4836-8665-23c5545663a5}</Project>
       <Name>Singapor.Texts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Singapor.Utils\Singapor.Utils.csproj">
-      <Project>{b5ff1265-17cc-4bc6-8723-1c7ad1aa13ba}</Project>
-      <Name>Singapor.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
