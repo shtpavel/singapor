@@ -6,7 +6,7 @@ using Singapor.Tests.Generators.Helpers;
 
 namespace Singapor.Tests.Generators.Unit
 {
-    public class FieldModelGenerator : IFieldModelValidator
+    public class FieldModelGenerator : IFieldModelGenerator
     {
         public FieldModel Get()
         {

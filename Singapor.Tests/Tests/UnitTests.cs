@@ -13,22 +13,12 @@ namespace Singapor.Tests.Tests
     [TestClass]
     public class UnitTests : UnitTestBase
     {
-        #region Fields
-
-        private ICompanyService _companyService;
-        private IUnitModelGenerator _unitModelGenerator;
-        private IUnitService _unitService;
-
-        #endregion
-
         #region Public methods
 
         [TestInitialize]
-        public void Setup()
+        public override void Setup()
         {
-            _companyService = _container.Resolve<ICompanyService>();
-            _unitService = _container.Resolve<IUnitService>();
-            _unitModelGenerator = _container.Resolve<IUnitModelGenerator>();
+            base.Setup();
         }
 
         [TestMethod]
@@ -140,18 +130,5 @@ namespace Singapor.Tests.Tests
 
         #endregion
 
-        #region Private methods
-
-        private CompanyModel CreateCompany()
-        {
-            return _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get()).Data;
-        }
-
-        private UnitTypeModel CreateUnitType(CompanyModel companyModel)
-        {
-            return _container.Resolve<IUnitTypeService>().Create(_container.Resolve<IUnitTypeModelGenerator>().Get(companyModel)).Data;
-        }
-
-        #endregion
     }
 }

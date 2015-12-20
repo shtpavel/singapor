@@ -74,7 +74,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Generators\IFieldModelValidator.cs" />
+    <Compile Include="Generators\IFieldModelGenerator.cs" />
     <Compile Include="Generators\IUnitModelGenerator.cs" />
     <Compile Include="Generators\IUnitTypeModelGenerator.cs" />
     <Compile Include="Generators\Unit\FieldModelGenerator.cs" />

@@ -13,14 +13,10 @@ namespace Singapor.Tests.Tests
     [TestClass]
     public class CompanyTests : UnitTestBase
     {
-        private ICompanyService _companyService;
-        private IGenerator<CompanyModel> _companyGenerator;
-
         [TestInitialize]
-        public void Setup()
+        public override void Setup()
         {
-            _companyGenerator = _container.Resolve<IGenerator<CompanyModel>>();
-            _companyService = _container.Resolve<ICompanyService>();
+            base.Setup();
         }
 
         [TestMethod]

@@ -10,21 +10,34 @@ namespace Singapor.Tests.Tests
     [TestClass]
     public class UnitTypeTests : UnitTestBase
     {
-        private IGenerator<CompanyModel> _companyGenerator;
-        private ICompanyService _companyService;
-        private IGenerator<UnitTypeModel> _unitTypeGenerator;
-
         [TestInitialize]
-        public void Setup()
+        public override void Setup()
         {
-            _companyGenerator = _container.Resolve<IGenerator<CompanyModel>>();
-            _unitTypeGenerator = _container.Resolve<IGenerator<UnitTypeModel>>();
-            _companyService = _container.Resolve<ICompanyService>();
+            base.Setup();
         }
 
         [TestMethod]
         public void Can_create_unit_type_without_fields()
         {
+            var companyModel = _companyGenerator.Get();
+            var unitTypeModel = _unitTypeGenerator.Get(companyModel);
+
+            var response = _unitTypeService.Create(unitTypeModel);
+
+            Assert.IsTrue(response.IsValid);
+        }
+
+        [TestMethod]
+        public void Can_create_unit_type_with_fields()
+        {
+            var companyModel = _companyGenerator.Get();
+            _companyService.Create(companyModel);
+            var unitTypeModel = _unitTypeGenerator.Get(companyModel);
+            
+
+            var response = _unitTypeService.Create(unitTypeModel);
+
+            Assert.IsTrue(response.IsValid);
         }
     }
 }

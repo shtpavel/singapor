@@ -27,6 +27,7 @@ namespace Singapor.Tests
             container.RegisterType<IGenerator<CompanyModel>, CompanyModelGenerator>();
             container.RegisterType<IUnitModelGenerator, UnitModelGenerator>();
             container.RegisterType<IUnitTypeModelGenerator, UnitTypeModelGenerator>();
+            container.RegisterType<IFieldModelGenerator, FieldModelGenerator>();
         }
 
         private IDataContext CreateDataContext()
