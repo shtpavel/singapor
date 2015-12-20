@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICompanyService.cs" />
+    <Compile Include="Abstract\IFieldService.cs" />
+    <Compile Include="Abstract\IFieldValidatorService.cs" />
+    <Compile Include="Abstract\IFieldValueService.cs" />
     <Compile Include="Abstract\IOrderService.cs" />
     <Compile Include="Abstract\IUnitScheduleService.cs" />
     <Compile Include="Abstract\IUnitService.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Models\CommonValidator.cs" />
     <Compile Include="Models\FieldModel.cs" />
     <Compile Include="Models\FieldValidatorModel.cs" />
+    <Compile Include="Models\FieldValueModel.cs" />
     <Compile Include="Models\Maps\CompanyMapper.cs" />
     <Compile Include="Models\Maps\IMapConfiguration.cs" />
     <Compile Include="Models\Maps\UnitMapper.cs" />
@@ -75,6 +79,9 @@
     <Compile Include="Abstract\IService.cs" />
     <Compile Include="Abstract\ModelBase.cs" />
     <Compile Include="Services\CompanyService.cs" />
+    <Compile Include="Services\FieldService.cs" />
+    <Compile Include="Services\FieldValidatorService.cs" />
+    <Compile Include="Services\FieldValueService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\UnitScheduleService.cs" />
     <Compile Include="Services\UnitService.cs" />

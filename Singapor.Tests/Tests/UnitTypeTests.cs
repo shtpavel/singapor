@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators;
@@ -30,10 +31,10 @@ namespace Singapor.Tests.Tests
         [TestMethod]
         public void Can_create_unit_type_with_fields()
         {
-            var companyModel = _companyGenerator.Get();
-            _companyService.Create(companyModel);
+            var companyModel = CreateCompany();
             var unitTypeModel = _unitTypeGenerator.Get(companyModel);
             
+            unitTypeModel.Fields.Add(_fieldGenerator.Get(unitTypeModel, FieldType.Integer));
 
             var response = _unitTypeService.Create(unitTypeModel);
 

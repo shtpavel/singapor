@@ -44,6 +44,10 @@ namespace Singapor.Infrastructure
             container.RegisterType<IUnitScheduleService, UnitScheduleService>();
             container.RegisterType<IUnitService, UnitService>();
             container.RegisterType<IUnitTypeService, UnitTypeService>();
+            container.RegisterType<IFieldValueService, FieldValueService>();
+            container.RegisterType<IFieldValidatorService, FieldValidatorService>();
+            container.RegisterType<IFieldService, FieldService>();
+
 
 
             //mappers
