@@ -30,9 +30,11 @@ namespace Singapor.Services.Services
 
         public virtual SingleEntityResponse<TModel> Create(TModel model)
         {
+            if (model.Id == null || model.Id == Guid.Empty)
+                model.Id = Guid.NewGuid();
             var data = Mapper.Map(model, Activator.CreateInstance<TEntity>());
 
-            var validationResult = new CommonValidator<TEntity>(_repository).Validate(data);
+            var validationResult = new CommonValidator<TModel>(this).Validate(model);
             if (!validationResult.IsValid)
                 return new SingleEntityResponse<TModel>(model, validationResult.GetErrorsObjects().ToList());
 
@@ -57,15 +59,24 @@ namespace Singapor.Services.Services
 
         public virtual SingleEntityResponse<TModel> Update(TModel data)
         {
-            var existingItem = _repository.GetById(data.Id);
+            if (!data.Id.HasValue)
+                return new SingleEntityResponse<TModel>(null);
+
+            var existingItem = _repository.GetById(data.Id.Value);
             var model = Mapper.Map(data, existingItem);
             
             return new SingleEntityResponse<TModel>(Mapper.Map(existingItem, data));
         }
 
-        public virtual SingleEntityResponse<TModel> Get(Guid id)
+        public virtual SingleEntityResponse<TModel> Get(Guid? id)
         {
-            var entity = _repository.GetById(id);
+            if (!id.HasValue)
+                return new SingleEntityResponse<TModel>(null);
+
+            var entity = _repository.GetById(id.Value);
+            if (entity == null)
+                return new SingleEntityResponse<TModel>(null);
+
             var model = Mapper.Map(entity, Activator.CreateInstance<TModel>());
 
             return new SingleEntityResponse<TModel>(model);

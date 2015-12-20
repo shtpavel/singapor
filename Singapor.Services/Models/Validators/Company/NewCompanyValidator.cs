@@ -12,6 +12,8 @@ namespace Singapor.Services.Models.Validators.Company
             CascadeMode = CascadeMode.StopOnFirstFailure;
             RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
             RuleFor(x => x.Name).Length(6, 20).WithMessage(string.Format(Validation.LengthBetween, 6, 20));
+            RuleFor(x => x.Email).NotEmpty().WithMessage(Validation.Required);
+            RuleFor(x => x.Phone).NotEmpty().WithMessage(Validation.Required);
         }
 
         #endregion

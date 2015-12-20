@@ -8,6 +8,9 @@ using Moq;
 using Singapor.DAL;
 using Singapor.Infrastructure;
 using Singapor.Model.Entities;
+using Singapor.Services.Abstract;
+using Singapor.Services.Models;
+using Singapor.Tests.Generators;
 using Unity;
 
 namespace Singapor.Tests
@@ -20,6 +23,9 @@ namespace Singapor.Tests
             var context = CreateDataContext();
             container.RegisterInstance(typeof (IDataContext), context, new PerThreadLifetimeManager());
             container.RegisterInstance(typeof(IUnitOfWork), context, new PerThreadLifetimeManager());
+            container.RegisterType<IGenerator<CompanyModel>, CompanyModelGenerator>();
+            container.RegisterType<IGenerator<UnitModel>, UnitModelGenerator>();
+            container.RegisterType<IGenerator<UnitTypeModel>, UnitTypeModelGenerator>();
         }
 
         private IDataContext CreateDataContext()

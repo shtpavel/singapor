@@ -2,6 +2,9 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models;
+using Singapor.Tests.Generators;
+using Singapor.Texts;
 using Unity;
 
 namespace Singapor.Tests
@@ -11,78 +14,62 @@ namespace Singapor.Tests
     {
         #region Fields
 
+        private ICompanyService _companyService;
+        private IUnityContainer _container;
+        private IGenerator<UnitModel> _unitModelGenerator;
         private IUnitService _unitService;
 
         #endregion
 
         #region Public methods
 
-        [TestMethod]
-        public void Can_create_unit()
-        {
-            var model = new UnitModel
-            {
-                Description = string.Empty,
-                Name = "Test unit",
-                IsParent = false
-            };
-
-            _unitService.Create(model);
-
-            Assert.IsTrue(_unitService.Get().Data.Any());
-        }
-
-        [TestMethod]
-        public void Can_remove_unit()
-        {
-            var model = new UnitModel
-            {
-                Description = string.Empty,
-                Name = "Test unit",
-                IsParent = false
-            };
-
-            _unitService.Create(model);
-
-            Assert.IsTrue(_unitService.Get().Data.Any());
-
-            _unitService.Delete(model.Id);
-
-            Assert.IsFalse(_unitService.Get().Data.Any());
-        }
-
-        [TestMethod]
-        public void Can_update_unit()
-        {
-            var model = new UnitModel
-            {
-                Description = string.Empty,
-                Name = "Test unit",
-                IsParent = false
-            };
-
-            _unitService.Create(model);
-
-            Assert.IsTrue(_unitService.Get().Data.Any());
-
-            var oldModel = _unitService.Get(model.Id).Data;
-
-            Assert.IsNotNull(oldModel);
-
-            oldModel.Name = "Updated";
-
-            _unitService.Update(oldModel);
-
-            var updatedModel = _unitService.Get(model.Id);
-
-            Assert.AreEqual(updatedModel.Data.Name, "Updated");
-        }
-
         [TestInitialize]
         public void Setup()
         {
-            var container = new TestsContainer().CreateContainer();
-            _unitService = container.Resolve<IUnitService>();
+            _container = new TestsContainer().CreateContainer();
+            _companyService = _container.Resolve<ICompanyService>();
+            _unitService = _container.Resolve<IUnitService>();
+            _unitModelGenerator = _container.Resolve<IGenerator<UnitModel>>();
+        }
+
+        [TestMethod]
+        public void CanCreateUnit()
+        {
+            CreateCompany();
+            CreateUnitType();
+
+            var model = _unitModelGenerator.Get();
+
+            var response = _unitService.Create(model);
+
+            Assert.IsTrue(response.IsValid);
+        }
+
+        [TestMethod]
+        public void Can_not_create_unit_without_company_id()
+        {
+            var model = _unitModelGenerator.Get();
+
+            var response = _unitService.Create(model);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => 
+                x.Fields.Any(f => f.Equals("CompanyId", StringComparison.InvariantCultureIgnoreCase))
+                && x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void CreateCompany()
+        {
+            _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get());
+        }
+
+        private void CreateUnitType()
+        {
+            _container.Resolve<IUnitTypeService>().Create(_container.Resolve<IGenerator<UnitTypeModel>>().Get());
         }
 
         #endregion

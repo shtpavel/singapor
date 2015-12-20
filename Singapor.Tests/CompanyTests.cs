@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Services.Responses;
+using Singapor.Tests.Generators;
 using Singapor.Texts;
 using Unity;
 
@@ -16,22 +17,20 @@ namespace Singapor.Tests
     public class CompanyTests
     {
         private ICompanyService _companyService;
+        private IGenerator<CompanyModel> _companyGenerator;
 
         [TestInitialize]
         public void Setup()
         {
             var container = new TestsContainer().CreateContainer();
+            _companyGenerator = container.Resolve<IGenerator<CompanyModel>>();
             _companyService = container.Resolve<ICompanyService>();
         }
 
         [TestMethod]
         public void Can_create_company()
         {
-            var companyModel = new CompanyModel()
-            {
-                Name = "Name of company",
-                Description = "Descr"
-            };
+            var companyModel = _companyGenerator.Get();
 
             var response = _companyService.Create(companyModel);
 
@@ -41,11 +40,8 @@ namespace Singapor.Tests
         [TestMethod]
         public void Can_not_create_company_with_empty_name()
         {
-            var companyModel = new CompanyModel()
-            {
-                Name = "",
-                Description = "Descr"
-            };
+            var companyModel = _companyGenerator.Get();
+            companyModel.Name = String.Empty;
 
             var response = _companyService.Create(companyModel);
 
@@ -58,11 +54,8 @@ namespace Singapor.Tests
         [TestMethod]
         public void Can_not_create_company_with_invalid_name_length()
         {
-            var companyModel = new CompanyModel()
-            {
-                Name = "Name",
-                Description = "Descr"
-            };
+            var companyModel = _companyGenerator.Get();
+            companyModel.Name = "123";
 
             var response = _companyService.Create(companyModel);
 
@@ -75,11 +68,7 @@ namespace Singapor.Tests
         [TestMethod]
         public void Can_not_create_company_with_duplicate_id()
         {
-            var companyModel = new CompanyModel()
-            {
-                Name = "Name1212",
-                Description = "Descr"
-            };
+            var companyModel = _companyGenerator.Get();
             var response = _companyService.Create(companyModel);
             response = _companyService.Create(response.Data);
 
@@ -87,6 +76,35 @@ namespace Singapor.Tests
             Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.UniqueId));
             Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.UniqueId)).Type, ErrorType.Validation);
             Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.UniqueId)).Fields.Count(), 1);
+        }
+
+        [TestMethod]
+        public void Can_not_create_company_with_empty_email()
+        {
+            var companyModel = _companyGenerator.Get();
+            companyModel.Email = string.Empty;
+
+            var response = _companyService.Create(companyModel);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
+            Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Type, ErrorType.Validation);
+            Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.Count(), 1);
+            Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.First(), "Email");
+        }
+        [TestMethod]
+        public void Can_not_create_company_with_empty_phone()
+        {
+            var companyModel = _companyGenerator.Get();
+            companyModel.Phone = string.Empty;
+
+            var response = _companyService.Create(companyModel);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
+            Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Type, ErrorType.Validation);
+            Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.Count(), 1);
+            Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.First(), "Phone");
         }
     }
 }

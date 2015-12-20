@@ -75,6 +75,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CompanyTests.cs" />
+    <Compile Include="Generators\CompanyGenerator.cs" />
+    <Compile Include="Generators\Helpers\StringsGenerators.cs" />
+    <Compile Include="Generators\IGenerator.cs" />
+    <Compile Include="Generators\UnitModelGenerator.cs" />
+    <Compile Include="Generators\UnitTypeModelGenerator.cs" />
     <Compile Include="Infrastructure\FakeDbSet.cs" />
     <Compile Include="UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

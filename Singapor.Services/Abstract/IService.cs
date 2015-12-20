@@ -9,7 +9,7 @@ namespace Singapor.Services.Abstract
         SingleEntityResponse<TModel> Create(TModel model);
         EmptyResponse Delete(Guid id);
         SingleEntityResponse<TModel> Update(TModel model);
-        SingleEntityResponse<TModel> Get(Guid id);
+        SingleEntityResponse<TModel> Get(Guid? id);
         ListResponse<TModel> Get();
     }
 }

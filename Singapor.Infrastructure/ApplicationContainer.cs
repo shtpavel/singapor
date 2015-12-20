@@ -32,12 +32,14 @@ namespace Singapor.Infrastructure
             container.RegisterType<IRepository<Order>, OrderRepository>();
             container.RegisterType<IRepository<UnitSchedule>, ScheduleRepository>();
             container.RegisterType<IRepository<Unit>, UnitRepository>();
+            container.RegisterType<IRepository<UnitType>, BaseRepository<UnitType>>();
 
             //register services
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<ICompanyService, CompanyService>();
             container.RegisterType<IUnitScheduleService, UnitScheduleService>();
             container.RegisterType<IUnitService, UnitService>();
+            container.RegisterType<IUnitTypeService, UnitTypeService>();
         }
     }
 }

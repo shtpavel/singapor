@@ -61,6 +61,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t find required company.
+        /// </summary>
+        public static string CompanyNotFound {
+            get {
+                return ResourceManager.GetString("CompanyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field should be from {0} to {1} charachers.
         /// </summary>
         public static string LengthBetween {
@@ -84,6 +93,24 @@ namespace Singapor.Texts {
         public static string UniqueId {
             get {
                 return ResourceManager.GetString("UniqueId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit not found.
+        /// </summary>
+        public static string UnitNotFound {
+            get {
+                return ResourceManager.GetString("UnitNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit type not found.
+        /// </summary>
+        public static string UnitTypeNotFound {
+            get {
+                return ResourceManager.GetString("UnitTypeNotFound", resourceCulture);
             }
         }
     }
