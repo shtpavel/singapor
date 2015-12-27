@@ -30,9 +30,9 @@ namespace Singapor.Tests.Generators.Helpers
         {
             if (characterSet == null)
                 characterSet =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                "abcdefghijklmnopqrstuvwxyz" +
-                "0123456789";
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                    "abcdefghijklmnopqrstuvwxyz" +
+                    "0123456789";
 
             if (length < 0)
                 throw new ArgumentException("length must not be negative", "length");

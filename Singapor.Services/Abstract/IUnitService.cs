@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Singapor.Services.Responses;
 
 namespace Singapor.Services.Abstract
 {
     public interface IUnitService : IService<UnitModel>
     {
+        #region Public methods
+
         ListResponse<UnitModel> Create(IEnumerable<UnitModel> units);
+
+        #endregion
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Singapor.DAL;
+﻿using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
@@ -13,10 +8,14 @@ namespace Singapor.Services.Services
 {
     public class FieldValidatorService : BaseService<FieldValidatorModel, FieldValidator>, IFieldValidatorService
     {
+        #region Constructors
+
         public FieldValidatorService(
-            IUnitOfWork unitOfWork, 
+            IUnitOfWork unitOfWork,
             IRepository<FieldValidator> repository) : base(unitOfWork, repository)
         {
         }
+
+        #endregion
     }
 }

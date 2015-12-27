@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using Singapor.Model.Entities;
 
 namespace Singapor.DAL
 {
     public interface IDataContext : IUnitOfWork
     {
-        IDbSet<T> Set<T>() where T: class;
+        #region Public methods
 
+        IDbSet<T> Set<T>() where T : class;
+
+        #endregion
     }
 
     public interface IUnitOfWork : IDisposable
     {
+        #region Public methods
+
         int SaveChanges();
+
+        #endregion
     }
 }

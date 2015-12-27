@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
-using Singapor.Services.Abstract;
+﻿using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators.Helpers;
 
@@ -8,6 +6,8 @@ namespace Singapor.Tests.Generators.Unit
 {
     public class UnitModelGenerator : IUnitModelGenerator
     {
+        #region Public methods
+
         public UnitModel Get()
         {
             var model = new UnitModel();
@@ -33,5 +33,7 @@ namespace Singapor.Tests.Generators.Unit
 
             return model;
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
@@ -13,12 +11,16 @@ using Singapor.Services.Responses;
 namespace Singapor.Services.Services
 {
     public class CompanyService : BaseService<CompanyModel, Company>, ICompanyService
-    { 
+    {
         #region Constructors
 
-        public CompanyService(IUnitOfWork unitOfWork, IRepository<Company> repository) : base(unitOfWork,repository)
+        public CompanyService(IUnitOfWork unitOfWork, IRepository<Company> repository) : base(unitOfWork, repository)
         {
         }
+
+        #endregion
+
+        #region Public methods
 
         public override SingleEntityResponse<CompanyModel> Create(CompanyModel model)
         {

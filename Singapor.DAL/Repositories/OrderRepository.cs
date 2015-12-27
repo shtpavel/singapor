@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Singapor.Model.Entities;
+﻿using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Repositories
 {
     public class OrderRepository : BaseRepository<Order>
     {
+        #region Constructors
+
         public OrderRepository(IDataContext context)
             : base(context)
         {
-            
         }
+
+        #endregion
     }
 }

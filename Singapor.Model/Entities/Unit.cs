@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Singapor.Model.Entities
 {
     public class Unit : EntityBase
     {
+        #region Properties
+
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsContainer { get; set; }
@@ -18,5 +17,7 @@ namespace Singapor.Model.Entities
         public Guid? ParentUnitId { get; set; }
         public Unit ParentUnit { get; set; }
         public virtual ICollection<Unit> Units { get; set; }
+
+        #endregion
     }
 }

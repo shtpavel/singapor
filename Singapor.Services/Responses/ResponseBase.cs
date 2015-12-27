@@ -1,25 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Singapor.Services.Responses
 {
     public class ResponseBase
     {
+        #region Properties
+
+        public bool IsValid
+        {
+            get { return Errors == null || !Errors.Any(); }
+        }
+
+        public List<ErrorObject> Errors { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
         protected ResponseBase(List<ErrorObject> errors)
         {
             Errors = errors;
         }
 
-        public bool IsValid { get { return Errors == null || !Errors.Any(); }}
-
-        public List<ErrorObject> Errors { get; private set; }
+        #endregion
     }
 
     public class ErrorObject
     {
+        #region Properties
+
+        public IEnumerable<string> Fields { get; private set; }
+        public ErrorType Type { get; private set; }
+        public string Message { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
         public ErrorObject(IEnumerable<string> fields, string message, ErrorType errorType)
         {
             Fields = fields;
@@ -27,9 +45,7 @@ namespace Singapor.Services.Responses
             Type = errorType;
         }
 
-        public IEnumerable<string> Fields { get; private set; }
-        public ErrorType Type { get; private set; }
-        public string Message { get; private set; }
+        #endregion
     }
 
     public enum ErrorType

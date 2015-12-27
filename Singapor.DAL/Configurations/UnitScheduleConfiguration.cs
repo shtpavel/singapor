@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Configurations
 {
     public class UnitScheduleConfiguration : EntityTypeConfiguration<UnitSchedule>
     {
+        #region Constructors
+
         public UnitScheduleConfiguration()
         {
             ToTable("UnitSchedule");
@@ -17,5 +14,7 @@ namespace Singapor.DAL.Configurations
             Property(x => x.ExactDate).IsRequired();
             Property(x => x.Description).IsRequired().HasMaxLength(100);
         }
+
+        #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Singapor.Services.Abstract;
+﻿using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators.Helpers;
 
@@ -7,12 +6,22 @@ namespace Singapor.Tests.Generators.Unit
 {
     internal class UnitTypeModelGenerator : IUnitTypeModelGenerator
     {
+        #region Fields
+
         private readonly ICompanyService _companyService;
+
+        #endregion
+
+        #region Constructors
 
         public UnitTypeModelGenerator(ICompanyService companyService)
         {
             _companyService = companyService;
         }
+
+        #endregion
+
+        #region Public methods
 
         public UnitTypeModel Get()
         {
@@ -30,5 +39,7 @@ namespace Singapor.Tests.Generators.Unit
 
             return model;
         }
+
+        #endregion
     }
 }

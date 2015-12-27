@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,75 +13,18 @@ namespace Singapor.Tests
 {
     public class FakeDbSet<T> : IDbSet<T> where T : class
     {
-        protected readonly HashSet<T> Data;
+        #region Fields
+
         private readonly IQueryable _query;
+        protected readonly HashSet<T> Data;
 
-        public FakeDbSet()
-        {
-            Data = new HashSet<T>();
-            _query = Data.AsQueryable();
-        }
+        #endregion
 
-        public T Add(T entity)
-        {
-            lock (Data) 
-                Data.Add(entity);
-            return entity;
-        }
-
-        public T Attach(T entity)
-        {
-            lock (Data) Data.Add(entity);
-            return entity;
-        }
-
-        public TDerivedEntity Create<TDerivedEntity>() where TDerivedEntity : class, T
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddOrUpdate(Expression<Func<T, object>> identifierExpression, params T[] entities)
-        {
-            AddOrUpdate(entities);
-        }
-
-        public void AddOrUpdate(params T[] entities)
-        {
-            foreach (var entity in entities)
-            {
-                Add(entity);
-            }
-        }
-
-        public T Create()
-        {
-            return Activator.CreateInstance<T>();
-        }
-
-        public virtual T Find(params object[] keyValues)
-        {
-            throw new NotImplementedException("Use FakeFindableDbSet");
-        }
+        #region Properties
 
         public ObservableCollection<T> Local
         {
             get { return new ObservableCollection<T>(Data); }
-        }
-
-        public T Remove(T entity)
-        {
-            lock (Data) Data.Remove(entity);
-            return entity;
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return Data.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return Data.GetEnumerator();
         }
 
         public Type ElementType
@@ -100,16 +42,102 @@ namespace Singapor.Tests
             get { return new AsyncQueryProviderWrapper<T>(_query.Provider); }
         }
 
+        #endregion
+
+        #region Constructors
+
+        public FakeDbSet()
+        {
+            Data = new HashSet<T>();
+            _query = Data.AsQueryable();
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public T Add(T entity)
+        {
+            lock (Data)
+                Data.Add(entity);
+            return entity;
+        }
+
+        public void AddOrUpdate(Expression<Func<T, object>> identifierExpression, params T[] entities)
+        {
+            AddOrUpdate(entities);
+        }
+
+        public void AddOrUpdate(params T[] entities)
+        {
+            foreach (var entity in entities)
+            {
+                Add(entity);
+            }
+        }
+
+        public T Attach(T entity)
+        {
+            lock (Data) Data.Add(entity);
+            return entity;
+        }
+
+        public TDerivedEntity Create<TDerivedEntity>() where TDerivedEntity : class, T
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Create()
+        {
+            return Activator.CreateInstance<T>();
+        }
+
+        public virtual T Find(params object[] keyValues)
+        {
+            throw new NotImplementedException("Use FakeFindableDbSet");
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return Data.GetEnumerator();
+        }
+
+        public T Remove(T entity)
+        {
+            lock (Data) Data.Remove(entity);
+            return entity;
+        }
+
+        #endregion
+
+        #region Private methods
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return Data.GetEnumerator();
+        }
+
+        #endregion
     }
 
     internal class AsyncQueryProviderWrapper<T> : IDbAsyncQueryProvider
     {
+        #region Fields
+
         private readonly IQueryProvider _inner;
+
+        #endregion
+
+        #region Constructors
 
         internal AsyncQueryProviderWrapper(IQueryProvider inner)
         {
             _inner = inner;
         }
+
+        #endregion
+
+        #region Public methods
 
         public IQueryable CreateQuery(Expression expression)
         {
@@ -140,10 +168,14 @@ namespace Singapor.Tests
         {
             return Task.FromResult(Execute<TResult>(expression));
         }
+
+        #endregion
     }
 
     public class AsyncEnumerableQuery<T> : EnumerableQuery<T>, IDbAsyncEnumerable<T>
     {
+        #region Constructors
+
         public AsyncEnumerableQuery(IEnumerable<T> enumerable)
             : base(enumerable)
         {
@@ -154,25 +186,59 @@ namespace Singapor.Tests
         {
         }
 
+        #endregion
+
+        #region Public methods
+
         public IDbAsyncEnumerator<T> GetAsyncEnumerator()
         {
             return new AsyncEnumeratorWrapper<T>(this.AsEnumerable().GetEnumerator());
         }
 
+        #endregion
+
+        #region Private methods
+
         IDbAsyncEnumerator IDbAsyncEnumerable.GetAsyncEnumerator()
         {
             return GetAsyncEnumerator();
         }
+
+        #endregion
     }
 
     public class AsyncEnumeratorWrapper<T> : IDbAsyncEnumerator<T>
     {
+        #region Fields
+
         private readonly IEnumerator<T> _inner;
+
+        #endregion
+
+        #region Properties
+
+        public T Current
+        {
+            get { return _inner.Current; }
+        }
+
+        object IDbAsyncEnumerator.Current
+        {
+            get { return Current; }
+        }
+
+        #endregion
+
+        #region Constructors
 
         public AsyncEnumeratorWrapper(IEnumerator<T> inner)
         {
             _inner = inner;
         }
+
+        #endregion
+
+        #region Public methods
 
         public void Dispose()
         {
@@ -184,14 +250,6 @@ namespace Singapor.Tests
             return Task.FromResult(_inner.MoveNext());
         }
 
-        public T Current
-        {
-            get { return _inner.Current; }
-        }
-
-        object IDbAsyncEnumerator.Current
-        {
-            get { return Current; }
-        }
+        #endregion
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
@@ -14,21 +11,35 @@ namespace Singapor.Services.Services
 {
     public class OrderService : BaseService<OrderModel, Order>, IOrderService
     {
+        #region Fields
+
         private readonly IRepository<UnitSchedule> _scheduleRepository;
+
+        #endregion
+
+        #region Constructors
 
         public OrderService(
             IUnitOfWork unitOfWork,
             IRepository<Order> repository,
-            IRepository<UnitSchedule> scheduleRepository) : base(unitOfWork,repository)
+            IRepository<UnitSchedule> scheduleRepository) : base(unitOfWork, repository)
         {
             _scheduleRepository = scheduleRepository;
         }
+
+        #endregion
+
+        #region Public methods
 
         public override SingleEntityResponse<OrderModel> Create(OrderModel model)
         {
             VerifyOrder(model);
             return base.Create(model);
         }
+
+        #endregion
+
+        #region Private methods
 
         private void VerifyOrder(OrderModel order)
         {
@@ -57,8 +68,10 @@ namespace Singapor.Services.Services
             }
 
             //Do not work in the break hours
-            if (ordersStartHour == dateSchedule.BreakHour 
-                || (ordersStartHour > dateSchedule.BreakHour && ordersStartHour < dateSchedule.BreakHour + dateSchedule.BreakDuration))
+            if (ordersStartHour == dateSchedule.BreakHour
+                ||
+                (ordersStartHour > dateSchedule.BreakHour &&
+                 ordersStartHour < dateSchedule.BreakHour + dateSchedule.BreakDuration))
             {
                 throw new Exception("Close in this hour");
             }
@@ -74,5 +87,7 @@ namespace Singapor.Services.Services
             //Todo: validate interceprion between other orders
             //Todo: marks with some tag like danger/ok/looksgood etc.
         }
+
+        #endregion
     }
 }

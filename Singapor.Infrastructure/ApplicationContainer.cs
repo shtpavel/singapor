@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Singapor.DAL;
+﻿using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
@@ -15,12 +10,16 @@ namespace Singapor.Infrastructure
 {
     public class ApplicationContainer
     {
+        #region Public methods
+
         public IUnityContainer CreateContainer()
         {
             var container = new UnityContainer();
             RegisterDependencies(container);
             return container;
         }
+
+        #endregion
 
         protected virtual void RegisterDependencies(IUnityContainer container)
         {

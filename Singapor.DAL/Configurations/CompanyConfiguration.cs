@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Configurations
 {
     public class CompanyConfiguration : EntityTypeConfiguration<Company>
     {
+        #region Constructors
+
         public CompanyConfiguration()
         {
             ToTable("Company");
@@ -17,5 +14,7 @@ namespace Singapor.DAL.Configurations
             Property(x => x.Name).IsRequired().HasMaxLength(50);
             Property(x => x.Description).HasMaxLength(500);
         }
+
+        #endregion
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using Singapor.DAL.Repositories;
-using Singapor.Model.Entities;
+﻿using FluentValidation;
 using Singapor.Services.Abstract;
 using Singapor.Texts;
 
@@ -13,8 +6,10 @@ namespace Singapor.Services.Models.Validators.Unit
 {
     public class NewUnitValidator : AbstractValidator<UnitModel>
     {
+        #region Constructors
+
         public NewUnitValidator(
-            ICompanyService companyService, 
+            ICompanyService companyService,
             IUnitService unitService,
             IUnitTypeService unitTypeService)
         {
@@ -28,7 +23,7 @@ namespace Singapor.Services.Models.Validators.Unit
                 }
                 return true;
             }).WithMessage(Validation.CompanyNotFound);
-            
+
             RuleFor(x => x.ParentUnitId).Must(x =>
             {
                 if (x.HasValue)
@@ -64,5 +59,7 @@ namespace Singapor.Services.Models.Validators.Unit
 
             RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
         }
+
+        #endregion
     }
 }

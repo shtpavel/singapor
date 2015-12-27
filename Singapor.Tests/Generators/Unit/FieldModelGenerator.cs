@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Singapor.Model.Entities;
-using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators.Helpers;
 
@@ -8,6 +7,8 @@ namespace Singapor.Tests.Generators.Unit
 {
     public class FieldModelGenerator : IFieldModelGenerator
     {
+        #region Public methods
+
         public FieldModel Get()
         {
             var model = new FieldModel();
@@ -22,7 +23,6 @@ namespace Singapor.Tests.Generators.Unit
         {
             var model = Get();
             model.UnitTypeId = unitTypeModel.Id;
-
             return model;
         }
 
@@ -34,12 +34,15 @@ namespace Singapor.Tests.Generators.Unit
             return model;
         }
 
-        public FieldModel Get(UnitTypeModel unitTypeModel, FieldType type, ICollection<FieldValidatorModel> fieldValidatorModels)
+        public FieldModel Get(UnitTypeModel unitTypeModel, FieldType type,
+            ICollection<FieldValidatorModel> fieldValidatorModels)
         {
             var model = Get(unitTypeModel, type);
             model.Validators = fieldValidatorModels;
 
             return model;
         }
+
+        #endregion
     }
 }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Singapor.Services.Models;
+﻿using Singapor.Services.Models;
 using Singapor.Tests.Generators.Helpers;
 
 namespace Singapor.Tests.Generators
 {
     public class CompanyModelGenerator : IGenerator<CompanyModel>
     {
+        #region Public methods
+
         public CompanyModel Get()
         {
-            var model = new CompanyModel()
+            var model = new CompanyModel
             {
                 Name = StringsGenerators.GenerateString(10),
                 Address = StringsGenerators.GenerateString(100),
@@ -24,5 +21,7 @@ namespace Singapor.Tests.Generators
 
             return model;
         }
+
+        #endregion
     }
 }

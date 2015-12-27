@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Configurations
 {
     public class OrderConfiguration : EntityTypeConfiguration<Order>
     {
+        #region Constructors
+
         public OrderConfiguration()
         {
             ToTable("Order");
@@ -18,5 +15,7 @@ namespace Singapor.DAL.Configurations
             Property(x => x.StartTime).IsRequired();
             Property(x => x.EndTime).IsRequired();
         }
+
+        #endregion
     }
 }

@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Singapor.Model;
 
 namespace Singapor.DAL.Repositories
 {
-    public class BaseRepository <TEntity>: IRepository<TEntity> where TEntity : EntityBase
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
     {
+        #region Fields
+
         private readonly IDataContext _context;
+
+        #endregion
+
+        #region Constructors
 
         public BaseRepository(IDataContext context)
         {
             _context = context;
         }
+
+        #endregion
+
+        #region Public methods
 
         public virtual TEntity Add(TEntity entity)
         {
@@ -30,9 +38,9 @@ namespace Singapor.DAL.Repositories
             _context.Set<TEntity>().Remove(entity);
         }
 
-        public TEntity GetById(Guid id)
+        public virtual IEnumerable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
+            return _context.Set<TEntity>().Where(predicate);
         }
 
         public virtual IEnumerable<TEntity> GetAll()
@@ -40,9 +48,11 @@ namespace Singapor.DAL.Repositories
             return _context.Set<TEntity>().ToList();
         }
 
-        public virtual IEnumerable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate)
+        public TEntity GetById(Guid id)
         {
-            return _context.Set<TEntity>().Where(predicate);
+            return _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
         }
+
+        #endregion
     }
 }
