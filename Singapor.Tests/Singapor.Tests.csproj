@@ -76,16 +76,20 @@
   <ItemGroup>
     <Compile Include="Generators\IFieldModelGenerator.cs" />
     <Compile Include="Generators\IUnitModelGenerator.cs" />
+    <Compile Include="Generators\IUnitScheduleModelGenerator.cs" />
     <Compile Include="Generators\IUnitTypeModelGenerator.cs" />
     <Compile Include="Generators\Unit\FieldModelGenerator.cs" />
+    <Compile Include="Generators\Unit\UnitScheduleModelGenerator.cs" />
     <Compile Include="Tests\CompanyTests.cs" />
-    <Compile Include="Generators\CompanyGenerator.cs" />
+    <Compile Include="Generators\CompanyModelGenerator.cs" />
     <Compile Include="Generators\Helpers\StringsGenerators.cs" />
     <Compile Include="Generators\IGenerator.cs" />
     <Compile Include="Generators\Unit\UnitModelGenerator.cs" />
     <Compile Include="Generators\Unit\UnitTypeModelGenerator.cs" />
     <Compile Include="Infrastructure\FakeDbSet.cs" />
     <Compile Include="Tests\FieldsTests.cs" />
+    <Compile Include="Tests\EndToEndTests.cs" />
+    <Compile Include="Tests\UnitScheduleTests.cs" />
     <Compile Include="Tests\UnitTypeTests.cs" />
     <Compile Include="Tests\UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

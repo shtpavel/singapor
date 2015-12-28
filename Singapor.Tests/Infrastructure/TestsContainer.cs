@@ -45,6 +45,7 @@ namespace Singapor.Tests
             container.RegisterType<IUnitModelGenerator, UnitModelGenerator>();
             container.RegisterType<IUnitTypeModelGenerator, UnitTypeModelGenerator>();
             container.RegisterType<IFieldModelGenerator, FieldModelGenerator>();
+            container.RegisterType<IUnitScheduleModelGenerator, UnitScheduleModelGenerator>();
         }
     }
 }

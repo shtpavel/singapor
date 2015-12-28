@@ -79,6 +79,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is already defined schedule for this date.
+        /// </summary>
+        public static string DuplicateScheduleForDate {
+            get {
+                return ResourceManager.GetString("DuplicateScheduleForDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field should be from {0} to {1} charachers.
         /// </summary>
         public static string LengthBetween {

@@ -2,11 +2,11 @@
 
 namespace Singapor.DAL.Repositories
 {
-    public class ScheduleRepository : BaseRepository<UnitSchedule>
+    public class UnitScheduleRepository : BaseRepository<UnitSchedule>
     {
         #region Constructors
 
-        public ScheduleRepository(IDataContext context)
+        public UnitScheduleRepository(IDataContext context)
             : base(context)
         {
         }

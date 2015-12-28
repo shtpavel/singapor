@@ -3,8 +3,6 @@ using System.Linq;
 using System.Security.Policy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Model.Entities;
-using Singapor.Services.Models;
-using Singapor.Services.Responses;
 using Singapor.Texts;
 
 namespace Singapor.Tests.Tests

@@ -59,7 +59,7 @@
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
-    <Compile Include="Repositories\ScheduleRepository.cs" />
+    <Compile Include="Repositories\UnitScheduleRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
   </ItemGroup>
   <ItemGroup />

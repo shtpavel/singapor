@@ -43,7 +43,7 @@ namespace Singapor.Tests.Tests
             Assert.IsTrue(childResponse.IsValid);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void Can_create_multiple_units_at_one_time()
         {
             var models = new List<UnitModel>();
@@ -77,7 +77,7 @@ namespace Singapor.Tests.Tests
                 && x.Message.Equals(Validation.ParentUnitIsNotContainer, StringComparison.InvariantCultureIgnoreCase)));
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void Can_not_create_more_than_20_units_at_one_time()
         {
             var models = new List<UnitModel>();

@@ -123,6 +123,9 @@
   <data name="CompanyNotFound" xml:space="preserve">
     <value>Can't find required company</value>
   </data>
+  <data name="DuplicateScheduleForDate" xml:space="preserve">
+    <value>There is already defined schedule for this date</value>
+  </data>
   <data name="LengthBetween" xml:space="preserve">
     <value>This field should be from {0} to {1} charachers</value>
   </data>

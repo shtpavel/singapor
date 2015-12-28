@@ -69,6 +69,7 @@
     <Compile Include="Models\UnitTypeModel.cs" />
     <Compile Include="Models\Validators\Company\NewCompanyValidator.cs" />
     <Compile Include="Models\Validators\Unit\NewFieldValidator.cs" />
+    <Compile Include="Models\Validators\Unit\NewUnitScheduleValidator.cs" />
     <Compile Include="Models\Validators\Unit\NewUnitValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\CompanyModel.cs" />

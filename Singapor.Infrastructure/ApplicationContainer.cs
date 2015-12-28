@@ -30,7 +30,7 @@ namespace Singapor.Infrastructure
             //register repositories
             container.RegisterType<IRepository<Company>, CompanyRepository>();
             container.RegisterType<IRepository<Order>, OrderRepository>();
-            container.RegisterType<IRepository<UnitSchedule>, ScheduleRepository>();
+            container.RegisterType<IRepository<UnitSchedule>, UnitScheduleRepository>();
             container.RegisterType<IRepository<Unit>, UnitRepository>();
             container.RegisterType<IRepository<UnitType>, BaseRepository<UnitType>>();
             container.RegisterType<IRepository<FieldValidator>, BaseRepository<FieldValidator>>();
