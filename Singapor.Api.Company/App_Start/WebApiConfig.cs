@@ -5,20 +5,20 @@ using System.Web.Http;
 
 namespace Singapor.Api.Company
 {
-	public static class WebApiConfig
-	{
-		public static void Register(HttpConfiguration config)
-		{
-			// Конфигурация и службы веб-API
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            // Web API configuration and services
 
-			// Маршруты веб-API
-			config.MapHttpAttributeRoutes();
+            // Web API routes
+            config.MapHttpAttributeRoutes();
 
-			config.Routes.MapHttpRoute(
-				name: "DefaultApi",
-				routeTemplate: "api/{controller}/{id}",
-				defaults: new { id = RouteParameter.Optional }
-			);
-		}
-	}
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+        }
+    }
 }
