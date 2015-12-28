@@ -12,14 +12,14 @@ namespace Singapor.Services.Services
 {
     public class UnitScheduleService : BaseService<UnitScheduleModel, UnitSchedule>, IUnitScheduleService
     {
-        private readonly UnitRepository _unitRepository;
+        private readonly IRepository<Unit> _unitRepository;
 
         #region Constructors
 
         public UnitScheduleService(
             IUnitOfWork unitOfWork, 
             IRepository<UnitSchedule> repository,
-            UnitRepository unitRepository)
+            IRepository<Unit> unitRepository)
             : base(unitOfWork, repository)
         {
             _unitRepository = unitRepository;

@@ -9,7 +9,7 @@ namespace Singapor.Services.Models
         #region Properties
 
         public DateTime? ExactDate { get; set; }
-        public DayOfWeek DayOfWeek { get; set; }
+        public DayOfWeek? DayOfWeek { get; set; }
         public int OpenHour { get; set; }
         public int CloseHour { get; set; }
         public int? BreakHour { get; set; }

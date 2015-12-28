@@ -7,7 +7,7 @@ namespace Singapor.Model.Entities
         #region Properties
 
         public string Description { get; set; }
-        public DayOfWeek DayOfWeek { get; set; }
+        public DayOfWeek? DayOfWeek { get; set; }
         public DateTime? ExactDate { get; set; }
         public int OpenHour { get; set; }
         public int CloseHour { get; set; }

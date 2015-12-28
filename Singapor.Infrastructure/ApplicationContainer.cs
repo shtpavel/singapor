@@ -1,10 +1,12 @@
-﻿using Singapor.DAL;
+﻿using Autofac;
+using Singapor.DAL;
 using Singapor.DAL.Repositories;
+using Singapor.Infrastructure.DependencyInjection.Module;
+using Singapor.Infrastructure.DependencyInjection.Modules;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models.Maps;
 using Singapor.Services.Services;
-using Unity;
 
 namespace Singapor.Infrastructure
 {
@@ -12,44 +14,21 @@ namespace Singapor.Infrastructure
     {
         #region Public methods
 
-        public IUnityContainer CreateContainer()
+        public IContainer CreateContainer()
         {
-            var container = new UnityContainer();
-            RegisterDependencies(container);
-            return container;
+            var builder = new ContainerBuilder();
+            RegisterModules(builder);
+            return builder.Build();
         }
 
         #endregion
 
-        protected virtual void RegisterDependencies(IUnityContainer container)
+        protected virtual void RegisterModules(ContainerBuilder builder)
         {
-            //register context
-            container.RegisterType<IDataContext, DataContext>(new PerThreadLifetimeManager());
-            container.RegisterType<IUnitOfWork, DataContext>(new PerThreadLifetimeManager());
-
-            //register repositories
-            container.RegisterType<IRepository<Company>, CompanyRepository>();
-            container.RegisterType<IRepository<Order>, OrderRepository>();
-            container.RegisterType<IRepository<UnitSchedule>, UnitScheduleRepository>();
-            container.RegisterType<IRepository<Unit>, UnitRepository>();
-            container.RegisterType<IRepository<UnitType>, BaseRepository<UnitType>>();
-            container.RegisterType<IRepository<FieldValidator>, BaseRepository<FieldValidator>>();
-            container.RegisterType<IRepository<Field>, BaseRepository<Field>>();
-            container.RegisterType<IRepository<FieldValue>, BaseRepository<FieldValue>>();
-
-            //register services
-            container.RegisterType<IOrderService, OrderService>();
-            container.RegisterType<ICompanyService, CompanyService>();
-            container.RegisterType<IUnitScheduleService, UnitScheduleService>();
-            container.RegisterType<IUnitService, UnitService>();
-            container.RegisterType<IUnitTypeService, UnitTypeService>();
-            container.RegisterType<IFieldValueService, FieldValueService>();
-            container.RegisterType<IFieldValidatorService, FieldValidatorService>();
-            container.RegisterType<IFieldService, FieldService>();
-
-            //mappers
-            container.RegisterType<IMapConfiguration, CompanyMapper>("CompanyMapper");
-            container.RegisterType<IMapConfiguration, UnitMapper>("UnitMapper");
+	        builder.RegisterModule<ContextModule>();
+	        builder.RegisterModule<RepositoryModule>();
+	        builder.RegisterModule<ServiceModule>();
+	        builder.RegisterModule<MappersModule>();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Singapor.Services.Models.Validators.Unit
     {
         public NewUnitScheduleValidator(
             IRepository<UnitSchedule> unitScheduleRepository,
-            UnitRepository unitRepository)
+            IRepository<Model.Entities.Unit> unitRepository)
         {
 
             RuleFor(x => x.UnitId)

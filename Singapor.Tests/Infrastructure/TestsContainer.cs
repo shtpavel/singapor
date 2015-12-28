@@ -1,11 +1,12 @@
-﻿using Moq;
+﻿using Autofac;
+using Moq;
 using Singapor.DAL;
 using Singapor.Infrastructure;
 using Singapor.Model.Entities;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators;
 using Singapor.Tests.Generators.Unit;
-using Unity;
+using Singapor.Tests.Infrastructure.Modules;
 
 namespace Singapor.Tests
 {
@@ -33,19 +34,17 @@ namespace Singapor.Tests
             return mockDataContext.Object;
         }
 
-        #endregion
+		#endregion
 
-        protected override void RegisterDependencies(IUnityContainer container)
-        {
-            base.RegisterDependencies(container);
+		protected override void RegisterModules(ContainerBuilder builder)
+		{
+            base.RegisterModules(builder);
+			builder.RegisterModule<GeneratorsModule>();
+
             var context = CreateDataContext();
-            container.RegisterInstance(typeof (IDataContext), context, new PerThreadLifetimeManager());
-            container.RegisterInstance(typeof (IUnitOfWork), context, new PerThreadLifetimeManager());
-            container.RegisterType<IGenerator<CompanyModel>, CompanyModelGenerator>();
-            container.RegisterType<IUnitModelGenerator, UnitModelGenerator>();
-            container.RegisterType<IUnitTypeModelGenerator, UnitTypeModelGenerator>();
-            container.RegisterType<IFieldModelGenerator, FieldModelGenerator>();
-            container.RegisterType<IUnitScheduleModelGenerator, UnitScheduleModelGenerator>();
+            builder.RegisterInstance(context).As<IDataContext>().SingleInstance();
+            builder.RegisterInstance(context).As<IUnitOfWork>().SingleInstance();
+            
         }
     }
 }
