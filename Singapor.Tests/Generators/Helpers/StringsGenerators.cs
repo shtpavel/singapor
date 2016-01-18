@@ -11,9 +11,9 @@ namespace Singapor.Tests.Generators.Helpers
         public static string GenerateEmail()
         {
             var template = "{0}@{1}.{2}";
-            var name = GenerateRandomAlphanumeric(10);
-            var addr = GenerateRandomAlphanumeric(8);
-            var domain = GenerateRandomAlphanumeric(3);
+            var name = "test";
+            var addr = "gmail";
+            var domain = "com";
             return string.Format(template, name, addr, domain);
         }
 

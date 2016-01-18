@@ -22,6 +22,7 @@ namespace Singapor.Tests
             var unitScheduleDbSet = new FakeDbSet<UnitSchedule>();
             var unitTypeDbSet = new FakeDbSet<UnitType>();
             var fieldDbSet = new FakeDbSet<Field>();
+            var userDbSet = new FakeDbSet<User>();
 
             var mockDataContext = new Mock<IDataContext>();
             mockDataContext.Setup(x => x.Set<Company>()).Returns(companyDbSet);
@@ -29,6 +30,7 @@ namespace Singapor.Tests
             mockDataContext.Setup(x => x.Set<Unit>()).Returns(unitDbSet);
             mockDataContext.Setup(x => x.Set<UnitSchedule>()).Returns(unitScheduleDbSet);
             mockDataContext.Setup(x => x.Set<UnitType>()).Returns(unitTypeDbSet);
+            mockDataContext.Setup(x => x.Set<User>()).Returns(userDbSet);
             mockDataContext.Setup(x => x.Set<Field>()).Returns(fieldDbSet);
 
             return mockDataContext.Object;
