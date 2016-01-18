@@ -45,7 +45,7 @@ namespace Singapor.Services.Services
             return base.Create(model);
         }
 
-        public ListResponse<UnitModel> Create(IEnumerable<UnitModel> units)
+        public ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> units)
         {
             throw new NotImplementedException();
         }

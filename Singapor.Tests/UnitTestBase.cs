@@ -33,7 +33,7 @@ namespace Singapor.Tests
 
         public UnitTestBase()
         {
-            _container = new TestsContainer().CreateContainer();
+            _container = new TestsContainer().GetContainerBuilder().Build();
             _container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
         }
 

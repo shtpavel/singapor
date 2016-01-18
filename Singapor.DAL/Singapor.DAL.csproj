@@ -52,6 +52,7 @@
     <Compile Include="Configurations\OrderConfiguration.cs" />
     <Compile Include="Configurations\UnitConfiguration.cs" />
     <Compile Include="Configurations\UnitScheduleConfiguration.cs" />
+    <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="IDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

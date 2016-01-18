@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using Singapor.Services.Models;
 using Singapor.Services.Models.Maps;
 
 namespace Singapor.Infrastructure.DependencyInjection.Modules
@@ -14,6 +15,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 		{
 			builder.RegisterType<CompanyMapper>().As<IMapConfiguration>();
 			builder.RegisterType<UnitMapper>().As<IMapConfiguration>();
+			builder.RegisterType<UserMapper>().As<IMapConfiguration>();
 		}
 	}
 }

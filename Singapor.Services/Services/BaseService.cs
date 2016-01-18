@@ -8,6 +8,7 @@ using Singapor.Services.Abstract;
 using Singapor.Services.Helpers;
 using Singapor.Services.Models;
 using Singapor.Services.Responses;
+using Singapor.Texts;
 
 namespace Singapor.Services.Services
 {
@@ -53,9 +54,10 @@ namespace Singapor.Services.Services
             var company = _repository.GetById(id);
             if (company == null)
             {
-                response.Errors.Add(new ErrorObject(new string[0], "Can't find company", ErrorType.NotFound));
+                response.Errors.Add(new ErrorObject(new string[0], Validation.CompanyNotFound, ErrorType.NotFound));
                 return response;
             }
+
             _repository.Delete(company);
             _unitOfWork.SaveChanges();
             return new EmptyResponse();
@@ -75,10 +77,10 @@ namespace Singapor.Services.Services
             return new SingleEntityResponse<TModel>(model);
         }
 
-        public ListResponse<TModel> Get()
+        public ListEntityResponse<TModel> Get()
         {
             return
-                new ListResponse<TModel>(
+                new ListEntityResponse<TModel>(
                     _repository.GetAll()
                         .Select(x => new SingleEntityResponse<TModel>(Mapper.Map(x, Activator.CreateInstance<TModel>()))));
         }

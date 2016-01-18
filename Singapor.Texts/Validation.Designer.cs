@@ -88,6 +88,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email address is not vaild.
+        /// </summary>
+        public static string EmailIsNotValid {
+            get {
+                return ResourceManager.GetString("EmailIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field should be from {0} to {1} charachers.
         /// </summary>
         public static string LengthBetween {

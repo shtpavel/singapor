@@ -7,7 +7,7 @@ namespace Singapor.DAL
     {
         #region Constructors
 
-        public DataContext() : base("")
+        public DataContext() : base("name=Default")
         {
         }
 
@@ -30,6 +30,7 @@ namespace Singapor.DAL
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new UnitConfiguration());
             modelBuilder.Configurations.Add(new UnitScheduleConfiguration());
+            modelBuilder.Configurations.Add(new UserConfiguration());
         }
     }
 }

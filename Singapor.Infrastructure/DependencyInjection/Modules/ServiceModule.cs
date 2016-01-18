@@ -21,6 +21,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Module
 			builder.RegisterType<FieldValueService>().As<IFieldValueService>();
 			builder.RegisterType<FieldValidatorService>().As<IFieldValidatorService>();
 			builder.RegisterType<FieldService>().As<IFieldService>();
+			builder.RegisterType<UserService>().As<IUserService>();
 		}
 	}
 }

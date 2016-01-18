@@ -7,7 +7,7 @@ namespace Singapor.Services.Abstract
     {
         #region Public methods
 
-        ListResponse<UnitModel> Create(IEnumerable<UnitModel> units);
+        ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> units);
 
         #endregion
     }

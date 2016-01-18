@@ -12,9 +12,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Module
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<DataContext>().As<IDataContext>().InstancePerRequest();
-			builder.RegisterType<DataContext>().As<IUnitOfWork>().InstancePerRequest();
-
+			builder.RegisterType<DataContext>().As<IDataContext>().As<IUnitOfWork>().InstancePerLifetimeScope();
 		}
 	}
 }

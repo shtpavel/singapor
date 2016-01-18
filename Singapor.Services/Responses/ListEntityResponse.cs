@@ -3,7 +3,7 @@ using Singapor.Services.Abstract;
 
 namespace Singapor.Services.Responses
 {
-    public class ListResponse<T> : ResponseBase where T : ModelBase
+    public class ListEntityResponse<T> : ResponseBase where T : ModelBase
     {
         #region Properties
 
@@ -13,7 +13,7 @@ namespace Singapor.Services.Responses
 
         #region Constructors
 
-        public ListResponse(IEnumerable<SingleEntityResponse<T>> data, List<ErrorObject> errors = null) : base(errors)
+        public ListEntityResponse(IEnumerable<SingleEntityResponse<T>> data, List<ErrorObject> errors = null) : base(errors)
         {
             Data = data;
         }

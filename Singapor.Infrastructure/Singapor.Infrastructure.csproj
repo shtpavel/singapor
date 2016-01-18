@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContainer.cs" />
+    <Compile Include="DependencyInjection\Modules\ApplicationServiceModule.cs" />
     <Compile Include="DependencyInjection\Modules\ContextModule.cs" />
     <Compile Include="DependencyInjection\Modules\MappersModule.cs" />
     <Compile Include="DependencyInjection\Modules\RepositoryModule.cs" />
@@ -62,6 +63,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Singapor.ApplicationServices\Singapor.ApplicationServices.csproj">
+      <Project>{FFCDC36D-0831-4138-8648-FA4689283F78}</Project>
+      <Name>Singapor.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
       <Project>{9396c057-f78d-41f7-aa46-7e2743e58150}</Project>
       <Name>Singapor.DAL</Name>
