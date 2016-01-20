@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CompanyRegisteredBody" xml:space="preserve">
-    <value>Thank you for registering {0}. Your login: {1}. Your password: {2}</value>
+    <value>Thank you for registering. Your login: {0}. Your password: {1}</value>
   </data>
   <data name="CompanyRegisteredSubject" xml:space="preserve">
     <value>The best startup. Company registered.</value>

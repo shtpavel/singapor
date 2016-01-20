@@ -1,5 +1,5 @@
-﻿using Singapor.Services.Models;
-using Singapor.Tests.Generators.Helpers;
+﻿using Singapor.Helpers;
+using Singapor.Services.Models;
 
 namespace Singapor.Tests.Generators
 {

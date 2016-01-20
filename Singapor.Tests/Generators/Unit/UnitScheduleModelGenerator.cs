@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Singapor.Helpers;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
-using Singapor.Tests.Generators.Helpers;
 
 namespace Singapor.Tests.Generators.Unit
 {

@@ -4,12 +4,15 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -34,9 +37,13 @@ namespace Singapor.Api
 
             var container = ConfigureContainer();
             var dependencyResolver = new AutofacWebApiDependencyResolver(container);
+
             ConfigureOAuth(appBuilder, container);
+            config.IncludeErrorDetailPolicy
+                    = IncludeErrorDetailPolicy.Always;
             config.DependencyResolver = dependencyResolver;
             config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
+
             appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             appBuilder.UseAutofacMiddleware(container);
             appBuilder.UseWebApi(config); 
@@ -44,9 +51,12 @@ namespace Singapor.Api
 
         private static IContainer ConfigureContainer()
         {
-            var builder = new ApplicationContainer().GetContainerBuilder();
+            var container = new ApplicationContainer().GetContainerBuilder();
+            
+            var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
-            var container = builder.Build();
+            builder.Update(container);
+
             container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
 
             return container;
@@ -75,16 +85,29 @@ namespace Singapor.Api
 
         public void ConfigureOAuth(IAppBuilder app, IContainer container)
         {
+            var issuer = WebConfigurationManager.AppSettings["issuer"];
+            var audience = WebConfigurationManager.AppSettings["audience"];
+            var secret = WebConfigurationManager.AppSettings["base64secret"];
+
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenFormat = new CustomJwtFormat(WebConfigurationManager.AppSettings["issuer"]),
                 Provider = new SimpleAuthorizationServerProvider(container)
             };
 
+            app.UseJwtBearerAuthentication(
+                new JwtBearerAuthenticationOptions
+                {
+                    AllowedAudiences = new[] { audience },
+                    IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
+                    {
+                        new SymmetricKeyIssuerSecurityTokenProvider(issuer, TextEncodings.Base64Url.Decode(secret))
+                    }
+                });
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using Autofac;
 using Autofac.Core.Lifetime;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
@@ -23,23 +26,33 @@ namespace Singapor.Api.Auth
             context.Validated();
         }
 
-        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            
             var userService = _container.Resolve<IUserService>();
-            var user = userService.Get(context.UserName, context.Password);
+            var userResponse = userService.Get(context.UserName, context.Password);
 
-            if (user == null)
+            if (!userResponse.IsValid || userResponse.Data == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                context.SetError("invalid_grant", "The user name or password is incorrect");
+                return Task.FromResult<object>(null);
             }
 
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            var identity = new ClaimsIdentity("JWT");
+            identity.AddClaim(new Claim(ClaimTypes.Name, userResponse.Data.Email));
             identity.AddClaim(new Claim("sub", context.UserName));
+            identity.AddClaim(new Claim(ClaimTypes.Role, "superAdmin"));
 
-            context.Validated(identity);
+            var props = new AuthenticationProperties(new Dictionary<string, string>
+                {
+                    {
+                         "audience", WebConfigurationManager.AppSettings["audience"]
+                    }
+                });
+
+            var ticket = new AuthenticationTicket(identity, props);
+            context.Validated(ticket);
+            return Task.FromResult<object>(null);
         }
     }
 }

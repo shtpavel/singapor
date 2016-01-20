@@ -1,9 +1,12 @@
-﻿using Singapor.Services.Models;
+﻿using System;
+using Singapor.Services.Models;
+using Singapor.Services.Responses;
 
 namespace Singapor.Services.Abstract
 {
     public interface IUserService : IService<UserModel>
     {
-        UserModel Get(string email, string password);
+        SingleEntityResponse<UserModel> Create(Guid companyId, string login);
+        SingleEntityResponse<UserModel> Get(string login, string password);
     }
 }

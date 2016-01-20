@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Singapor.Helpers;
 using Singapor.Model.Entities;
 using Singapor.Services.Models;
-using Singapor.Tests.Generators.Helpers;
 
 namespace Singapor.Tests.Generators.Unit
 {

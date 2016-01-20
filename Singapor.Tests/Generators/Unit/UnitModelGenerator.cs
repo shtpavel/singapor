@@ -1,6 +1,6 @@
-﻿using Singapor.Services.Abstract;
+﻿using Singapor.Helpers;
+using Singapor.Services.Abstract;
 using Singapor.Services.Models;
-using Singapor.Tests.Generators.Helpers;
 
 namespace Singapor.Tests.Generators.Unit
 {

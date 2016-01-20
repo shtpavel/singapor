@@ -78,8 +78,7 @@
     <Compile Include="Generators\Unit\UnitScheduleModelGenerator.cs" />
     <Compile Include="Infrastructure\Modules\GeneratorsModule.cs" />
     <Compile Include="Tests\CompanyTests.cs" />
-    <Compile Include="Generators\CompanyModelGenerator.cs" />
-    <Compile Include="Generators\Helpers\StringsGenerators.cs" />
+    <Compile Include="Generators\Unit\CompanyModelGenerator.cs" />
     <Compile Include="Generators\IGenerator.cs" />
     <Compile Include="Generators\Unit\UnitModelGenerator.cs" />
     <Compile Include="Generators\Unit\UnitTypeModelGenerator.cs" />
@@ -97,6 +96,10 @@
     <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
       <Project>{9396c057-f78d-41f7-aa46-7e2743e58150}</Project>
       <Name>Singapor.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Helpers\Singapor.Helpers.csproj">
+      <Project>{3369F802-1889-4A27-91A4-89DDEE682FB4}</Project>
+      <Name>Singapor.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Singapor.Infrastructure\Singapor.Infrastructure.csproj">
       <Project>{f61f11a8-7d5f-41cd-9717-3d20fac7ffdc}</Project>
@@ -118,6 +121,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Generators\Helpers\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

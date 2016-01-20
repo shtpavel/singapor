@@ -14,11 +14,19 @@ namespace Singapor.Infrastructure
     {
         #region Public methods
 
-        public ContainerBuilder GetContainerBuilder()
+        public IContainer GetContainerBuilder()
         {
             var builder = new ContainerBuilder();
             RegisterModules(builder);
-            return builder;
+
+            var container = builder.Build();
+
+            //Register container itself
+            var newContainerBuilder = new ContainerBuilder();
+            newContainerBuilder.RegisterInstance(container).SingleInstance();
+            newContainerBuilder.Update(container);
+
+            return container;
         }
 
         #endregion
@@ -30,6 +38,7 @@ namespace Singapor.Infrastructure
 	        builder.RegisterModule<ServiceModule>();
 	        builder.RegisterModule<MappersModule>();
 	        builder.RegisterModule<ApplicationServiceModule>();
+            builder.RegisterModule<EventSystemModule>();
         }
     }
 }

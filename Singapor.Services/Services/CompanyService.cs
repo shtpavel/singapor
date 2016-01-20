@@ -42,13 +42,8 @@ namespace Singapor.Services.Services
 
             if (response.IsValid)
             {
-                var password = Membership.GeneratePassword(6, 0);
-                var userCreationResponse = _userService.Create(new UserModel()
-                {
-                    Email = model.Email,
-                    CompanyId = response.Data.Id,
-                    Password = password
-                });
+                var userCreationResponse = _userService.Create(model.Id.Value, model.Email);
+                //TODO: handle somehow the fact that user creation failed.
             }
 
             return response;

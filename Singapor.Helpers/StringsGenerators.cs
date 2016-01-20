@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace Singapor.Tests.Generators.Helpers
+namespace Singapor.Helpers
 {
     public static class StringsGenerators
     {

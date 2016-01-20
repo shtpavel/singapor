@@ -57,9 +57,12 @@
     <Compile Include="ApplicationContainer.cs" />
     <Compile Include="DependencyInjection\Modules\ApplicationServiceModule.cs" />
     <Compile Include="DependencyInjection\Modules\ContextModule.cs" />
+    <Compile Include="DependencyInjection\Modules\EventSystemModule.cs" />
     <Compile Include="DependencyInjection\Modules\MappersModule.cs" />
     <Compile Include="DependencyInjection\Modules\RepositoryModule.cs" />
     <Compile Include="DependencyInjection\Modules\ServiceModule.cs" />
+    <Compile Include="Listeners\ListenerBase.cs" />
+    <Compile Include="Listeners\UserCreatedListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,11 +82,16 @@
       <Project>{eb9947e2-52d4-481a-9500-1f7d6a9ead46}</Project>
       <Name>Singapor.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
+      <Project>{F7DB7DBC-C6C8-4836-8665-23C5545663A5}</Project>
+      <Name>Singapor.Texts</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

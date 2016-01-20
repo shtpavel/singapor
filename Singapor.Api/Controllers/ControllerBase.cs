@@ -23,7 +23,7 @@ namespace Singapor.Api.Controllers
             }
 
             return Request.CreateResponse(
-                succesStatusCode,
+                HttpStatusCode.BadRequest,
                 new Response<T>(serviceResponse.Data, serviceResponse.Errors));
         }
 

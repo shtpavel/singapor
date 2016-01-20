@@ -61,7 +61,7 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thank you for registering {0}. Your login: {1}. Your password: {2}.
+        ///   Looks up a localized string similar to Thank you for registering. Your login: {0}. Your password: {1}.
         /// </summary>
         public static string CompanyRegisteredBody {
             get {
