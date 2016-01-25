@@ -52,7 +52,9 @@
     <Compile Include="Configurations\OrderConfiguration.cs" />
     <Compile Include="Configurations\UnitConfiguration.cs" />
     <Compile Include="Configurations\UnitScheduleConfiguration.cs" />
+    <Compile Include="Configurations\UnitTypeConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="DatabaseInintializer.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="IDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Singapor.Helpers\Singapor.Helpers.csproj">
+      <Project>{3369F802-1889-4A27-91A4-89DDEE682FB4}</Project>
+      <Name>Singapor.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Singapor.Model\Singapor.Model.csproj">
       <Project>{A511AF82-EE61-4704-816D-BF0779FAD21E}</Project>
       <Name>Singapor.Model</Name>

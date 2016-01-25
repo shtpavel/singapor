@@ -9,6 +9,7 @@ namespace Singapor.DAL
 
         public DataContext() : base("name=Default")
         {
+            Database.SetInitializer(new DatabaseInintializer());
         }
 
         #endregion
@@ -31,6 +32,7 @@ namespace Singapor.DAL
             modelBuilder.Configurations.Add(new UnitConfiguration());
             modelBuilder.Configurations.Add(new UnitScheduleConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
+            modelBuilder.Configurations.Add(new UnitTypeConfiguration());
         }
     }
 }

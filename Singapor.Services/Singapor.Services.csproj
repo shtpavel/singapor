@@ -62,7 +62,6 @@
     <Compile Include="Abstract\IUnitService.cs" />
     <Compile Include="Abstract\IUnitTypeService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
-    <Compile Include="Auth\PasswordHasher.cs" />
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Events\EventAggregatorProvider.cs" />
     <Compile Include="Events\IEventAggregatorProvider.cs" />

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
@@ -19,8 +17,6 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using Singapor.Api.Auth;
 using Singapor.Infrastructure;
-using Singapor.Services.Abstract;
-using Singapor.Services.Auth;
 using Singapor.Services.Models.Maps;
 
 [assembly: OwinStartup(typeof(Singapor.Api.Startup))]
@@ -34,7 +30,6 @@ namespace Singapor.Api
             HttpConfiguration config = new HttpConfiguration();
             CongfigureRoutes(config);
             ConfigureFormatters(config);
-
             var container = ConfigureContainer();
             var dependencyResolver = new AutofacWebApiDependencyResolver(container);
 

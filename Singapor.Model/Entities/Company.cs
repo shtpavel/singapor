@@ -14,6 +14,7 @@ namespace Singapor.Model.Entities
         public string Country { get; set; }
         public string Email { get; set; }
         public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<UnitType> UnitTypes { get; set; }
 
         #endregion
     }
