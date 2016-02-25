@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Singapor.Api.Controllers.Abstract;
@@ -12,16 +9,29 @@ namespace Singapor.Api.Controllers
 {
     public class AuthController : ControllerBase<CompanyModel>
     {
+        #region Fields
+
         private readonly ICompanyService _service;
+
+        #endregion
+
+        #region Constructors
 
         public AuthController(ICompanyService service)
         {
             _service = service;
         }
 
-        public HttpResponseMessage Post(CompanyModel model)
+        #endregion
+
+        #region Public methods
+
+        [HttpPost]
+        public HttpResponseMessage Register(CompanyModel model)
         {
             return GetResponse(_service.Create(model), HttpStatusCode.Created);
         }
+
+        #endregion
     }
 }
