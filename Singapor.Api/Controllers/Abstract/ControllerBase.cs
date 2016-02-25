@@ -1,29 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Singapor.Api.Classes;
 using Singapor.Services.Abstract;
-using Singapor.Services.Models;
 using Singapor.Services.Responses;
 
-namespace Singapor.Api.Controllers
+namespace Singapor.Api.Controllers.Abstract
 {
-    public class ControllerBase<TService, TModel> : ApiController
-        where TService : IService<TModel>
-        where TModel : ModelBase
+    public abstract class ControllerBase<TModel> : ApiController where TModel : ModelBase 
     {
-        protected TService _service;
-
-        public ControllerBase(TService service)
-        {
-            _service = service;
-        }
-
         protected HttpResponseMessage GetResponse(
-            SingleEntityResponse<TModel> serviceResponse, 
+            SingleEntityResponse<TModel> serviceResponse,
             HttpStatusCode succesStatusCode)
         {
             if (serviceResponse.IsValid)
@@ -39,7 +32,7 @@ namespace Singapor.Api.Controllers
         }
 
         protected HttpResponseMessage GetResponse(
-            ListEntityResponse<TModel> serviceResponse, 
+            ListEntityResponse<TModel> serviceResponse,
             HttpStatusCode succesStatusCode)
         {
             HttpResponseMessage response;
@@ -55,14 +48,9 @@ namespace Singapor.Api.Controllers
                     HttpStatusCode.BadRequest,
                     serviceResponse.Data.Select(x => new Response<TModel>(x.Data, x.Errors)));
             }
-            
+
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/json");
             return response;
-        }
-
-        protected ListEntityResponse<CompanyModel> Filter(ListEntityResponse<CompanyModel> listReponse, Filter filter)
-        {
-            return listReponse;
         }
     }
 }

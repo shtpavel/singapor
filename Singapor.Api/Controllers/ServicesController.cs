@@ -11,32 +11,16 @@ using Singapor.Services.Models;
 
 namespace Singapor.Api.Controllers
 {
-    public class ServicesController : ControllerBase<IServiceService,ServiceModel>
+    public class ServicesController : CrudControllerBase<IServiceService,ServiceModel>
     {
         public ServicesController(IServiceService serviceService) : base(serviceService)
         {
         }
 
-        public HttpResponseMessage Get()
-        {
-            return GetResponse(_service.Get(), HttpStatusCode.OK);
-        }
-
-        [Route("api/companies/{companyId}/services")]
+        [Route("api/companies/{companyId}/services")] //TODO: replace with odata
         public HttpResponseMessage GetByCompanyId(Guid companyId)
         {
             return GetResponse(_service.Get(x => x.CompanyId == companyId), HttpStatusCode.OK);
-        }
-
-        public HttpResponseMessage Get(Guid id)
-        {
-            return GetResponse(_service.Get(id), HttpStatusCode.Found);
-        }
-
-        [Authorize]
-        public HttpResponseMessage Post(ServiceModel model)
-        {
-            return GetResponse(_service.Create(model), HttpStatusCode.Created);
         }
     }
 }

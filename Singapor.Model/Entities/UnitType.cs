@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Singapor.Model.Entities.Abstract;
 
 namespace Singapor.Model.Entities
 {
-    public class UnitType : EntityBase
+    public class UnitType : CompanyDependentEntityBase
     {
         #region Properties
 
@@ -11,8 +12,6 @@ namespace Singapor.Model.Entities
         public string Description { get; set; }
         public bool IsContainer { get; set; }
         public bool IsServicable { get; set; }
-        public Company Company { get; set; }
-        public Guid CompanyId { get; set; }
         public ICollection<Field> Fields { get; set; }
 
         #endregion

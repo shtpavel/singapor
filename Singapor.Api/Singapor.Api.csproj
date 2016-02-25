@@ -155,8 +155,10 @@
     <Compile Include="Auth\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Classes\Filter.cs" />
     <Compile Include="Classes\Response.cs" />
+    <Compile Include="Controllers\Abstract\ControllerBase.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
-    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\Abstract\CrudControllerBase.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\UnitTypesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
