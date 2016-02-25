@@ -42,6 +42,7 @@
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\FieldValidator.cs" />
     <Compile Include="Entities\FieldValue.cs" />
+    <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Entities\Company.cs" />

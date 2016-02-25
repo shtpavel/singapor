@@ -11,27 +11,30 @@ using Singapor.Services.Models;
 
 namespace Singapor.Api.Controllers
 {
-    public class UnitTypesController : ControllerBase<IUnitTypeService,UnitTypeModel>
+    public class ServicesController : ControllerBase<IServiceService,ServiceModel>
     {
-        public UnitTypesController(IUnitTypeService service)
-            : base(service)
+        public ServicesController(IServiceService serviceService) : base(serviceService)
         {
         }
 
-        [Authorize]
         public HttpResponseMessage Get()
         {
             return GetResponse(_service.Get(), HttpStatusCode.OK);
         }
 
-        [Authorize]
+        [Route("api/companies/{companyId}/services")]
+        public HttpResponseMessage GetByCompanyId(Guid companyId)
+        {
+            return GetResponse(_service.Get(x => x.CompanyId == companyId), HttpStatusCode.OK);
+        }
+
         public HttpResponseMessage Get(Guid id)
         {
             return GetResponse(_service.Get(id), HttpStatusCode.Found);
         }
 
         [Authorize]
-        public HttpResponseMessage Post(UnitTypeModel model)
+        public HttpResponseMessage Post(ServiceModel model)
         {
             return GetResponse(_service.Create(model), HttpStatusCode.Created);
         }

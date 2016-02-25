@@ -17,8 +17,32 @@ namespace Singapor.DAL
             
             CreateSuperUser(context, defaultCompany);
             CreateUnitTypes(context, defaultCompany);
+            CreateServices(context, defaultCompany);
 
             base.Seed(context);
+        }
+
+        private void CreateServices(DataContext context, Company defaultCompany)
+        {
+            var list = new List<Service>();
+            list.Add(new Service()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Haircut",
+                Description = "",
+                CompanyId = defaultCompany.Id,
+                Company = defaultCompany
+            });
+
+            list.Add(new Service()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Manicure",
+                Description = "",
+                CompanyId = defaultCompany.Id,
+                Company = defaultCompany
+            });
+            list.ForEach(x => context.Set<Service>().Add(x));
         }
 
         private void CreateUnitTypes(DataContext context, Company defaultCompany)

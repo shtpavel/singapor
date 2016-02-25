@@ -20,7 +20,6 @@ using Singapor.Infrastructure;
 using Singapor.Services.Models.Maps;
 
 [assembly: OwinStartup(typeof(Singapor.Api.Startup))]
-
 namespace Singapor.Api
 {
     public class Startup
@@ -51,7 +50,7 @@ namespace Singapor.Api
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
             builder.Update(container);
-
+            
             container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
 
             return container;

@@ -22,6 +22,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Module
 			builder.RegisterType<BaseRepository<Field>>().As<IRepository<Field>>();
 			builder.RegisterType<BaseRepository<FieldValue>>().As<IRepository<FieldValue>>();
 			builder.RegisterType<BaseRepository<User>>().As<IRepository<User>>();
+			builder.RegisterType<BaseRepository<Service>>().As<IRepository<Service>>();
 		}
 	}
 }

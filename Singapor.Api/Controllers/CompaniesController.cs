@@ -3,35 +3,36 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Singapor.Api.Classes;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
+using Singapor.Services.Responses;
 
 namespace Singapor.Api.Controllers
 {
-    public class CompaniesController : ControllerBase
+    public class CompaniesController : ControllerBase<ICompanyService,CompanyModel>
     {
-        private readonly ICompanyService _companyService;
-
-        public CompaniesController(ICompanyService companyService)
+        public CompaniesController(ICompanyService service)
+            : base(service)
         {
-            _companyService = companyService;
         }
 
         [Authorize]
         public HttpResponseMessage Get()
         {
-            return GetResponse(_companyService.Get(), HttpStatusCode.OK);
+            return GetResponse(_service.Get(), HttpStatusCode.OK);
         }
 
         [Authorize]
         public HttpResponseMessage Get(Guid id)
         {
-            return GetResponse(_companyService.Get(id), HttpStatusCode.Found);
+            return GetResponse(_service.Get(id), HttpStatusCode.Found);
         }
 
         public HttpResponseMessage Post(CompanyModel model)
         {
-            return GetResponse(_companyService.Create(model), HttpStatusCode.Created);
+            return GetResponse(_service.Create(model), HttpStatusCode.Created);
         }
+
     }
 }

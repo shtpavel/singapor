@@ -58,6 +58,7 @@
     <Compile Include="Abstract\IFieldValidatorService.cs" />
     <Compile Include="Abstract\IFieldValueService.cs" />
     <Compile Include="Abstract\IOrderService.cs" />
+    <Compile Include="Abstract\IServiceService.cs" />
     <Compile Include="Abstract\IUnitScheduleService.cs" />
     <Compile Include="Abstract\IUnitService.cs" />
     <Compile Include="Abstract\IUnitTypeService.cs" />
@@ -74,9 +75,11 @@
     <Compile Include="Models\FieldValueModel.cs" />
     <Compile Include="Models\Maps\CompanyMapper.cs" />
     <Compile Include="Models\Maps\IMapConfiguration.cs" />
+    <Compile Include="Models\Maps\ServiceMapper.cs" />
     <Compile Include="Models\Maps\UnitMapper.cs" />
     <Compile Include="Models\Maps\UserMapper.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Models\UnitScheduleModel.cs" />
     <Compile Include="Models\UnitTypeModel.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Services\FieldValidatorService.cs" />
     <Compile Include="Services\FieldValueService.cs" />
     <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\ServiceService.cs" />
     <Compile Include="Services\UnitScheduleService.cs" />
     <Compile Include="Services\UnitService.cs" />
     <Compile Include="Services\UnitTypeService.cs" />

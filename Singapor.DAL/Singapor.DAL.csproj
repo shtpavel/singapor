@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Configurations\CompanyConfiguration.cs" />
     <Compile Include="Configurations\OrderConfiguration.cs" />
+    <Compile Include="Configurations\ServiceConfiguration.cs" />
     <Compile Include="Configurations\UnitConfiguration.cs" />
     <Compile Include="Configurations\UnitScheduleConfiguration.cs" />
     <Compile Include="Configurations\UnitTypeConfiguration.cs" />

@@ -16,6 +16,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 			builder.RegisterType<CompanyMapper>().As<IMapConfiguration>();
 			builder.RegisterType<UnitMapper>().As<IMapConfiguration>();
 			builder.RegisterType<UserMapper>().As<IMapConfiguration>();
+			builder.RegisterType<ServiceMapper>().As<IMapConfiguration>();
 		}
 	}
 }

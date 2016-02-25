@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
@@ -84,6 +85,17 @@ namespace Singapor.Services.Services
                     _repository.GetAll()
                         .Select(x => new SingleEntityResponse<TModel>(Mapper.Map(x, Activator.CreateInstance<TModel>()))));
         }
+
+        public ListEntityResponse<TModel> Get(Func<TModel, bool> predicate)
+        {
+            return
+                new ListEntityResponse<TModel>(
+                    _repository
+                        .GetAll()
+                            .Select(x => Mapper.Map(x, Activator.CreateInstance<TModel>()))
+                            .Where(predicate)
+                            .Select(x => new SingleEntityResponse<TModel>(x)));
+        } 
 
         public virtual SingleEntityResponse<TModel> Update(TModel data)
         {
