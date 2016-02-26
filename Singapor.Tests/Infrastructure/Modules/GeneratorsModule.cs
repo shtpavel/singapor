@@ -17,8 +17,6 @@ namespace Singapor.Tests.Infrastructure.Modules
 			builder.RegisterType<CompanyModelGenerator>().As<IGenerator<CompanyModel>>();
 			builder.RegisterType<UnitModelGenerator>().As<IUnitModelGenerator>();
 			builder.RegisterType<UnitTypeModelGenerator>().As<IUnitTypeModelGenerator>();
-			builder.RegisterType<FieldModelGenerator>().As<IFieldModelGenerator>();
-			builder.RegisterType<UnitScheduleModelGenerator>().As<IUnitScheduleModelGenerator>();
 		}
 	}
 }

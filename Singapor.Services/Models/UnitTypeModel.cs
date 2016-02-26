@@ -12,7 +12,6 @@ namespace Singapor.Services.Models
         public string Description { get; set; }
         public bool IsContainer { get; set; }
         public Guid? CompanyId { get; set; }
-        public ICollection<FieldModel> Fields { get; set; }
 
         #endregion
 
@@ -20,7 +19,6 @@ namespace Singapor.Services.Models
 
         public UnitTypeModel()
         {
-            Fields = new List<FieldModel>();
         }
 
         #endregion

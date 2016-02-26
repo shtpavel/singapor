@@ -40,17 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Abstract\CompanyDependentEntityBase.cs" />
-    <Compile Include="Entities\Field.cs" />
-    <Compile Include="Entities\FieldValidator.cs" />
-    <Compile Include="Entities\FieldValue.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Abstract\EntityBase.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\ScheduleType.cs" />
     <Compile Include="Entities\Unit.cs" />
-    <Compile Include="Entities\UnitSchedule.cs" />
     <Compile Include="Entities\UnitType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

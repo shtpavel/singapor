@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using Singapor.Model.Entities;
 using Singapor.Services.Auth;
+using Singapor.Texts;
 
 namespace Singapor.DAL
 {
@@ -14,12 +16,32 @@ namespace Singapor.DAL
         protected override void Seed(DataContext context)
         {
             var defaultCompany = CreateCompany();
-            
+
+            context.Set<Company>().Add(defaultCompany);
+
+            CreateRoles(context);
             CreateSuperUser(context, defaultCompany);
             CreateUnitTypes(context, defaultCompany);
             CreateServices(context, defaultCompany);
 
             base.Seed(context);
+        }
+
+        private void CreateRoles(DataContext context)
+        {
+            var list = new List<Role>();
+            list.Add(new Role()
+            {
+                Id = RoleIds.SuperAdmin,
+                Name = "SuperAdmin"
+            });
+            list.Add(new Role()
+            {
+                Id = RoleIds.CompanyAdmin,
+                Name = "CompanyAdmin"
+            });
+
+            list.ForEach(x => context.Set<Role>().Add(x));
         }
 
         private void CreateServices(DataContext context, Company defaultCompany)
@@ -100,9 +122,11 @@ namespace Singapor.DAL
                 Company = defaultCompany,
                 CompanyId = defaultCompany.Id,
                 CreatedAt = DateTime.UtcNow,
-                Email = "superadmin@gmail.com",
-                Password = PasswordHasher.Hash("123123")
+                Email = "admin@admin.com",
+                Password = PasswordHasher.Hash("admin"),
             };
+            superAdmin.Roles.Add(context.Set<Role>().First(x => x.Id == RoleIds.SuperAdmin));
+
             context.Set<User>().Add(superAdmin);
         }
 

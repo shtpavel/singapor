@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Configuration;
@@ -9,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
+using Singapor.Texts;
 
 namespace Singapor.Api.Auth
 {
@@ -40,8 +42,12 @@ namespace Singapor.Api.Auth
 
             var identity = new ClaimsIdentity("JWT");
             identity.AddClaim(new Claim(ClaimTypes.Name, userResponse.Data.Email));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userResponse.Data.Id.ToString()));
+            identity.AddClaim(new Claim(CustomClaims.CompanyId, userResponse.Data.Id.ToString()));
             identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim(ClaimTypes.Role, "superAdmin"));
+
+            foreach (var roleId in userResponse.Data.Roles.Select(x => x.Id))
+                identity.AddClaim(new Claim(ClaimTypes.Role, roleId.ToString()));
 
             var props = new AuthenticationProperties(new Dictionary<string, string>
                 {

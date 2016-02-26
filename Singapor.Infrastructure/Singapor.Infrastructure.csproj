@@ -60,6 +60,7 @@
     <Compile Include="DependencyInjection\Modules\EventSystemModule.cs" />
     <Compile Include="DependencyInjection\Modules\MappersModule.cs" />
     <Compile Include="DependencyInjection\Modules\RepositoryModule.cs" />
+    <Compile Include="DependencyInjection\Modules\FiltersModule.cs" />
     <Compile Include="DependencyInjection\Modules\ServiceModule.cs" />
     <Compile Include="Listeners\ListenerBase.cs" />
     <Compile Include="Listeners\UserCreatedListener.cs" />
@@ -69,6 +70,10 @@
     <ProjectReference Include="..\Singapor.ApplicationServices\Singapor.ApplicationServices.csproj">
       <Project>{FFCDC36D-0831-4138-8648-FA4689283F78}</Project>
       <Name>Singapor.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Common\Singapor.Common.csproj">
+      <Project>{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}</Project>
+      <Name>Singapor.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
       <Project>{9396c057-f78d-41f7-aa46-7e2743e58150}</Project>

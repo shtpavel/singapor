@@ -49,22 +49,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\CompanyConfiguration.cs" />
-    <Compile Include="Configurations\OrderConfiguration.cs" />
+    <Compile Include="Configurations\RoleConfiguration.cs" />
     <Compile Include="Configurations\ServiceConfiguration.cs" />
     <Compile Include="Configurations\UnitConfiguration.cs" />
-    <Compile Include="Configurations\UnitScheduleConfiguration.cs" />
     <Compile Include="Configurations\UnitTypeConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="DatabaseInintializer.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="Filters\Abstract\ICompanyDependentQueryFilterProvide.cs" />
+    <Compile Include="Filters\Abstract\IEmptyQueryFilterProvider.cs" />
+    <Compile Include="Filters\Abstract\IQueryFilter.cs" />
     <Compile Include="IDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
-    <Compile Include="Repositories\UnitScheduleRepository.cs" />
-    <Compile Include="Repositories\UnitRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -79,6 +77,10 @@
     <ProjectReference Include="..\Singapor.Model\Singapor.Model.csproj">
       <Project>{A511AF82-EE61-4704-816D-BF0779FAD21E}</Project>
       <Name>Singapor.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
+      <Project>{F7DB7DBC-C6C8-4836-8665-23C5545663A5}</Project>
+      <Name>Singapor.Texts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

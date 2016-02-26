@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7DB7DBC-C6C8-4836-8665-23C5545663A5}</ProjectGuid>
+    <ProjectGuid>{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Singapor.Texts</RootNamespace>
-    <AssemblyName>Singapor.Texts</AssemblyName>
+    <RootNamespace>Singapor.Common</RootNamespace>
+    <AssemblyName>Singapor.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,29 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomClaims.cs" />
-    <Compile Include="EmailTexts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmailTexts.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Contexts\IUserContext.cs" />
+    <Compile Include="Contexts\UserContext.cs" />
+    <Compile Include="Exceptions\SingaporException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleIds.cs" />
-    <Compile Include="Validation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Validation.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EmailTexts.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>EmailTexts.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Validation.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
+      <Project>{F7DB7DBC-C6C8-4836-8665-23C5545663A5}</Project>
+      <Name>Singapor.Texts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,7 @@ using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model;
 using Singapor.Services.Abstract;
+using Singapor.Services.Filters;
 using Singapor.Services.Helpers;
 using Singapor.Services.Models;
 using Singapor.Services.Responses;
@@ -13,7 +14,9 @@ using Singapor.Texts;
 
 namespace Singapor.Services.Services
 {
-    public class BaseService<TModel, TEntity> : IService<TModel> where TModel : ModelBase where TEntity : EntityBase
+    public class BaseService<TModel, TEntity> : IService<TModel> 
+        where TModel : ModelBase 
+        where TEntity : EntityBase
     {
         #region Fields
 
@@ -24,7 +27,9 @@ namespace Singapor.Services.Services
 
         #region Constructors
 
-        public BaseService(IUnitOfWork unitOfWork, IRepository<TEntity> repository)
+        public BaseService(
+            IUnitOfWork unitOfWork,
+            IRepository<TEntity> repository)
         {
             _unitOfWork = unitOfWork;
             _repository = repository;
@@ -106,6 +111,12 @@ namespace Singapor.Services.Services
 
             return new SingleEntityResponse<TModel>(Mapper.Map(existingItem, data));
         }
+
+        #endregion
+
+
+        #region Private methods
+
 
         #endregion
     }

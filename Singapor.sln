@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.ApplicationService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Api", "Singapor.Api\Singapor.Api.csproj", "{430CCECF-5E03-41BF-AF9F-FB3C6B52252A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Common", "Singapor.Common\Singapor.Common.csproj", "{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{430CCECF-5E03-41BF-AF9F-FB3C6B52252A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{430CCECF-5E03-41BF-AF9F-FB3C6B52252A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{430CCECF-5E03-41BF-AF9F-FB3C6B52252A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +86,6 @@ Global
 		{3369F802-1889-4A27-91A4-89DDEE682FB4} = {EF917988-22A2-49F1-B514-18D0F0C5E507}
 		{FFCDC36D-0831-4138-8648-FA4689283F78} = {EF917988-22A2-49F1-B514-18D0F0C5E507}
 		{430CCECF-5E03-41BF-AF9F-FB3C6B52252A} = {9A29540F-406A-45B9-AFEA-F9DDFC69990C}
+		{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5} = {EF917988-22A2-49F1-B514-18D0F0C5E507}
 	EndGlobalSection
 EndGlobal

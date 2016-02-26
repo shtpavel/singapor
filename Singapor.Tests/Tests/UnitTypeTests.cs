@@ -8,18 +8,6 @@ namespace Singapor.Tests.Tests
     {
         #region Public methods
 
-        [TestMethod]
-        public void Can_create_unit_type_with_fields()
-        {
-            var companyModel = CreateCompany();
-            var unitTypeModel = _unitTypeModelGenerator.Get(companyModel);
-
-            unitTypeModel.Fields.Add(_fieldGenerator.Get(unitTypeModel, FieldType.Integer));
-
-            var response = _unitTypeService.Create(unitTypeModel);
-
-            Assert.IsTrue(response.IsValid);
-        }
 
         [TestMethod]
         public void Can_create_unit_type_without_fields()

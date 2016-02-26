@@ -17,21 +17,15 @@ namespace Singapor.Tests
         private IDataContext CreateDataContext()
         {
             var companyDbSet = new FakeDbSet<Company>();
-            var orderDbSet = new FakeDbSet<Order>();
             var unitDbSet = new FakeDbSet<Unit>();
-            var unitScheduleDbSet = new FakeDbSet<UnitSchedule>();
             var unitTypeDbSet = new FakeDbSet<UnitType>();
-            var fieldDbSet = new FakeDbSet<Field>();
             var userDbSet = new FakeDbSet<User>();
 
             var mockDataContext = new Mock<IDataContext>();
             mockDataContext.Setup(x => x.Set<Company>()).Returns(companyDbSet);
-            mockDataContext.Setup(x => x.Set<Order>()).Returns(orderDbSet);
             mockDataContext.Setup(x => x.Set<Unit>()).Returns(unitDbSet);
-            mockDataContext.Setup(x => x.Set<UnitSchedule>()).Returns(unitScheduleDbSet);
             mockDataContext.Setup(x => x.Set<UnitType>()).Returns(unitTypeDbSet);
             mockDataContext.Setup(x => x.Set<User>()).Returns(userDbSet);
-            mockDataContext.Setup(x => x.Set<Field>()).Returns(fieldDbSet);
 
             return mockDataContext.Object;
         }

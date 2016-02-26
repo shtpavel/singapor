@@ -18,14 +18,10 @@ namespace Singapor.Tests
         protected IGenerator<CompanyModel> _companyGenerator;
         protected ICompanyService _companyService;
         protected IContainer _container;
-        protected IFieldModelGenerator _fieldGenerator;
-        protected IFieldService _fieldService;
         protected IUnitModelGenerator _unitModelGenerator;
         protected IUnitService _unitService;
         protected IUnitTypeModelGenerator _unitTypeModelGenerator;
         protected IUnitTypeService _unitTypeService;
-        protected IUnitScheduleModelGenerator _unitScheduleModelGenerator;
-        protected IUnitScheduleService _unitScheduleService;
 
         #endregion
 
@@ -48,11 +44,7 @@ namespace Singapor.Tests
             _unitService = _container.Resolve<IUnitService>();
             _unitModelGenerator = _container.Resolve<IUnitModelGenerator>();
             _unitTypeModelGenerator = _container.Resolve<IUnitTypeModelGenerator>();
-            _fieldGenerator = _container.Resolve<IFieldModelGenerator>();
             _unitTypeService = _container.Resolve<IUnitTypeService>();
-            _fieldService = _container.Resolve<IFieldService>();
-            _unitScheduleService = _container.Resolve<IUnitScheduleService>();
-            _unitScheduleModelGenerator = _container.Resolve<IUnitScheduleModelGenerator>();
         }
 
         #endregion

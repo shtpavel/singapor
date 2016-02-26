@@ -24,12 +24,6 @@ namespace Singapor.Services.Models.Maps
 
             Mapper.CreateMap<UnitTypeModel, UnitType>();
             Mapper.CreateMap<UnitType, UnitTypeModel>();
-
-            Mapper.CreateMap<FieldModel, Field>();
-            Mapper.CreateMap<Field, FieldModel>();
-
-            Mapper.CreateMap<UnitSchedule, UnitScheduleModel>();
-            Mapper.CreateMap<UnitScheduleModel, UnitSchedule>();
         }
 
         #endregion

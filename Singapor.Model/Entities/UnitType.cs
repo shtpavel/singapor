@@ -12,7 +12,6 @@ namespace Singapor.Model.Entities
         public string Description { get; set; }
         public bool IsContainer { get; set; }
         public bool IsServicable { get; set; }
-        public ICollection<Field> Fields { get; set; }
 
         #endregion
     }

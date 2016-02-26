@@ -14,6 +14,9 @@ namespace Singapor.Services.Models.Maps
         {
             Mapper.CreateMap<UserModel, User>();
             Mapper.CreateMap<User, UserModel>();
+
+            Mapper.CreateMap<RoleModel, Role>();
+            Mapper.CreateMap<Role, RoleModel>();
         }
     }
 }

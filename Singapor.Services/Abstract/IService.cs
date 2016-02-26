@@ -1,9 +1,11 @@
 ﻿using System;
+using Singapor.Services.Filters;
 using Singapor.Services.Responses;
 
 namespace Singapor.Services.Abstract
 {
-    public interface IService<TModel> where TModel : ModelBase
+    public interface IService<TModel> 
+        where TModel : ModelBase
     {
         #region Public methods
 

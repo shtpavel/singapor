@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Singapor.Services.Abstract;
 
 namespace Singapor.Services.Models
@@ -9,5 +10,6 @@ namespace Singapor.Services.Models
         public string Phone { get; set; }
         public string Password { get; set; }
         public Guid? CompanyId { get; set; }
+        public ICollection<RoleModel> Roles { get; set; } 
     }
 }

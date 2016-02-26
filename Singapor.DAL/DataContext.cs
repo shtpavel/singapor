@@ -28,9 +28,7 @@ namespace Singapor.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new CompanyConfiguration());
-            modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new UnitConfiguration());
-            modelBuilder.Configurations.Add(new UnitScheduleConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UnitTypeConfiguration());
             modelBuilder.Configurations.Add(new ServiceConfiguration());

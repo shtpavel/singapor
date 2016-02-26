@@ -39,6 +39,7 @@ namespace Singapor.Infrastructure
 	        builder.RegisterModule<MappersModule>();
 	        builder.RegisterModule<ApplicationServiceModule>();
             builder.RegisterModule<EventSystemModule>();
+            builder.RegisterModule<FiltersModule>();
         }
     }
 }
