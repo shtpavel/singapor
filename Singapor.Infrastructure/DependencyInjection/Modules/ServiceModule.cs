@@ -13,11 +13,11 @@ namespace Singapor.Infrastructure.DependencyInjection.Module
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<CompanyService>().As<ICompanyService>().InstancePerLifetimeScope();
-            builder.RegisterType<UnitService>().As<IUnitService>().InstancePerLifetimeScope();
-            builder.RegisterType<UnitTypeService>().As<IUnitTypeService>().InstancePerLifetimeScope();
-            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
-            builder.RegisterType<ServiceService>().As<IServiceService>().InstancePerLifetimeScope();
+		    builder.RegisterType<CompanyService>().As<ICompanyService>();
+		    builder.RegisterType<UnitService>().As<IUnitService>();
+		    builder.RegisterType<UnitTypeService>().As<IUnitTypeService>();
+		    builder.RegisterType<UserService>().As<IUserService>();
+		    builder.RegisterType<ServiceService>().As<IServiceService>();
 		}
 	}
 }

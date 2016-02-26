@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Moq;
+using Singapor.Common.Contexts;
 using Singapor.DAL;
 using Singapor.Infrastructure;
 using Singapor.Model.Entities;
@@ -38,9 +39,9 @@ namespace Singapor.Tests
 			builder.RegisterModule<GeneratorsModule>();
 
             var context = CreateDataContext();
-            builder.RegisterInstance(context).As<IDataContext>().SingleInstance();
-            builder.RegisterInstance(context).As<IUnitOfWork>().SingleInstance();
-            
+            builder.RegisterInstance(context).As<IDataContext>().As<IUnitOfWork>().SingleInstance();
+            builder.RegisterType<UserContext>().As<IUserContext>();
+
         }
     }
 }

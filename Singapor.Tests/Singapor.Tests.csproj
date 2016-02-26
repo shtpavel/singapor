@@ -56,6 +56,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Globalization" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -87,6 +88,10 @@
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Singapor.Common\Singapor.Common.csproj">
+      <Project>{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}</Project>
+      <Name>Singapor.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Singapor.DAL\Singapor.DAL.csproj">
       <Project>{9396c057-f78d-41f7-aa46-7e2743e58150}</Project>
       <Name>Singapor.DAL</Name>

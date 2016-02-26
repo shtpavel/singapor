@@ -14,7 +14,7 @@ namespace Singapor.Services.Filters
         public Expression<Func<T, bool>> GetFilter()
         {
             var argParam = Expression.Parameter(typeof(T), "entity");
-            var trueExpression = Expression.Equal(argParam, Expression.Constant(true));
+            var trueExpression = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
             return Expression.Lambda<Func<T, bool>>(trueExpression, argParam);
         }
     }

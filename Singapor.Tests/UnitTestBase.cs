@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Web;
 using Autofac;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
@@ -31,6 +36,20 @@ namespace Singapor.Tests
         {
             _container = new TestsContainer().GetContainerBuilder();
             _container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+
+            HttpContext.Current = HttpContext.Current = new HttpContext(
+                new HttpRequest("", "http://tempuri.org", ""),
+                new HttpResponse(new StringWriter())
+            );
+
+            HttpContext.Current.User = new GenericPrincipal(
+                new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Role, RoleIds.SuperAdmin.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
+                }), 
+                new string[0]
+            );
         }
 
         #endregion
