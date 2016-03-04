@@ -3,11 +3,11 @@ using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Configurations
 {
-    public class UnitConfiguration : EntityTypeConfiguration<Unit>
+    public class UnitDatabaseConfiguration : EntityTypeConfiguration<Unit>
     {
         #region Constructors
 
-        public UnitConfiguration()
+        public UnitDatabaseConfiguration()
         {
             ToTable("Unit");
             HasKey(x => x.Id);

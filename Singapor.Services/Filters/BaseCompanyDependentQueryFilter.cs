@@ -25,7 +25,7 @@ namespace Singapor.Services.Filters
         }
 
         #endregion
-
+        
         #region Public methods
 
         public Expression<Func<T, bool>> GetFilter()

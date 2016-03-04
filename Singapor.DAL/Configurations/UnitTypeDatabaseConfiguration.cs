@@ -8,11 +8,11 @@ using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Configurations
 {
-    public class UserConfiguration : EntityTypeConfiguration<User>
+    public class UnitTypeDatabaseConfiguration : EntityTypeConfiguration<UnitType>
     {
-        public UserConfiguration()
+        public UnitTypeDatabaseConfiguration()
         {
-            ToTable("User");
+            ToTable("UnitType");
             HasKey(x => x.Id);
         }
     }

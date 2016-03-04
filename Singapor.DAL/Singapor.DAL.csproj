@@ -48,12 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\CompanyConfiguration.cs" />
-    <Compile Include="Configurations\RoleConfiguration.cs" />
-    <Compile Include="Configurations\ServiceConfiguration.cs" />
-    <Compile Include="Configurations\UnitConfiguration.cs" />
-    <Compile Include="Configurations\UnitTypeConfiguration.cs" />
-    <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="Configurations\CompanyDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\RoleDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\ServiceDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\UnitDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\UnitTypeDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\UserDatabaseConfiguration.cs" />
     <Compile Include="DatabaseInintializer.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Filters\Abstract\ICompanyDependentQueryFilterProvide.cs" />

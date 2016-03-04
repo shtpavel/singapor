@@ -27,11 +27,11 @@ namespace Singapor.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new CompanyConfiguration());
-            modelBuilder.Configurations.Add(new UnitConfiguration());
-            modelBuilder.Configurations.Add(new UserConfiguration());
-            modelBuilder.Configurations.Add(new UnitTypeConfiguration());
-            modelBuilder.Configurations.Add(new ServiceConfiguration());
+            modelBuilder.Configurations.Add(new CompanyDatabaseConfiguration());
+            modelBuilder.Configurations.Add(new UnitDatabaseConfiguration());
+            modelBuilder.Configurations.Add(new UserDatabaseConfiguration());
+            modelBuilder.Configurations.Add(new UnitTypeDatabaseConfiguration());
+            modelBuilder.Configurations.Add(new ServiceDatabaseConfiguration());
         }
     }
 }
