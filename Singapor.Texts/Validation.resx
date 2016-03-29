@@ -123,6 +123,9 @@
   <data name="CompanyNotFound" xml:space="preserve">
     <value>Can't find required company</value>
   </data>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>Email alrieady exists</value>
+  </data>
   <data name="DuplicateScheduleForDate" xml:space="preserve">
     <value>There is already defined schedule for this date</value>
   </data>

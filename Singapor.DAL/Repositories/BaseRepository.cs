@@ -45,12 +45,12 @@ namespace Singapor.DAL.Repositories
             _context.Set<TEntity>().Remove(entity);
         }
 
-        public virtual IEnumerable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate)
+        public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
             return GetFilteredEntities().Where(predicate);
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+	    public virtual IEnumerable<TEntity> GetAll()
         {
             return GetFilteredEntities();
         }

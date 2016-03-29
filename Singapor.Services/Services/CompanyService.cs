@@ -33,7 +33,7 @@ namespace Singapor.Services.Services
 
         public override SingleEntityResponse<CompanyModel> Create(CompanyModel model)
         {
-            var newCopmanyValidator = new NewCompanyValidator();
+            var newCopmanyValidator = new NewCompanyValidator(_repository);
             var validationResult = newCopmanyValidator.Validate(model);
             if (!validationResult.IsValid)
                 return new SingleEntityResponse<CompanyModel>(model, validationResult.GetErrorsObjects().ToList());

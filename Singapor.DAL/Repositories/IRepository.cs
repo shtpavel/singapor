@@ -11,9 +11,10 @@ namespace Singapor.DAL.Repositories
 
         TEntity Add(TEntity entity);
         void Delete(TEntity entity);
-        IEnumerable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll();
         TEntity GetById(Guid id);
+        
 
         #endregion
     }
