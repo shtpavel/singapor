@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
-using Singapor.Services.Models;
+﻿using Autofac;
 using Singapor.Services.Models.Maps;
 
 namespace Singapor.Infrastructure.DependencyInjection.Modules

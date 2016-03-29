@@ -1,9 +1,8 @@
-﻿using Singapor.Model.Entities;
-using Singapor.Services.Models;
+﻿using Singapor.Services.Models;
 
 namespace Singapor.Services.Abstract
 {
-    public interface IServiceService : IService<ServiceModel>
-    {
-    }
+	public interface IServiceService : IService<ServiceModel>
+	{
+	}
 }

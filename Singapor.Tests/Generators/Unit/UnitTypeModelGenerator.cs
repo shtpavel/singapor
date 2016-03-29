@@ -4,42 +4,42 @@ using Singapor.Services.Models;
 
 namespace Singapor.Tests.Generators.Unit
 {
-    internal class UnitTypeModelGenerator : IUnitTypeModelGenerator
-    {
-        #region Fields
+	internal class UnitTypeModelGenerator : IUnitTypeModelGenerator
+	{
+		#region Fields
 
-        private readonly ICompanyService _companyService;
+		private readonly ICompanyService _companyService;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public UnitTypeModelGenerator(ICompanyService companyService)
-        {
-            _companyService = companyService;
-        }
+		public UnitTypeModelGenerator(ICompanyService companyService)
+		{
+			_companyService = companyService;
+		}
 
-        #endregion
+		#endregion
 
-        #region Public methods
+		#region Public methods
 
-        public UnitTypeModel Get()
-        {
-            var model = new UnitTypeModel();
-            model.Description = StringsGenerators.GenerateString(199);
-            model.Name = StringsGenerators.GenerateString(10);
+		public UnitTypeModel Get()
+		{
+			var model = new UnitTypeModel();
+			model.Description = StringsGenerators.GenerateString(199);
+			model.Name = StringsGenerators.GenerateString(10);
 
-            return model;
-        }
+			return model;
+		}
 
-        public UnitTypeModel Get(CompanyModel companyModel)
-        {
-            var model = Get();
-            model.CompanyId = companyModel.Id;
+		public UnitTypeModel Get(CompanyModel companyModel)
+		{
+			var model = Get();
+			model.CompanyId = companyModel.Id;
 
-            return model;
-        }
+			return model;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

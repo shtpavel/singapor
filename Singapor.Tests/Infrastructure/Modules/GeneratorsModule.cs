@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Singapor.Services.Models;
 using Singapor.Tests.Generators;
 using Singapor.Tests.Generators.Unit;

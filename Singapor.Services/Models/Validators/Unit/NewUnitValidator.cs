@@ -4,62 +4,62 @@ using Singapor.Texts;
 
 namespace Singapor.Services.Models.Validators.Unit
 {
-    public class NewUnitValidator : AbstractValidator<UnitModel>
-    {
-        #region Constructors
+	public class NewUnitValidator : AbstractValidator<UnitModel>
+	{
+		#region Constructors
 
-        public NewUnitValidator(
-            ICompanyService companyService,
-            IUnitService unitService,
-            IUnitTypeService unitTypeService)
-        {
-            RuleFor(x => x.CompanyId).NotNull().WithMessage(Validation.Required);
-            RuleFor(x => x.CompanyId).Must(x =>
-            {
-                if (x.HasValue)
-                {
-                    var company = companyService.Get(x.Value);
-                    return company.Data != null;
-                }
-                return true;
-            }).WithMessage(Validation.CompanyNotFound);
+		public NewUnitValidator(
+			ICompanyService companyService,
+			IUnitService unitService,
+			IUnitTypeService unitTypeService)
+		{
+			RuleFor(x => x.CompanyId).NotNull().WithMessage(Validation.Required);
+			RuleFor(x => x.CompanyId).Must(x =>
+			{
+				if (x.HasValue)
+				{
+					var company = companyService.Get(x.Value);
+					return company.Data != null;
+				}
+				return true;
+			}).WithMessage(Validation.CompanyNotFound);
 
-            RuleFor(x => x.ParentUnitId).Must(x =>
-            {
-                if (x.HasValue)
-                {
-                    var unit = unitService.Get(x.Value);
-                    return unit.Data != null;
-                }
-                return true;
-            }).WithMessage(Validation.UnitNotFound);
-            RuleFor(x => x.ParentUnitId).Must(x =>
-            {
-                if (x.HasValue)
-                {
-                    var unit = unitService.Get(x.Value);
+			RuleFor(x => x.ParentUnitId).Must(x =>
+			{
+				if (x.HasValue)
+				{
+					var unit = unitService.Get(x.Value);
+					return unit.Data != null;
+				}
+				return true;
+			}).WithMessage(Validation.UnitNotFound);
+			RuleFor(x => x.ParentUnitId).Must(x =>
+			{
+				if (x.HasValue)
+				{
+					var unit = unitService.Get(x.Value);
 
-                    if (unit.Data != null)
-                    {
-                        return unit.Data.IsContainer;
-                    }
-                }
-                return true;
-            }).WithMessage(Validation.ParentUnitIsNotContainer);
-            RuleFor(x => x.TypeId).NotNull().WithMessage(Validation.Required);
-            RuleFor(x => x.TypeId).Must(x =>
-            {
-                if (x.HasValue)
-                {
-                    var type = unitTypeService.Get(x.Value);
-                    return type.Data != null;
-                }
-                return true;
-            }).WithMessage(Validation.UnitTypeNotFound);
+					if (unit.Data != null)
+					{
+						return unit.Data.IsContainer;
+					}
+				}
+				return true;
+			}).WithMessage(Validation.ParentUnitIsNotContainer);
+			RuleFor(x => x.TypeId).NotNull().WithMessage(Validation.Required);
+			RuleFor(x => x.TypeId).Must(x =>
+			{
+				if (x.HasValue)
+				{
+					var type = unitTypeService.Get(x.Value);
+					return type.Data != null;
+				}
+				return true;
+			}).WithMessage(Validation.UnitTypeNotFound);
 
-            RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
-        }
+			RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

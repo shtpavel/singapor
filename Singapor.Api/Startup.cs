@@ -19,89 +19,98 @@ using Singapor.Api.Auth;
 using Singapor.Infrastructure;
 using Singapor.Services.Models.Maps;
 
-[assembly: OwinStartup(typeof(Singapor.Api.Startup))]
+[assembly: OwinStartup(typeof (Singapor.Api.Startup))]
+
 namespace Singapor.Api
 {
-    public class Startup
-    {
-        public void Configuration(IAppBuilder appBuilder)
-        {
-            HttpConfiguration config = new HttpConfiguration();
-            CongfigureRoutes(config);
-            ConfigureFormatters(config);
-            var container = ConfigureContainer();
-            var dependencyResolver = new AutofacWebApiDependencyResolver(container);
+	public class Startup
+	{
+		#region Public methods
 
-            ConfigureOAuth(appBuilder, container);
-            config.IncludeErrorDetailPolicy
-                    = IncludeErrorDetailPolicy.Always;
-            config.DependencyResolver = dependencyResolver;
-            config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
+		public void Configuration(IAppBuilder appBuilder)
+		{
+			HttpConfiguration config = new HttpConfiguration();
+			CongfigureRoutes(config);
+			ConfigureFormatters(config);
+			var container = ConfigureContainer();
+			var dependencyResolver = new AutofacWebApiDependencyResolver(container);
 
-            appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-            appBuilder.UseAutofacMiddleware(container);
-            appBuilder.UseWebApi(config); 
-        }
+			ConfigureOAuth(appBuilder, container);
+			config.IncludeErrorDetailPolicy
+				= IncludeErrorDetailPolicy.Always;
+			config.DependencyResolver = dependencyResolver;
+			config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
 
-        private static IContainer ConfigureContainer()
-        {
-            var container = new ApplicationContainer().GetContainerBuilder();
-            
-            var builder = new ContainerBuilder();
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
-            builder.Update(container);
-            
-            container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+			appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+			appBuilder.UseAutofacMiddleware(container);
+			appBuilder.UseWebApi(config);
+		}
 
-            return container;
-        }
+		public void ConfigureOAuth(IAppBuilder app, IContainer container)
+		{
+			var issuer = WebConfigurationManager.AppSettings["issuer"];
+			var audience = WebConfigurationManager.AppSettings["audience"];
+			var secret = WebConfigurationManager.AppSettings["base64secret"];
 
-        private static void ConfigureFormatters(HttpConfiguration config)
-        {
-            config.Formatters.Clear();
-            config.Formatters.Add(new JsonMediaTypeFormatter());
-            config.Formatters.JsonFormatter.SerializerSettings =
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-        }
+			var oAuthServerOptions = new OAuthAuthorizationServerOptions()
+			{
+				AllowInsecureHttp = true,
+				TokenEndpointPath = new PathString("/api/token"),
+				AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+				AccessTokenFormat = new CustomJwtFormat(WebConfigurationManager.AppSettings["issuer"]),
+				Provider = new SimpleAuthorizationServerProvider(container)
+			};
 
-        private void CongfigureRoutes(HttpConfiguration config)
-        {
-            config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new {id = RouteParameter.Optional}
-                );
-        }
+			app.UseJwtBearerAuthentication(
+				new JwtBearerAuthenticationOptions
+				{
+					AllowedAudiences = new[] {audience},
+					IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
+					{
+						new SymmetricKeyIssuerSecurityTokenProvider(issuer, TextEncodings.Base64Url.Decode(secret))
+					}
+				});
+			app.UseOAuthAuthorizationServer(oAuthServerOptions);
+		}
 
-        public void ConfigureOAuth(IAppBuilder app, IContainer container)
-        {
-            var issuer = WebConfigurationManager.AppSettings["issuer"];
-            var audience = WebConfigurationManager.AppSettings["audience"];
-            var secret = WebConfigurationManager.AppSettings["base64secret"];
+		#endregion
 
-            var oAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/api/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                AccessTokenFormat = new CustomJwtFormat(WebConfigurationManager.AppSettings["issuer"]),
-                Provider = new SimpleAuthorizationServerProvider(container)
-            };
+		#region Private methods
 
-            app.UseJwtBearerAuthentication(
-                new JwtBearerAuthenticationOptions
-                {
-                    AllowedAudiences = new[] { audience },
-                    IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
-                    {
-                        new SymmetricKeyIssuerSecurityTokenProvider(issuer, TextEncodings.Base64Url.Decode(secret))
-                    }
-                });
-            app.UseOAuthAuthorizationServer(oAuthServerOptions);
-        }
-    }
+		private static IContainer ConfigureContainer()
+		{
+			var container = new ApplicationContainer().GetContainerBuilder();
+
+			var builder = new ContainerBuilder();
+			builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
+			builder.Update(container);
+
+			container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+
+			return container;
+		}
+
+		private static void ConfigureFormatters(HttpConfiguration config)
+		{
+			config.Formatters.Clear();
+			config.Formatters.Add(new JsonMediaTypeFormatter());
+			config.Formatters.JsonFormatter.SerializerSettings =
+				new JsonSerializerSettings
+				{
+					ContractResolver = new CamelCasePropertyNamesContractResolver()
+				};
+		}
+
+		private void CongfigureRoutes(HttpConfiguration config)
+		{
+			config.MapHttpAttributeRoutes();
+			config.Routes.MapHttpRoute(
+				name: "DefaultApi",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new {id = RouteParameter.Optional}
+				);
+		}
+
+		#endregion
+	}
 }

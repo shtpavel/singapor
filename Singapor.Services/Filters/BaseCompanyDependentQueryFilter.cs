@@ -8,43 +8,43 @@ using Singapor.Texts;
 
 namespace Singapor.Services.Filters
 {
-    public class BaseCompanyDependentQueryFilterProvider<T> : ICompanyDependentQueryFilterProvider<T>
-        where T : CompanyDependentEntityBase
-    {
-        #region Fields
+	public class BaseCompanyDependentQueryFilterProvider<T> : ICompanyDependentQueryFilterProvider<T>
+		where T : CompanyDependentEntityBase
+	{
+		#region Fields
 
-        private readonly IUserContext _userContext;
+		private readonly IUserContext _userContext;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public BaseCompanyDependentQueryFilterProvider(IUserContext userContext)
-        {
-            _userContext = userContext;
-        }
+		public BaseCompanyDependentQueryFilterProvider(IUserContext userContext)
+		{
+			_userContext = userContext;
+		}
 
-        #endregion
-        
-        #region Public methods
+		#endregion
 
-        public Expression<Func<T, bool>> GetFilter()
-        {
-            if (!_userContext.UserId.HasValue)
-                throw new SingaporException("BaseCompanyDependentQueryFilter.Filter. Can't find userd in user context.");
+		#region Public methods
 
-            var argParam = Expression.Parameter(typeof (CompanyDependentEntityBase), "entity");
-            if (_userContext.IsInRole(RoleIds.SuperAdmin))
-            {
-                var trueExpression = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
-                return Expression.Lambda<Func<T, bool>>(trueExpression, argParam);
-            }
+		public Expression<Func<T, bool>> GetFilter()
+		{
+			if (!_userContext.UserId.HasValue)
+				throw new SingaporException("BaseCompanyDependentQueryFilter.Filter. Can't find userd in user context.");
 
-            var companyIdProperty = Expression.Property(argParam, "CompanyId");
-            var equalsExpression = Expression.Equal(companyIdProperty, Expression.Constant(_userContext.UserCompanyId));
-            return Expression.Lambda<Func<T, bool>>(equalsExpression, argParam);
-        }
+			var argParam = Expression.Parameter(typeof (CompanyDependentEntityBase), "entity");
+			if (_userContext.IsInRole(RoleIds.SuperAdmin))
+			{
+				var trueExpression = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
+				return Expression.Lambda<Func<T, bool>>(trueExpression, argParam);
+			}
 
-        #endregion
-    }
+			var companyIdProperty = Expression.Property(argParam, "CompanyId");
+			var equalsExpression = Expression.Equal(companyIdProperty, Expression.Constant(_userContext.UserCompanyId));
+			return Expression.Lambda<Func<T, bool>>(equalsExpression, argParam);
+		}
+
+		#endregion
+	}
 }

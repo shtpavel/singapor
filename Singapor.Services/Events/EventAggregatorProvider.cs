@@ -1,37 +1,50 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Autofac;
-using Singapor.Services.Abstract;
 
 namespace Singapor.Services.Events
 {
-    public class EventAggregatorProvider : IEventAggregatorProvider
-    {
-        private readonly IEventAggregator _eventAggregator;
-        private readonly IContainer _container;
+	public class EventAggregatorProvider : IEventAggregatorProvider
+	{
+		#region Fields
 
-        public EventAggregatorProvider(IContainer container)
-        {
-            var config = new EventAggregator.Config
-            {
-                DefaultThreadMarshaler = action => Task.Factory.StartNew(action)
-            };
+		private readonly IContainer _container;
+		private readonly IEventAggregator _eventAggregator;
 
-            _eventAggregator = new EventAggregator(config);
-            _container = container;
+		#endregion
 
-            RegisterAllKnownListeners();
-        }
+		#region Constructors
 
-        private void RegisterAllKnownListeners()
-        {
-            _eventAggregator.AddListener(_container.Resolve<IListener<UserCreated>>());
-        }
+		public EventAggregatorProvider(IContainer container)
+		{
+			var config = new EventAggregator.Config
+			{
+				DefaultThreadMarshaler = action => Task.Factory.StartNew(action)
+			};
 
-        public IEventAggregator GetEventAggregator()
-        {
-            return _eventAggregator;
-        }
-    }
+			_eventAggregator = new EventAggregator(config);
+			_container = container;
+
+			RegisterAllKnownListeners();
+		}
+
+		#endregion
+
+		#region Public methods
+
+		public IEventAggregator GetEventAggregator()
+		{
+			return _eventAggregator;
+		}
+
+		#endregion
+
+		#region Private methods
+
+		private void RegisterAllKnownListeners()
+		{
+			_eventAggregator.AddListener(_container.Resolve<IListener<UserCreated>>());
+		}
+
+		#endregion
+	}
 }

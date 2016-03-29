@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Singapor.Services.Models;
+﻿using Singapor.Services.Models;
 
 namespace Singapor.Services.Events
 {
-    public class UserCreated : EventBase
-    {
-        public UserModel Data { get; private set; }
+	public class UserCreated : EventBase
+	{
+		#region Properties
 
-        public UserCreated(UserModel data)
-        {
-            Data = data;
-        }
-    }
+		public UserModel Data { get; private set; }
+
+		#endregion
+
+		#region Constructors
+
+		public UserCreated(UserModel data)
+		{
+			Data = data;
+		}
+
+		#endregion
+	}
 }

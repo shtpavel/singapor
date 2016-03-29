@@ -4,36 +4,36 @@ using Singapor.Services.Models;
 
 namespace Singapor.Tests.Generators.Unit
 {
-    public class UnitModelGenerator : IUnitModelGenerator
-    {
-        #region Public methods
+	public class UnitModelGenerator : IUnitModelGenerator
+	{
+		#region Public methods
 
-        public UnitModel Get()
-        {
-            var model = new UnitModel();
-            model.Description = StringsGenerators.GenerateString(199);
-            model.IsContainer = false;
-            model.Name = StringsGenerators.GenerateString(10);
+		public UnitModel Get()
+		{
+			var model = new UnitModel();
+			model.Description = StringsGenerators.GenerateString(199);
+			model.IsContainer = false;
+			model.Name = StringsGenerators.GenerateString(10);
 
-            return model;
-        }
+			return model;
+		}
 
-        public UnitModel Get(CompanyModel companyModel)
-        {
-            var model = Get();
-            model.CompanyId = companyModel.Id;
+		public UnitModel Get(CompanyModel companyModel)
+		{
+			var model = Get();
+			model.CompanyId = companyModel.Id;
 
-            return model;
-        }
+			return model;
+		}
 
-        public UnitModel Get(CompanyModel companyModel, UnitTypeModel unitTypeModel)
-        {
-            var model = Get(companyModel);
-            model.TypeId = unitTypeModel.Id;
+		public UnitModel Get(CompanyModel companyModel, UnitTypeModel unitTypeModel)
+		{
+			var model = Get(companyModel);
+			model.TypeId = unitTypeModel.Id;
 
-            return model;
-        }
+			return model;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

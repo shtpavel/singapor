@@ -7,31 +7,31 @@ using Singapor.Services.Models;
 
 namespace Singapor.Api.Controllers
 {
-    public class AuthController : ControllerBase<CompanyModel>
-    {
-        #region Fields
+	public class AuthController : ControllerBase<CompanyModel>
+	{
+		#region Fields
 
-        private readonly ICompanyService _service;
+		private readonly ICompanyService _service;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public AuthController(ICompanyService service)
-        {
-            _service = service;
-        }
+		public AuthController(ICompanyService service)
+		{
+			_service = service;
+		}
 
-        #endregion
+		#endregion
 
-        #region Public methods
+		#region Public methods
 
-        [HttpPost]
-        public HttpResponseMessage Register(CompanyModel model)
-        {
-            return GetResponse(_service.Create(model), HttpStatusCode.Created);
-        }
+		[HttpPost]
+		public HttpResponseMessage Register(CompanyModel model)
+		{
+			return GetResponse(_service.Create(model), HttpStatusCode.Created);
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

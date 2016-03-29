@@ -2,12 +2,12 @@
 
 namespace Singapor.Services.Abstract
 {
-    public class ModelBase
-    {
-        #region Properties
+	public class ModelBase
+	{
+		#region Properties
 
-        public Guid? Id { get; set; }
+		public Guid? Id { get; set; }
 
-        #endregion
-    }
+		#endregion
+	}
 }

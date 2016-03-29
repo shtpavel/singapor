@@ -1,64 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using Autofac;
-using Autofac.Core.Lifetime;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Singapor.Services.Abstract;
-using Singapor.Services.Models;
 using Singapor.Texts;
 
 namespace Singapor.Api.Auth
 {
-    public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
-    {
-        private readonly IContainer _container;
+	public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
+	{
+		#region Fields
 
-        public SimpleAuthorizationServerProvider(IContainer container)
-        {
-            _container = container;
-        }
+		private readonly IContainer _container;
 
-        public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
-        {
-            context.Validated();
-        }
+		#endregion
 
-        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-        {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            var userService = _container.Resolve<IUserService>();
-            var userResponse = userService.Get(context.UserName, context.Password);
+		#region Constructors
 
-            if (!userResponse.IsValid || userResponse.Data == null)
-            {
-                context.SetError("invalid_grant", "The user name or password is incorrect");
-                return Task.FromResult<object>(null);
-            }
+		public SimpleAuthorizationServerProvider(IContainer container)
+		{
+			_container = container;
+		}
 
-            var identity = new ClaimsIdentity("JWT");
-            identity.AddClaim(new Claim(ClaimTypes.Name, userResponse.Data.Email));
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userResponse.Data.Id.ToString()));
-            identity.AddClaim(new Claim(CustomClaims.CompanyId, userResponse.Data.Id.ToString()));
-            identity.AddClaim(new Claim("sub", context.UserName));
+		#endregion
 
-            foreach (var roleId in userResponse.Data.Roles.Select(x => x.Id))
-                identity.AddClaim(new Claim(ClaimTypes.Role, roleId.ToString()));
+		#region Public methods
 
-            var props = new AuthenticationProperties(new Dictionary<string, string>
-                {
-                    {
-                         "audience", WebConfigurationManager.AppSettings["audience"]
-                    }
-                });
+		public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+		{
+			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {"*"});
+			var userService = _container.Resolve<IUserService>();
+			var userResponse = userService.Get(context.UserName, context.Password);
 
-            var ticket = new AuthenticationTicket(identity, props);
-            context.Validated(ticket);
-            return Task.FromResult<object>(null);
-        }
-    }
+			if (!userResponse.IsValid || userResponse.Data == null)
+			{
+				context.SetError("invalid_grant", "The user name or password is incorrect");
+				return Task.FromResult<object>(null);
+			}
+
+			var identity = new ClaimsIdentity("JWT");
+			identity.AddClaim(new Claim(ClaimTypes.Name, userResponse.Data.Email));
+			identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userResponse.Data.Id.ToString()));
+			identity.AddClaim(new Claim(CustomClaims.CompanyId, userResponse.Data.Id.ToString()));
+			identity.AddClaim(new Claim("sub", context.UserName));
+
+			foreach (var roleId in userResponse.Data.Roles.Select(x => x.Id))
+				identity.AddClaim(new Claim(ClaimTypes.Role, roleId.ToString()));
+
+			var props = new AuthenticationProperties(new Dictionary<string, string>
+			{
+				{
+					"audience", WebConfigurationManager.AppSettings["audience"]
+				}
+			});
+
+			var ticket = new AuthenticationTicket(identity, props);
+			context.Validated(ticket);
+			return Task.FromResult<object>(null);
+		}
+
+		public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+		{
+			context.Validated();
+		}
+
+		#endregion
+	}
 }

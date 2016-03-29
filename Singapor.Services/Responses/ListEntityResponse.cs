@@ -3,21 +3,21 @@ using Singapor.Services.Abstract;
 
 namespace Singapor.Services.Responses
 {
-    public class ListEntityResponse<T> : ResponseBase where T : ModelBase
-    {
-        #region Properties
+	public class ListEntityResponse<T> : ResponseBase where T : ModelBase
+	{
+		#region Properties
 
-        public IEnumerable<SingleEntityResponse<T>> Data { get; private set; }
+		public IEnumerable<SingleEntityResponse<T>> Data { get; private set; }
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public ListEntityResponse(IEnumerable<SingleEntityResponse<T>> data, List<ErrorObject> errors = null) : base(errors)
-        {
-            Data = data;
-        }
+		public ListEntityResponse(IEnumerable<SingleEntityResponse<T>> data, List<ErrorObject> errors = null) : base(errors)
+		{
+			Data = data;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

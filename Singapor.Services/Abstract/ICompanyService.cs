@@ -2,7 +2,7 @@
 
 namespace Singapor.Services.Abstract
 {
-    public interface ICompanyService : IService<CompanyModel>
-    {
-    }
+	public interface ICompanyService : IService<CompanyModel>
+	{
+	}
 }

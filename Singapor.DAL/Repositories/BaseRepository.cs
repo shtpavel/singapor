@@ -1,76 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using Singapor.DAL.Filters;
 using Singapor.DAL.Filters.Abstract;
 using Singapor.Model;
 
 namespace Singapor.DAL.Repositories
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
-    {
-        #region Fields
+	public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
+	{
+		#region Fields
 
-        private readonly IDataContext _context;
-        private readonly IQueryFilterProvider<TEntity> _queryFilterProvider;
+		private readonly IDataContext _context;
+		private readonly IQueryFilterProvider<TEntity> _queryFilterProvider;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public BaseRepository(
-            IDataContext context,
-            IQueryFilterProvider<TEntity> queryFilterProvider)
-        {
-            _context = context;
-            _queryFilterProvider = queryFilterProvider;
-        }
+		public BaseRepository(
+			IDataContext context,
+			IQueryFilterProvider<TEntity> queryFilterProvider)
+		{
+			_context = context;
+			_queryFilterProvider = queryFilterProvider;
+		}
 
-        #endregion
+		#endregion
 
-        #region Public methods
+		#region Public methods
 
-        public virtual TEntity Add(TEntity entity)
-        {
-            var set = _context.Set<TEntity>();
-            set.Add(entity);
+		public virtual TEntity Add(TEntity entity)
+		{
+			var set = _context.Set<TEntity>();
+			set.Add(entity);
 
-            return entity;
-        }
+			return entity;
+		}
 
-        public virtual void Delete(TEntity entity)
-        {
-            _context.Set<TEntity>().Remove(entity);
-        }
+		public virtual void Delete(TEntity entity)
+		{
+			_context.Set<TEntity>().Remove(entity);
+		}
 
-        public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
-        {
-            return GetFilteredEntities().Where(predicate);
-        }
+		public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+		{
+			return GetFilteredEntities().Where(predicate);
+		}
 
-	    public virtual IEnumerable<TEntity> GetAll()
-        {
-            return GetFilteredEntities();
-        }
+		public virtual IEnumerable<TEntity> GetAll()
+		{
+			return GetFilteredEntities();
+		}
 
-        public TEntity GetById(Guid id)
-        {
-            return GetFilteredEntities().FirstOrDefault(x => x.Id == id);
-        }
+		public TEntity GetById(Guid id)
+		{
+			return GetFilteredEntities().FirstOrDefault(x => x.Id == id);
+		}
 
-        #endregion
+		#endregion
 
-        #region Private methods
+		#region Private methods
 
-        private IQueryable<TEntity> GetFilteredEntities()
-        {
-            return _context
-                .Set<TEntity>()
-                .Where(_queryFilterProvider.GetFilter());
-        }
+		private IQueryable<TEntity> GetFilteredEntities()
+		{
+			return _context
+				.Set<TEntity>()
+				.Where(_queryFilterProvider.GetFilter());
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -5,24 +5,24 @@ using Singapor.Services.Responses;
 
 namespace Singapor.Services.Helpers
 {
-    public static class ValidationResultExtensionMethods
-    {
-        #region Public methods
+	public static class ValidationResultExtensionMethods
+	{
+		#region Public methods
 
-        public static IEnumerable<ErrorObject> GetErrorsObjects(this ValidationResult validationResult)
-        {
-            var errors =
-                validationResult.
-                    Errors
-                    .Select(
-                        x => new ErrorObject(
-                            new List<string> {x.PropertyName},
-                            x.ErrorMessage,
-                            ErrorType.Validation));
+		public static IEnumerable<ErrorObject> GetErrorsObjects(this ValidationResult validationResult)
+		{
+			var errors =
+				validationResult.
+					Errors
+					.Select(
+						x => new ErrorObject(
+							new List<string> {x.PropertyName},
+							x.ErrorMessage,
+							ErrorType.Validation));
 
-            return errors;
-        }
+			return errors;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

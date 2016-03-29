@@ -3,21 +3,21 @@ using System.Data.Entity;
 
 namespace Singapor.DAL
 {
-    public interface IDataContext : IUnitOfWork
-    {
-        #region Public methods
+	public interface IDataContext : IUnitOfWork
+	{
+		#region Public methods
 
-        IDbSet<T> Set<T>() where T : class;
+		IDbSet<T> Set<T>() where T : class;
 
-        #endregion
-    }
+		#endregion
+	}
 
-    public interface IUnitOfWork : IDisposable
-    {
-        #region Public methods
+	public interface IUnitOfWork : IDisposable
+	{
+		#region Public methods
 
-        int SaveChanges();
+		int SaveChanges();
 
-        #endregion
-    }
+		#endregion
+	}
 }

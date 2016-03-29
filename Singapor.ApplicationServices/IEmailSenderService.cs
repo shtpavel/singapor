@@ -2,8 +2,12 @@
 
 namespace Singapor.ApplicationServices
 {
-    public interface IEmailSenderService
-    {
-        Task Send(string toEmailAddress, string emailSubject, string emailMessage);
-    }
+	public interface IEmailSenderService
+	{
+		#region Public methods
+
+		Task Send(string toEmailAddress, string emailSubject, string emailMessage);
+
+		#endregion
+	}
 }

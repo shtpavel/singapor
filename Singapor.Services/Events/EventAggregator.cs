@@ -1,13 +1,14 @@
 // ReSharper disable InconsistentNaming
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
 namespace Singapor.Services.Events
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    /*
+	/*
      * 
      * License: 
      * 
@@ -50,516 +51,644 @@ namespace Singapor.Services.Events
      * 
      */
 
-    /// <summary>
-    /// Specifies a class that would like to receive particular messages.
-    /// </summary>
-    /// <typeparam name="TMessage">The type of message object to subscribe to.</typeparam>
+	/// <summary>
+	/// Specifies a class that would like to receive particular messages.
+	/// </summary>
+	/// <typeparam name="TMessage">The type of message object to subscribe to.</typeparam>
 #if WINDOWS_PHONE
     public interface IListener<TMessage>
 #else
-    public interface IListener<in TMessage>
+	public interface IListener<in TMessage>
 #endif
-    {
-        /// <summary>
-        /// This will be called every time a TMessage is published through the event aggregator
-        /// </summary>
-        void Handle(TMessage message);
-    }
+	{
+		/// <summary>
+		/// This will be called every time a TMessage is published through the event aggregator
+		/// </summary>
+		void Handle(TMessage message);
+	}
 
-    /// <summary>
-    /// Provides a way to add and remove a listener object from the EventAggregator
-    /// </summary>
-    public interface IEventSubscriptionManager
-    {
-        /// <summary>
-        /// Adds the given listener object to the EventAggregator.
-        /// </summary>
-        /// <param name="listener">Object that should be implementing IListener(of T's), this overload is used when your listeners to multiple message types</param>
-        /// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
-        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference = null);
+	/// <summary>
+	/// Provides a way to add and remove a listener object from the EventAggregator
+	/// </summary>
+	public interface IEventSubscriptionManager
+	{
+		#region Public methods
 
-        /// <summary>
-        /// Adds the given listener object to the EventAggregator.
-        /// </summary>
-        /// <typeparam name="T">Listener Message type</typeparam>
-        /// <param name="listener"></param>
-        /// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
-        /// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
-        IEventSubscriptionManager AddListener<T>(IListener<T> listener, bool? holdStrongReference = null);
+		/// <summary>
+		/// Adds the given listener object to the EventAggregator.
+		/// </summary>
+		/// <param name="listener">Object that should be implementing IListener(of T's), this overload is used when your listeners to multiple message types</param>
+		/// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
+		/// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+		IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference = null);
 
-        /// <summary>
-        /// Removes the listener object from the EventAggregator
-        /// </summary>
-        /// <param name="listener">The object to be removed</param>
-        /// <returns>Returnes the current IEventSubscriptionManager for fluent removals.</returns>
-        IEventSubscriptionManager RemoveListener(object listener);
-    }
+		/// <summary>
+		/// Adds the given listener object to the EventAggregator.
+		/// </summary>
+		/// <typeparam name="T">Listener Message type</typeparam>
+		/// <param name="listener"></param>
+		/// <param name="holdStrongReference">determines if the EventAggregator should hold a weak or strong reference to the listener object. If null it will use the Config level option unless overriden by the parameter.</param>
+		/// <returns>Returns the current IEventSubscriptionManager to allow for easy fluent additions.</returns>
+		IEventSubscriptionManager AddListener<T>(IListener<T> listener, bool? holdStrongReference = null);
 
-    public interface IEventPublisher
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null);
+		/// <summary>
+		/// Removes the listener object from the EventAggregator
+		/// </summary>
+		/// <param name="listener">The object to be removed</param>
+		/// <returns>Returnes the current IEventSubscriptionManager for fluent removals.</returns>
+		IEventSubscriptionManager RemoveListener(object listener);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter"),
-         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        void SendMessage<TMessage>(Action<Action> marshal = null)
-            where TMessage : new();
-    }
+		#endregion
+	}
 
-    public interface IEventAggregator : IEventPublisher, IEventSubscriptionManager
-    {
-    }
+	public interface IEventPublisher
+	{
+		#region Public methods
 
-    public class EventAggregator : IEventAggregator
-    {
-        private readonly ListenerWrapperCollection _listeners;
-        private readonly Config _config;
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+		void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null);
 
-        public EventAggregator()
-            : this(new Config())
-        {
-        }
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter"
+			),
+		 System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+		void SendMessage<TMessage>(Action<Action> marshal = null)
+			where TMessage : new();
 
-        public EventAggregator(Config config)
-        {
-            _config = config;
-            _listeners = new ListenerWrapperCollection();
-        }
+		#endregion
+	}
 
-        /// <summary>
-        /// This will send the message to each IListener that is subscribing to TMessage.
-        /// </summary>
-        /// <typeparam name="TMessage">The type of message being sent</typeparam>
-        /// <param name="message">The message instance</param>
-        /// <param name="marshal">You can optionally override how the message publication action is marshalled</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        public void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null)
-        {
-            if (marshal == null)
-                marshal = _config.DefaultThreadMarshaler;
+	public interface IEventAggregator : IEventPublisher, IEventSubscriptionManager
+	{
+	}
 
-            Call<IListener<TMessage>>(message, marshal);
-        }
+	public class EventAggregator : IEventAggregator
+	{
+		#region Fields
 
-        /// <summary>
-        /// This will create a new default instance of TMessage and send the message to each IListener that is subscribing to TMessage.
-        /// </summary>
-        /// <typeparam name="TMessage">The type of message being sent</typeparam>
-        /// <param name="marshal">You can optionally override how the message publication action is marshalled</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"),
-         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
-             "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        public void SendMessage<TMessage>(Action<Action> marshal = null)
-            where TMessage : new()
-        {
-            SendMessage(new TMessage(), marshal);
-        }
+		private readonly Config _config;
+		private readonly ListenerWrapperCollection _listeners;
 
-        private void Call<TListener>(object message, Action<Action> marshaller)
-            where TListener : class
-        {
-            int listenerCalledCount = 0;
-            marshaller(() =>
-                {
-                    foreach (ListenerWrapper o in _listeners.Where(o => o.Handles<TListener>() || o.HandlesMessage(message)))
-                    {
-                        bool wasThisOneCalled;
-                        o.TryHandle<TListener>(message, out wasThisOneCalled);
-                        if (wasThisOneCalled)
-                            listenerCalledCount++;
-                    }
-                });
+		#endregion
 
-            var wasAnyListenerCalled = listenerCalledCount > 0;
+		#region Constructors
 
-            if (!wasAnyListenerCalled)
-            {
-                _config.OnMessageNotPublishedBecauseZeroListeners(message);
-            }
-        }
+		public EventAggregator()
+			: this(new Config())
+		{
+		}
 
-        public IEventSubscriptionManager AddListener(object listener)
-        {
-            return AddListener(listener, null);
-        }
+		public EventAggregator(Config config)
+		{
+			_config = config;
+			_listeners = new ListenerWrapperCollection();
+		}
 
-        public IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference)
-        {
-            if (listener == null) throw new ArgumentNullException("listener");
+		#endregion
 
-            bool holdRef = _config.HoldReferences;
-            if (holdStrongReference.HasValue)
-                holdRef = holdStrongReference.Value;
-            bool supportMessageInheritance = _config.SupportMessageInheritance;
-            _listeners.AddListener(listener, holdRef, supportMessageInheritance);
+		#region Public methods
 
-            return this;
-        }
+		public IEventSubscriptionManager AddListener(object listener)
+		{
+			return AddListener(listener, null);
+		}
 
-        public IEventSubscriptionManager AddListener<T>(IListener<T> listener, bool? holdStrongReference)
-        {
-            AddListener((object) listener, holdStrongReference);
+		public IEventSubscriptionManager AddListener(object listener, bool? holdStrongReference)
+		{
+			if (listener == null) throw new ArgumentNullException("listener");
 
-            return this;
-        }
+			bool holdRef = _config.HoldReferences;
+			if (holdStrongReference.HasValue)
+				holdRef = holdStrongReference.Value;
+			bool supportMessageInheritance = _config.SupportMessageInheritance;
+			_listeners.AddListener(listener, holdRef, supportMessageInheritance);
 
-        public IEventSubscriptionManager RemoveListener(object listener)
-        {
-            _listeners.RemoveListener(listener);
-            return this;
-        }
+			return this;
+		}
 
-        /// <summary>
-        /// Wrapper collection of ListenerWrappers to manage things like 
-        /// threadsafe manipulation to the collection, and convenience 
-        /// methods to configure the collection
-        /// </summary>
-        private class ListenerWrapperCollection : IEnumerable<ListenerWrapper>
-        {
-            private readonly List<ListenerWrapper> _listeners = new List<ListenerWrapper>();
-            private readonly object _sync = new object();
+		public IEventSubscriptionManager AddListener<T>(IListener<T> listener, bool? holdStrongReference)
+		{
+			AddListener((object) listener, holdStrongReference);
 
-            public void RemoveListener(object listener)
-            {
-                ListenerWrapper listenerWrapper;
-                lock (_sync)
-                    if (TryGetListenerWrapperByListener(listener, out listenerWrapper))
-                        _listeners.Remove(listenerWrapper);
-            }
+			return this;
+		}
 
-            private void RemoveListenerWrapper(ListenerWrapper listenerWrapper)
-            {
-                lock (_sync)
-                    _listeners.Remove(listenerWrapper);
-            }
+		public IEventSubscriptionManager RemoveListener(object listener)
+		{
+			_listeners.RemoveListener(listener);
+			return this;
+		}
 
-            public IEnumerator<ListenerWrapper> GetEnumerator()
-            {
-                lock (_sync)
-                    return _listeners.ToList().GetEnumerator();
-            }
+		/// <summary>
+		/// This will send the message to each IListener that is subscribing to TMessage.
+		/// </summary>
+		/// <typeparam name="TMessage">The type of message being sent</typeparam>
+		/// <param name="message">The message instance</param>
+		/// <param name="marshal">You can optionally override how the message publication action is marshalled</param>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+		public void SendMessage<TMessage>(TMessage message, Action<Action> marshal = null)
+		{
+			if (marshal == null)
+				marshal = _config.DefaultThreadMarshaler;
 
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
+			Call<IListener<TMessage>>(message, marshal);
+		}
 
-            private bool ContainsListener(object listener)
-            {
-                ListenerWrapper listenerWrapper;
-                return TryGetListenerWrapperByListener(listener, out listenerWrapper);
-            }
+		/// <summary>
+		/// This will create a new default instance of TMessage and send the message to each IListener that is subscribing to TMessage.
+		/// </summary>
+		/// <typeparam name="TMessage">The type of message being sent</typeparam>
+		/// <param name="marshal">You can optionally override how the message publication action is marshalled</param>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"),
+		 System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
+			 "CA1004:GenericMethodsShouldProvideTypeParameter")]
+		public void SendMessage<TMessage>(Action<Action> marshal = null)
+			where TMessage : new()
+		{
+			SendMessage(new TMessage(), marshal);
+		}
 
-            private bool TryGetListenerWrapperByListener(object listener, out ListenerWrapper listenerWrapper)
-            {
-                lock (_sync)
-                    listenerWrapper = _listeners.SingleOrDefault(x => x.ListenerInstance == listener);
+		#endregion
 
-                return listenerWrapper != null;
-            }
+		#region Private methods
 
-            public void AddListener(object listener, bool holdStrongReference, bool supportMessageInheritance)
-            {
-                lock (_sync)
-                {
+		private void Call<TListener>(object message, Action<Action> marshaller)
+			where TListener : class
+		{
+			int listenerCalledCount = 0;
+			marshaller(() =>
+			{
+				foreach (ListenerWrapper o in _listeners.Where(o => o.Handles<TListener>() || o.HandlesMessage(message)))
+				{
+					bool wasThisOneCalled;
+					o.TryHandle<TListener>(message, out wasThisOneCalled);
+					if (wasThisOneCalled)
+						listenerCalledCount++;
+				}
+			});
 
-                    if (ContainsListener(listener))
-                        return;
+			var wasAnyListenerCalled = listenerCalledCount > 0;
 
-                    var listenerWrapper = new ListenerWrapper(listener, RemoveListenerWrapper, holdStrongReference, supportMessageInheritance);
-                    if (listenerWrapper.Count == 0)
-                        throw new ArgumentException("IListener<T> is not implemented", "listener");
-                    _listeners.Add(listenerWrapper);
-                }
-            }
-        }
+			if (!wasAnyListenerCalled)
+			{
+				_config.OnMessageNotPublishedBecauseZeroListeners(message);
+			}
+		}
 
-        #region IReference
+		#endregion
 
-        private interface IReference
-        {
-            object Target { get; }
-        }
+		#region Nested type: Config
 
-        private class WeakReferenceImpl : IReference
-        {
-            private readonly WeakReference _reference;
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
+		public class Config
+		{
+			#region Fields
 
-            public WeakReferenceImpl(object listener)
-            {
-                _reference = new WeakReference(listener);
-            }
+			private Action<Action> _defaultThreadMarshaler = action => action();
 
-            public object Target
-            {
-                get { return _reference.Target; }
-            }
-        }
+			private Action<object> _onMessageNotPublishedBecauseZeroListeners = msg =>
+			{
+				/* TODO: possibly Trace message?*/
+			};
 
-        private class StrongReferenceImpl : IReference
-        {
-            private readonly object _target;
+			#endregion
 
-            public StrongReferenceImpl(object target)
-            {
-                _target = target;
-            }
+			#region Properties
 
-            public object Target
-            {
-                get { return _target; }
-            }
-        }
+			public Action<object> OnMessageNotPublishedBecauseZeroListeners
+			{
+				get { return _onMessageNotPublishedBecauseZeroListeners; }
+				set { _onMessageNotPublishedBecauseZeroListeners = value; }
+			}
 
-        #endregion
+			public Action<Action> DefaultThreadMarshaler
+			{
+				get { return _defaultThreadMarshaler; }
+				set { _defaultThreadMarshaler = value; }
+			}
 
-        private class ListenerWrapper
-        {
-            private const string HandleMethodName = "Handle";
-            private readonly Action<ListenerWrapper> _onRemoveCallback;
-            private readonly List<HandleMethodWrapper> _handlers = new List<HandleMethodWrapper>(); 
-            private readonly IReference _reference;
+			/// <summary>
+			/// If true instructs the EventAggregator to hold onto a reference to all listener objects. You will then have to explicitly remove them from the EventAggrator.
+			/// If false then a WeakReference is used and the garbage collector can remove the listener when not in scope any longer.
+			/// </summary>
+			public bool HoldReferences { get; set; }
 
-            public ListenerWrapper(object listener, Action<ListenerWrapper> onRemoveCallback, bool holdReferences, bool supportMessageInheritance)
-            {
-                _onRemoveCallback = onRemoveCallback;
+			/// <summary>
+			/// If true then EventAggregator will support registering listeners for base messages. 
+			/// If false then EventAggregator will only match the message type to the listener.
+			/// </summary>
+			public bool SupportMessageInheritance { get; set; }
 
-                if (holdReferences)
-                    _reference = new StrongReferenceImpl(listener);
-                else
-                    _reference = new WeakReferenceImpl(listener);
+			#endregion
+		}
 
-                var listenerInterfaces = TypeHelper.GetBaseInterfaceType(listener.GetType())
-                                                   .Where(w => TypeHelper.DirectlyClosesGeneric(w, typeof (IListener<>)));
+		#endregion
 
-                foreach (var listenerInterface in listenerInterfaces)
-                {
-                    var messageType = TypeHelper.GetFirstGenericType(listenerInterface);
-                    var handleMethod = TypeHelper.GetMethod(listenerInterface, HandleMethodName);
+		#region Nested type: HandleMethodWrapper
 
-                    HandleMethodWrapper handler = new HandleMethodWrapper(handleMethod, listenerInterface, messageType,supportMessageInheritance );
-                    _handlers.Add(handler);
-                }
-            }
+		private class HandleMethodWrapper
+		{
+			#region Fields
 
-            public object ListenerInstance
-            {
-                get { return _reference.Target; }
-            }
+			private readonly MethodInfo _handlerMethod;
+			private readonly Type _listenerInterface;
+			private readonly Type _messageType;
+			private readonly bool _supportMessageInheritance;
+			private readonly Dictionary<Type, bool> supportedMessageTypes = new Dictionary<Type, bool>();
 
-            public bool Handles<TListener>() where TListener : class
-            {
-                return _handlers.Aggregate(false, (current, handler) => current | handler.Handles<TListener>());
-            }
+			#endregion
 
-            public bool HandlesMessage(object message)
-            {
-                return message != null && _handlers.Aggregate(false, (current, handler) => current | handler.HandlesMessage(message));
-            }
+			#region Constructors
 
-            public void TryHandle<TListener>(object message, out bool wasHandled)
-                where TListener : class
-            {
-                var target = _reference.Target;
-                wasHandled = false;
-                if (target == null)
-                {
-                    _onRemoveCallback(this);
-                    return;
-                }
+			public HandleMethodWrapper(MethodInfo handlerMethod, Type listenerInterface, Type messageType,
+				bool supportMessageInheritance)
+			{
+				_handlerMethod = handlerMethod;
+				_listenerInterface = listenerInterface;
+				_messageType = messageType;
+				_supportMessageInheritance = supportMessageInheritance;
+				supportedMessageTypes[messageType] = true;
+			}
 
-                foreach (var handler in _handlers)
-                {
-                    bool thisOneHandled = false;
-                    handler.TryHandle<TListener>(target, message, out thisOneHandled);
-                    wasHandled |= thisOneHandled;
-                }
-            }
+			#endregion
 
-            public int Count
-            {
-                get { return _handlers.Count; }
-            }
-        }
+			#region Public methods
 
-        private class HandleMethodWrapper
-        {
-            private readonly Type _listenerInterface;
-            private readonly Type _messageType;
-            private readonly MethodInfo _handlerMethod;
-            private readonly bool _supportMessageInheritance;
-            private readonly Dictionary<Type, bool> supportedMessageTypes = new Dictionary<Type, bool>(); 
+			public bool Handles<TListener>() where TListener : class
+			{
+				return _listenerInterface == typeof (TListener);
+			}
 
-            public HandleMethodWrapper(MethodInfo handlerMethod, Type listenerInterface, Type messageType, bool supportMessageInheritance)
-            {
-                _handlerMethod = handlerMethod;
-                _listenerInterface = listenerInterface;
-                _messageType = messageType;
-                _supportMessageInheritance = supportMessageInheritance;
-                supportedMessageTypes[messageType] = true;
-            }
+			public bool HandlesMessage(object message)
+			{
+				if (message == null)
+				{
+					return false;
+				}
 
-            public bool Handles<TListener>() where TListener : class
-            {
-                return _listenerInterface == typeof (TListener);
-            }
+				bool handled;
+				Type messageType = message.GetType();
+				bool previousMessageType = supportedMessageTypes.TryGetValue(messageType, out handled);
+				if (!previousMessageType && _supportMessageInheritance)
+				{
+					handled = TypeHelper.IsAssignableFrom(_messageType, messageType);
+					supportedMessageTypes[messageType] = handled;
+				}
+				return handled;
+			}
 
-            public bool HandlesMessage(object message)
-            {
-                if (message == null)
-                {
-                    return false;
-                }
+			public void TryHandle<TListener>(object target, object message, out bool wasHandled)
+				where TListener : class
+			{
+				wasHandled = false;
+				if (target == null)
+				{
+					return;
+				}
 
-                bool handled;
-                Type messageType = message.GetType();
-                bool previousMessageType = supportedMessageTypes.TryGetValue(messageType, out handled);
-                if (!previousMessageType && _supportMessageInheritance)
-                {
-                    handled = TypeHelper.IsAssignableFrom(_messageType, messageType);
-                    supportedMessageTypes[messageType] = handled;
-                }
-                return handled;
-            }
+				if (!Handles<TListener>() && !HandlesMessage(message)) return;
 
-            public void TryHandle<TListener>(object target, object message, out bool wasHandled)
-                where TListener : class
-            {
-                wasHandled = false;
-                if (target == null)
-                {
-                    return;
-                }
+				_handlerMethod.Invoke(target, new[] {message});
+				wasHandled = true;
+			}
 
-                if (!Handles<TListener>() && !HandlesMessage(message)) return;
+			#endregion
+		}
 
-                _handlerMethod.Invoke(target, new[] {message});
-                wasHandled = true;
-            }
-        }
+		#endregion
 
-        internal static class TypeHelper
-        {
-            internal static IEnumerable<Type> GetBaseInterfaceType(Type type)
-            {
-                if (type == null)
-                    return new Type[0];
+		#region Nested type: ListenerWrapper
+
+		private class ListenerWrapper
+		{
+			#region Static fields and constants
+
+			private const string HandleMethodName = "Handle";
+
+			#endregion
+
+			#region Fields
+
+			private readonly List<HandleMethodWrapper> _handlers = new List<HandleMethodWrapper>();
+			private readonly Action<ListenerWrapper> _onRemoveCallback;
+			private readonly IReference _reference;
+
+			#endregion
+
+			#region Properties
+
+			public object ListenerInstance
+			{
+				get { return _reference.Target; }
+			}
+
+			public int Count
+			{
+				get { return _handlers.Count; }
+			}
+
+			#endregion
+
+			#region Constructors
+
+			public ListenerWrapper(object listener, Action<ListenerWrapper> onRemoveCallback, bool holdReferences,
+				bool supportMessageInheritance)
+			{
+				_onRemoveCallback = onRemoveCallback;
+
+				if (holdReferences)
+					_reference = new StrongReferenceImpl(listener);
+				else
+					_reference = new WeakReferenceImpl(listener);
+
+				var listenerInterfaces = TypeHelper.GetBaseInterfaceType(listener.GetType())
+					.Where(w => TypeHelper.DirectlyClosesGeneric(w, typeof (IListener<>)));
+
+				foreach (var listenerInterface in listenerInterfaces)
+				{
+					var messageType = TypeHelper.GetFirstGenericType(listenerInterface);
+					var handleMethod = TypeHelper.GetMethod(listenerInterface, HandleMethodName);
+
+					HandleMethodWrapper handler = new HandleMethodWrapper(handleMethod, listenerInterface, messageType,
+						supportMessageInheritance);
+					_handlers.Add(handler);
+				}
+			}
+
+			#endregion
+
+			#region Public methods
+
+			public bool Handles<TListener>() where TListener : class
+			{
+				return _handlers.Aggregate(false, (current, handler) => current | handler.Handles<TListener>());
+			}
+
+			public bool HandlesMessage(object message)
+			{
+				return message != null &&
+				       _handlers.Aggregate(false, (current, handler) => current | handler.HandlesMessage(message));
+			}
+
+			public void TryHandle<TListener>(object message, out bool wasHandled)
+				where TListener : class
+			{
+				var target = _reference.Target;
+				wasHandled = false;
+				if (target == null)
+				{
+					_onRemoveCallback(this);
+					return;
+				}
+
+				foreach (var handler in _handlers)
+				{
+					bool thisOneHandled = false;
+					handler.TryHandle<TListener>(target, message, out thisOneHandled);
+					wasHandled |= thisOneHandled;
+				}
+			}
+
+			#endregion
+		}
+
+		#endregion
+
+		#region Nested type: ListenerWrapperCollection
+
+		/// <summary>
+		/// Wrapper collection of ListenerWrappers to manage things like 
+		/// threadsafe manipulation to the collection, and convenience 
+		/// methods to configure the collection
+		/// </summary>
+		private class ListenerWrapperCollection : IEnumerable<ListenerWrapper>
+		{
+			#region Fields
+
+			private readonly List<ListenerWrapper> _listeners = new List<ListenerWrapper>();
+			private readonly object _sync = new object();
+
+			#endregion
+
+			#region Public methods
+
+			public void AddListener(object listener, bool holdStrongReference, bool supportMessageInheritance)
+			{
+				lock (_sync)
+				{
+					if (ContainsListener(listener))
+						return;
+
+					var listenerWrapper = new ListenerWrapper(listener, RemoveListenerWrapper, holdStrongReference,
+						supportMessageInheritance);
+					if (listenerWrapper.Count == 0)
+						throw new ArgumentException("IListener<T> is not implemented", "listener");
+					_listeners.Add(listenerWrapper);
+				}
+			}
+
+			public IEnumerator<ListenerWrapper> GetEnumerator()
+			{
+				lock (_sync)
+					return _listeners.ToList().GetEnumerator();
+			}
+
+			public void RemoveListener(object listener)
+			{
+				ListenerWrapper listenerWrapper;
+				lock (_sync)
+					if (TryGetListenerWrapperByListener(listener, out listenerWrapper))
+						_listeners.Remove(listenerWrapper);
+			}
+
+			#endregion
+
+			#region Private methods
+
+			private bool ContainsListener(object listener)
+			{
+				ListenerWrapper listenerWrapper;
+				return TryGetListenerWrapperByListener(listener, out listenerWrapper);
+			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
+
+			private void RemoveListenerWrapper(ListenerWrapper listenerWrapper)
+			{
+				lock (_sync)
+					_listeners.Remove(listenerWrapper);
+			}
+
+			private bool TryGetListenerWrapperByListener(object listener, out ListenerWrapper listenerWrapper)
+			{
+				lock (_sync)
+					listenerWrapper = _listeners.SingleOrDefault(x => x.ListenerInstance == listener);
+
+				return listenerWrapper != null;
+			}
+
+			#endregion
+		}
+
+		#endregion
+
+		#region Nested type: TypeHelper
+
+		internal static class TypeHelper
+		{
+			internal static IEnumerable<Type> GetBaseInterfaceType(Type type)
+			{
+				if (type == null)
+					return new Type[0];
 
 #if NETFX_CORE
                 var interfaces = type.GetTypeInfo().ImplementedInterfaces.ToList();
 #else
-                var interfaces = type.GetInterfaces().ToList();
+				var interfaces = type.GetInterfaces().ToList();
 #endif
 
-                foreach (var @interface in interfaces.ToArray())
-                {
-                    interfaces.AddRange(GetBaseInterfaceType(@interface));
-                }
+				foreach (var @interface in interfaces.ToArray())
+				{
+					interfaces.AddRange(GetBaseInterfaceType(@interface));
+				}
 
 #if NETFX_CORE
                 if (type.GetTypeInfo().IsInterface)
 #else
-                if (type.IsInterface)
+				if (type.IsInterface)
 #endif
-                {
-                    interfaces.Add(type);
-                }
+				{
+					interfaces.Add(type);
+				}
 
-                return interfaces.Distinct();
-            }
+				return interfaces.Distinct();
+			}
 
-            internal static bool DirectlyClosesGeneric(Type type, Type openType)
-            {
-                if (type == null)
-                    return false;
+			internal static bool DirectlyClosesGeneric(Type type, Type openType)
+			{
+				if (type == null)
+					return false;
 #if NETFX_CORE
                 if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == openType)
 #else
-                if (type.IsGenericType && type.GetGenericTypeDefinition() == openType)
+				if (type.IsGenericType && type.GetGenericTypeDefinition() == openType)
 #endif
-                {
-                    return true;
-                }
+				{
+					return true;
+				}
 
-                return false;
-            }
+				return false;
+			}
 
-            internal static Type GetFirstGenericType<T>() where T : class
-            {
-                return GetFirstGenericType(typeof (T));
-            }
+			internal static Type GetFirstGenericType<T>() where T : class
+			{
+				return GetFirstGenericType(typeof (T));
+			}
 
-            internal static Type GetFirstGenericType(Type type)
-            {
+			internal static Type GetFirstGenericType(Type type)
+			{
 #if NETFX_CORE
                 var messageType = type.GetTypeInfo().GenericTypeArguments.First();
 #else
-                var messageType = type.GetGenericArguments().First();
+				var messageType = type.GetGenericArguments().First();
 #endif
-                return messageType;
-            }
+				return messageType;
+			}
 
-            internal static MethodInfo GetMethod(Type type, string methodName)
-            {
+			internal static MethodInfo GetMethod(Type type, string methodName)
+			{
 #if NETFX_CORE
                 var typeInfo = type.GetTypeInfo();
                 var handleMethod = typeInfo.GetDeclaredMethod(methodName);
 #else
-                var handleMethod = type.GetMethod(methodName);
+				var handleMethod = type.GetMethod(methodName);
 
 #endif
-                return handleMethod;
-            }
+				return handleMethod;
+			}
 
-            internal static bool IsAssignableFrom(Type type, Type specifiedType)
-            {
+			internal static bool IsAssignableFrom(Type type, Type specifiedType)
+			{
 #if NETFX_CORE
                 return type.GetTypeInfo().IsAssignableFrom(specifiedType.GetTypeInfo());
 #else
-                return type.IsAssignableFrom(specifiedType);
+				return type.IsAssignableFrom(specifiedType);
 #endif
-            }
-        }
+			}
+		}
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]
-        public class Config
-        {
-            private Action<object> _onMessageNotPublishedBecauseZeroListeners = msg =>
-                {
-                    /* TODO: possibly Trace message?*/
-                };
+		#endregion
 
-            public Action<object> OnMessageNotPublishedBecauseZeroListeners
-            {
-                get { return _onMessageNotPublishedBecauseZeroListeners; }
-                set { _onMessageNotPublishedBecauseZeroListeners = value; }
-            }
+		#region IReference
 
-            private Action<Action> _defaultThreadMarshaler = action => action();
+		private interface IReference
+		{
+			#region Properties
 
-            public Action<Action> DefaultThreadMarshaler
-            {
-                get { return _defaultThreadMarshaler; }
-                set { _defaultThreadMarshaler = value; }
-            }
+			object Target { get; }
 
-            /// <summary>
-            /// If true instructs the EventAggregator to hold onto a reference to all listener objects. You will then have to explicitly remove them from the EventAggrator.
-            /// If false then a WeakReference is used and the garbage collector can remove the listener when not in scope any longer.
-            /// </summary>
-            public bool HoldReferences { get; set; }
+			#endregion
+		}
 
-            /// <summary>
-            /// If true then EventAggregator will support registering listeners for base messages. 
-            /// If false then EventAggregator will only match the message type to the listener.
-            /// </summary>
-            public bool SupportMessageInheritance { get; set; }
-        }
-    }
+		private class WeakReferenceImpl : IReference
+		{
+			#region Fields
 
+			private readonly WeakReference _reference;
 
+			#endregion
+
+			#region Properties
+
+			public object Target
+			{
+				get { return _reference.Target; }
+			}
+
+			#endregion
+
+			#region Constructors
+
+			public WeakReferenceImpl(object listener)
+			{
+				_reference = new WeakReference(listener);
+			}
+
+			#endregion
+		}
+
+		private class StrongReferenceImpl : IReference
+		{
+			#region Fields
+
+			private readonly object _target;
+
+			#endregion
+
+			#region Properties
+
+			public object Target
+			{
+				get { return _target; }
+			}
+
+			#endregion
+
+			#region Constructors
+
+			public StrongReferenceImpl(object target)
+			{
+				_target = target;
+			}
+
+			#endregion
+		}
+
+		#endregion
+	}
 }
 
 // ReSharper enable InconsistentNaming

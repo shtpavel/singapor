@@ -2,23 +2,23 @@
 
 namespace Singapor.Model
 {
-    public class EntityBase
-    {
-        #region Properties
+	public class EntityBase
+	{
+		#region Properties
 
-        public Guid Id { get; set; }
-        public DateTime CreatedAt { get; set; }
+		public Guid Id { get; set; }
+		public DateTime CreatedAt { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public EntityBase()
-        {
-            Id = Guid.NewGuid();
-            CreatedAt = DateTime.UtcNow;
-        }
+		public EntityBase()
+		{
+			Id = Guid.NewGuid();
+			CreatedAt = DateTime.UtcNow;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Security;
-using AutoMapper;
-using Microsoft.SqlServer.Server;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Helpers;
@@ -18,57 +13,70 @@ using Singapor.Services.Responses;
 
 namespace Singapor.Services.Services
 {
-    public class UserService : BaseService<UserModel, User>, IUserService
-    {
-        private readonly IEventAggregatorProvider _eventAggregatorProvider;
+	public class UserService : BaseService<UserModel, User>, IUserService
+	{
+		#region Fields
 
-        public UserService(
-            IUnitOfWork unitOfWork, 
-            IRepository<User> repository,
-            IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, repository)
-        {
-            _eventAggregatorProvider = eventAggregatorProvider;
-        }
+		private readonly IEventAggregatorProvider _eventAggregatorProvider;
 
-        public override SingleEntityResponse<UserModel> Create(UserModel model)
-        {
-            model.Password = PasswordHasher.Hash(model.Password);
-            return base.Create(model);
-        }
+		#endregion
 
-        public SingleEntityResponse<UserModel> Create(Guid companyId, string login)
-        {
-            var password = StringsGenerators.GenerateString(6);
-            var model = new UserModel
-            {
-                Email = login,
-                CompanyId = companyId,
-                Password = PasswordHasher.Hash(password)
-            };
+		#region Constructors
 
-            var response = base.Create(model);
+		public UserService(
+			IUnitOfWork unitOfWork,
+			IRepository<User> repository,
+			IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, repository)
+		{
+			_eventAggregatorProvider = eventAggregatorProvider;
+		}
 
-            //TODO: this is dirty hack
-            model.Password = password;
+		#endregion
 
-            if (response.IsValid)
-                _eventAggregatorProvider.GetEventAggregator().SendMessage(new UserCreated(model));
+		#region Public methods
 
-            return response;
-        }
+		public override SingleEntityResponse<UserModel> Create(UserModel model)
+		{
+			model.Password = PasswordHasher.Hash(model.Password);
+			return base.Create(model);
+		}
 
-        public SingleEntityResponse<UserModel> Get(string email, string password)
-        {
-            var user = 
-                this._repository
-                    .GetAll()
-                    .SingleOrDefault(x => x.Email == email && 
-                        PasswordHasher.Verify(password, x.Password));
+		public SingleEntityResponse<UserModel> Create(Guid companyId, string login)
+		{
+			var password = StringsGenerators.GenerateString(6);
+			var model = new UserModel
+			{
+				Email = login,
+				CompanyId = companyId,
+				Password = PasswordHasher.Hash(password)
+			};
 
-            if (user == null)
-                return new SingleEntityResponse<UserModel>(null, new List<ErrorObject> {new ErrorObject(new [] {""},"", ErrorType.NotFound)});
+			var response = base.Create(model);
 
-            return Get(user.Id);
-        }
-    }
+			//TODO: this is dirty hack
+			model.Password = password;
+
+			if (response.IsValid)
+				_eventAggregatorProvider.GetEventAggregator().SendMessage(new UserCreated(model));
+
+			return response;
+		}
+
+		public SingleEntityResponse<UserModel> Get(string email, string password)
+		{
+			var user =
+				this._repository
+					.GetAll()
+					.SingleOrDefault(x => x.Email == email &&
+					                      PasswordHasher.Verify(password, x.Password));
+
+			if (user == null)
+				return new SingleEntityResponse<UserModel>(null,
+					new List<ErrorObject> {new ErrorObject(new[] {""}, "", ErrorType.NotFound)});
+
+			return Get(user.Id);
+		}
+
+		#endregion
+	}
 }

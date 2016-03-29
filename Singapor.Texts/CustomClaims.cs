@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Singapor.Texts
+﻿namespace Singapor.Texts
 {
-    public static class CustomClaims
-    {
-        public static string CompanyId = "companyid";
-    }
+	public static class CustomClaims
+	{
+		#region Static fields and constants
+
+		public static string CompanyId = "companyid";
+
+		#endregion
+	}
 }

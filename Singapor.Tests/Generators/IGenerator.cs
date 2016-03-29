@@ -2,12 +2,12 @@
 
 namespace Singapor.Tests.Generators
 {
-    public interface IGenerator<T> where T : ModelBase
-    {
-        #region Public methods
+	public interface IGenerator<T> where T : ModelBase
+	{
+		#region Public methods
 
-        T Get();
+		T Get();
 
-        #endregion
-    }
+		#endregion
+	}
 }

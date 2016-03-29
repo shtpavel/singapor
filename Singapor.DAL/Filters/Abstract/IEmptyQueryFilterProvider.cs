@@ -2,8 +2,7 @@
 
 namespace Singapor.DAL.Filters.Abstract
 {
-    public interface IEmptyQueryFilterProvider<T> : IQueryFilterProvider<T> where T:EntityBase
-    {
-         
-    }
+	public interface IEmptyQueryFilterProvider<T> : IQueryFilterProvider<T> where T : EntityBase
+	{
+	}
 }

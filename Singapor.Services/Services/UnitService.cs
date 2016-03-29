@@ -11,45 +11,45 @@ using Singapor.Services.Responses;
 
 namespace Singapor.Services.Services
 {
-    public class UnitService : BaseService<UnitModel, Unit>, IUnitService
-    {
-        #region Fields
+	public class UnitService : BaseService<UnitModel, Unit>, IUnitService
+	{
+		#region Fields
 
-        private readonly ICompanyService _companyService;
-        private readonly IUnitTypeService _unitTypeService;
+		private readonly ICompanyService _companyService;
+		private readonly IUnitTypeService _unitTypeService;
 
-        #endregion
+		#endregion
 
-        #region Constructors
+		#region Constructors
 
-        public UnitService(
-            IUnitOfWork unitOfWork,
-            IRepository<Unit> repository,
-            ICompanyService companyService,
-            IUnitTypeService unitTypeService) : base(unitOfWork, repository)
-        {
-            _companyService = companyService;
-            _unitTypeService = unitTypeService;
-        }
+		public UnitService(
+			IUnitOfWork unitOfWork,
+			IRepository<Unit> repository,
+			ICompanyService companyService,
+			IUnitTypeService unitTypeService) : base(unitOfWork, repository)
+		{
+			_companyService = companyService;
+			_unitTypeService = unitTypeService;
+		}
 
-        #endregion
+		#endregion
 
-        #region Public methods
+		#region Public methods
 
-        public override SingleEntityResponse<UnitModel> Create(UnitModel model)
-        {
-            var newUnitValidator = new NewUnitValidator(_companyService, this, _unitTypeService);
-            var validationResult = newUnitValidator.Validate(model);
-            if (!validationResult.IsValid)
-                return new SingleEntityResponse<UnitModel>(model, validationResult.GetErrorsObjects().ToList());
-            return base.Create(model);
-        }
+		public override SingleEntityResponse<UnitModel> Create(UnitModel model)
+		{
+			var newUnitValidator = new NewUnitValidator(_companyService, this, _unitTypeService);
+			var validationResult = newUnitValidator.Validate(model);
+			if (!validationResult.IsValid)
+				return new SingleEntityResponse<UnitModel>(model, validationResult.GetErrorsObjects().ToList());
+			return base.Create(model);
+		}
 
-        public ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> units)
-        {
-            throw new NotImplementedException();
-        }
+		public ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> units)
+		{
+			throw new NotImplementedException();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

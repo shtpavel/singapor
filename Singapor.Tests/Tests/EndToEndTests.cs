@@ -1,26 +1,29 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Singapor.Tests.Tests
 {
-    [TestClass]
-    public class EndToEndTests : UnitTestBase
-    {
-        [TestInitialize]
-        public override void Setup()
-        {
-            base.Setup();
-        }
+	[TestClass]
+	public class EndToEndTests : UnitTestBase
+	{
+		#region Public methods
 
-        [TestMethod]
-        public void Simple_end_to_end_test()
-        {
-            var companyModel = CreateCompany();
-            var unitTypeModel = CreateUnitType(companyModel);
-            var unitModel = CreateUnit(companyModel, unitTypeModel);
+		[TestInitialize]
+		public override void Setup()
+		{
+			base.Setup();
+		}
 
-            Assert.IsTrue(_unitService.Get().Data.Any());
-        }
-    }
+		[TestMethod]
+		public void Simple_end_to_end_test()
+		{
+			var companyModel = CreateCompany();
+			var unitTypeModel = CreateUnitType(companyModel);
+			var unitModel = CreateUnit(companyModel, unitTypeModel);
+
+			Assert.IsTrue(_unitService.Get().Data.Any());
+		}
+
+		#endregion
+	}
 }

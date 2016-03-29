@@ -3,14 +3,14 @@ using Singapor.Services.Models;
 
 namespace Singapor.Api.Controllers
 {
-    public class ServicesController : CrudControllerBase<IServiceService, ServiceModel>
-    {
-        #region Constructors
+	public class ServicesController : CrudControllerBase<IServiceService, ServiceModel>
+	{
+		#region Constructors
 
-        public ServicesController(IServiceService serviceService) : base(serviceService)
-        {
-        }
+		public ServicesController(IServiceService serviceService) : base(serviceService)
+		{
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

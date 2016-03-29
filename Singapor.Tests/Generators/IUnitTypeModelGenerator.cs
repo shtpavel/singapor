@@ -2,12 +2,12 @@
 
 namespace Singapor.Tests.Generators
 {
-    public interface IUnitTypeModelGenerator : IGenerator<UnitTypeModel>
-    {
-        #region Public methods
+	public interface IUnitTypeModelGenerator : IGenerator<UnitTypeModel>
+	{
+		#region Public methods
 
-        UnitTypeModel Get(CompanyModel companyModel);
+		UnitTypeModel Get(CompanyModel companyModel);
 
-        #endregion
-    }
+		#endregion
+	}
 }
