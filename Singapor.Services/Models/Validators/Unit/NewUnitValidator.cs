@@ -1,29 +1,19 @@
 ﻿using FluentValidation;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models.Validators.Abstract;
 using Singapor.Texts;
 
 namespace Singapor.Services.Models.Validators.Unit
 {
-	public class NewUnitValidator : AbstractValidator<UnitModel>
+	internal class NewUnitValidator : CompanyDependentValidatorBase<UnitModel>
 	{
 		#region Constructors
 
 		public NewUnitValidator(
 			ICompanyService companyService,
 			IUnitService unitService,
-			IUnitTypeService unitTypeService)
+			IUnitTypeService unitTypeService) : base(companyService)
 		{
-			RuleFor(x => x.CompanyId).NotNull().WithMessage(Validation.Required);
-			RuleFor(x => x.CompanyId).Must(x =>
-			{
-				if (x.HasValue)
-				{
-					var company = companyService.Get(x.Value);
-					return company.Data != null;
-				}
-				return true;
-			}).WithMessage(Validation.CompanyNotFound);
-
 			RuleFor(x => x.ParentUnitId).Must(x =>
 			{
 				if (x.HasValue)

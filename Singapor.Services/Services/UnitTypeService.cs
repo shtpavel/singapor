@@ -3,6 +3,7 @@ using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
+using Singapor.Services.Responses;
 
 namespace Singapor.Services.Services
 {
@@ -15,5 +16,11 @@ namespace Singapor.Services.Services
 		}
 
 		#endregion
+
+		public override SingleEntityResponse<UnitTypeModel> Create(UnitTypeModel model)
+		{
+
+			return base.Create(model);
+		}
 	}
 }

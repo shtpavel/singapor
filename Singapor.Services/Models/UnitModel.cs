@@ -1,8 +1,9 @@
 using System;
+using Singapor.Services.Models;
 
 namespace Singapor.Services.Abstract
 {
-	public class UnitModel : ModelBase
+	public class UnitModel : CompanyDependentModelBase
 	{
 		#region Properties
 
@@ -10,7 +11,6 @@ namespace Singapor.Services.Abstract
 		public string Description { get; set; }
 		public bool IsContainer { get; set; }
 		public Guid? TypeId { get; set; }
-		public Guid? CompanyId { get; set; }
 		public Guid? ParentUnitId { get; set; }
 
 		#endregion
