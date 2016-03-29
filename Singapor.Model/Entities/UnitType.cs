@@ -1,4 +1,5 @@
-﻿using Singapor.Model.Entities.Abstract;
+﻿using Singapor.Common.Enums;
+using Singapor.Model.Entities.Abstract;
 
 namespace Singapor.Model.Entities
 {
@@ -10,6 +11,7 @@ namespace Singapor.Model.Entities
 		public string Description { get; set; }
 		public bool IsContainer { get; set; }
 		public bool IsServicable { get; set; }
+		public TimeIntervalUnit TimeIntervalUnit { get; set; }
 
 		#endregion
 	}

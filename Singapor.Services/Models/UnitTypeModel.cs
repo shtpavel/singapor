@@ -1,5 +1,4 @@
-﻿using System;
-using Singapor.Services.Abstract;
+﻿using Singapor.Common.Enums;
 
 namespace Singapor.Services.Models
 {
@@ -10,6 +9,7 @@ namespace Singapor.Services.Models
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public bool IsContainer { get; set; }
+		public TimeIntervalUnit TimeIntervalUnit { get; set; }
 
 		#endregion
 	}

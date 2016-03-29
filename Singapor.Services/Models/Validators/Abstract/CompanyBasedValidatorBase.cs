@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using Singapor.Services.Abstract;
 using Singapor.Texts;
 
 namespace Singapor.Services.Models.Validators.Abstract
 {
-	internal class CompanyDependentValidatorBase<T> 
+	internal class CompanyDependentValidatorBase<T>
 		: AbstractValidator<T> where T : CompanyDependentModelBase
 	{
+		#region Constructors
+
 		public CompanyDependentValidatorBase(ICompanyService companyService)
 		{
 			RuleFor(x => x.CompanyId).NotNull().WithMessage(Validation.Required);
@@ -25,5 +22,7 @@ namespace Singapor.Services.Models.Validators.Abstract
 				return true;
 			}).WithMessage(Validation.CompanyNotFound);
 		}
+
+		#endregion
 	}
 }
