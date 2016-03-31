@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Singapor.Helpers.Auth;
 using Singapor.Model.Entities;
-using Singapor.Services.Auth;
 using Singapor.Texts;
 
 namespace Singapor.DAL
@@ -90,7 +90,7 @@ namespace Singapor.DAL
 		private void CreateUnitTypes(DataContext context, Company defaultCompany)
 		{
 			var list = new List<UnitType>();
-			list.Add(new UnitType()
+			list.Add(new UnitType
 			{
 				Id = Guid.NewGuid(),
 				Name = "Department",
@@ -99,17 +99,17 @@ namespace Singapor.DAL
 				IsContainer = true
 			});
 
-			list.Add(new UnitType()
+			list.Add(new UnitType
 			{
 				Id = Guid.NewGuid(),
 				Name = "ServiceOffice",
 				Company = defaultCompany,
 				CompanyId = defaultCompany.Id,
 				IsContainer = true,
-				IsServicable = true
+				IsServiceable = true
 			});
 
-			list.Add(new UnitType()
+			list.Add(new UnitType
 			{
 				Id = Guid.NewGuid(),
 				Name = "Room",
@@ -125,7 +125,7 @@ namespace Singapor.DAL
 				Company = defaultCompany,
 				CompanyId = defaultCompany.Id,
 				IsContainer = false,
-				IsServicable = true
+				IsServiceable = true
 			});
 
 			list.ForEach(x => context.Set<UnitType>().Add(x));

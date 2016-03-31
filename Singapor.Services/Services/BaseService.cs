@@ -4,6 +4,7 @@ using AutoMapper;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model;
+using Singapor.Model.Entities.Abstract;
 using Singapor.Services.Abstract;
 using Singapor.Services.Helpers;
 using Singapor.Services.Models;

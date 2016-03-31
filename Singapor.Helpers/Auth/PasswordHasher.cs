@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Singapor.Services.Auth
+namespace Singapor.Helpers.Auth
 {
 	public sealed class PasswordHasher
 	{

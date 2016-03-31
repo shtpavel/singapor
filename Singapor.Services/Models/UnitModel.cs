@@ -1,7 +1,6 @@
 using System;
-using Singapor.Services.Models;
 
-namespace Singapor.Services.Abstract
+namespace Singapor.Services.Models
 {
 	public class UnitModel : CompanyDependentModelBase
 	{

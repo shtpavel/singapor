@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Singapor.Tests
+namespace Singapor.Tests.Infrastructure
 {
 	public class FakeDbSet<T> : IDbSet<T> where T : class
 	{

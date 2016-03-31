@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using Singapor.Api.Classes;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models;
 using Singapor.Services.Responses;
 
 namespace Singapor.Api.Controllers.Abstract

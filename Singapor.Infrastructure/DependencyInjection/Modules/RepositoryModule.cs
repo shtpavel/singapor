@@ -2,7 +2,7 @@
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 
-namespace Singapor.Infrastructure.DependencyInjection.Module
+namespace Singapor.Infrastructure.DependencyInjection.Modules
 {
 	public class RepositoryModule : Autofac.Module
 	{

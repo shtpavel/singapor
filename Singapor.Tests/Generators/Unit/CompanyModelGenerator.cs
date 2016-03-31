@@ -1,7 +1,7 @@
 ﻿using Singapor.Helpers;
 using Singapor.Services.Models;
 
-namespace Singapor.Tests.Generators
+namespace Singapor.Tests.Generators.Unit
 {
 	public class CompanyModelGenerator : IGenerator<CompanyModel>
 	{

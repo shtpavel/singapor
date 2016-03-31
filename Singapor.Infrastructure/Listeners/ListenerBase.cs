@@ -1,6 +1,6 @@
 ﻿using Singapor.Services.Events;
 
-namespace Singapor.Infrastructure.EventAggregator.Listeners
+namespace Singapor.Infrastructure.Listeners
 {
 	public abstract class ListenerBase<T> : IListener<T>
 		where T : class

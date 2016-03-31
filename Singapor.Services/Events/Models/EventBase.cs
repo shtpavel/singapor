@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Singapor.Services.Events
+namespace Singapor.Services.Events.Models
 {
 	public class EventBase
 	{

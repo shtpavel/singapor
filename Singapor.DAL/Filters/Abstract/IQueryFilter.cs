@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Singapor.Model;
+using Singapor.Model.Entities.Abstract;
 
 namespace Singapor.DAL.Filters.Abstract
 {

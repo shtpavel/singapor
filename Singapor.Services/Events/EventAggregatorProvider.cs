@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Autofac;
+using Singapor.Services.Events.Models;
 
 namespace Singapor.Services.Events
 {

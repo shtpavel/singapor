@@ -1,6 +1,6 @@
 ﻿using Singapor.Services.Models;
 
-namespace Singapor.Services.Events
+namespace Singapor.Services.Events.Models
 {
 	public class UserCreated : EventBase
 	{

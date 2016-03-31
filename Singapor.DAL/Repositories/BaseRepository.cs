@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Singapor.DAL.Filters.Abstract;
 using Singapor.Model;
+using Singapor.Model.Entities.Abstract;
 
 namespace Singapor.DAL.Repositories
 {

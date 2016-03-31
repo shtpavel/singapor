@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models;
 using Singapor.Texts;
 
 namespace Singapor.Tests.Tests

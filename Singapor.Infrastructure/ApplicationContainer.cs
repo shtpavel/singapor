@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Singapor.Infrastructure.DependencyInjection.Module;
 using Singapor.Infrastructure.DependencyInjection.Modules;
 
 namespace Singapor.Infrastructure

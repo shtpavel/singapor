@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Singapor.Services.Abstract
+namespace Singapor.Services.Models
 {
 	public class ModelBase
 	{

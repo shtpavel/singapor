@@ -4,10 +4,11 @@ using System.Linq;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Helpers;
+using Singapor.Helpers.Auth;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
-using Singapor.Services.Auth;
 using Singapor.Services.Events;
+using Singapor.Services.Events.Models;
 using Singapor.Services.Models;
 using Singapor.Services.Responses;
 

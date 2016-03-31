@@ -1,8 +1,8 @@
 ﻿using Singapor.ApplicationServices;
-using Singapor.Services.Events;
+using Singapor.Services.Events.Models;
 using Singapor.Texts;
 
-namespace Singapor.Infrastructure.EventAggregator.Listeners
+namespace Singapor.Infrastructure.Listeners
 {
 	public class UserCreatedListener : ListenerBase<UserCreated>
 	{

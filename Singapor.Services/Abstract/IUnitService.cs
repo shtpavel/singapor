@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Singapor.Services.Models;
 using Singapor.Services.Responses;
 
 namespace Singapor.Services.Abstract

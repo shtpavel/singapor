@@ -2,7 +2,7 @@
 using Singapor.Services.Abstract;
 using Singapor.Services.Services;
 
-namespace Singapor.Infrastructure.DependencyInjection.Module
+namespace Singapor.Infrastructure.DependencyInjection.Modules
 {
 	public class ServiceModule : Autofac.Module
 	{

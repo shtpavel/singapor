@@ -10,7 +10,6 @@ namespace Singapor.Services.Models.Validators.Company
 	{
 		#region Fields
 
-		private readonly IRepository<Model.Entities.Company> _companyRepository;
 
 		#endregion
 
@@ -18,7 +17,6 @@ namespace Singapor.Services.Models.Validators.Company
 
 		public NewCompanyValidator(IRepository<Model.Entities.Company> companyRepository)
 		{
-			_companyRepository = companyRepository;
 			CascadeMode = CascadeMode.StopOnFirstFailure;
 
 			RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
@@ -32,7 +30,7 @@ namespace Singapor.Services.Models.Validators.Company
 				.Must(x => new EmailAddressAttribute().IsValid(x))
 				.WithMessage(Validation.EmailIsNotValid);
 			RuleFor(x => x.Email)
-				.Must(email => !_companyRepository.GetAll(cmp => cmp.Email == email).Any())
+				.Must(email => !companyRepository.GetAll(cmp => cmp.Email == email).Any())
 				.WithMessage(Validation.DuplicateEmail);
 		}
 

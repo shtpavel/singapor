@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentValidation;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
@@ -43,7 +44,7 @@ namespace Singapor.Services.Services
 
 			if (response.IsValid)
 			{
-				var userCreationResponse = _userService.Create(model.Id.Value, model.Email);
+				var userCreationResponse = _userService.Create(response.Data.Id.Value, response.Data.Email);
 				//TODO: handle somehow the fact that user creation failed.
 			}
 

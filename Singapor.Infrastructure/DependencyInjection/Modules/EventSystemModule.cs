@@ -1,6 +1,7 @@
 ﻿using Autofac;
-using Singapor.Infrastructure.EventAggregator.Listeners;
+using Singapor.Infrastructure.Listeners;
 using Singapor.Services.Events;
+using Singapor.Services.Events.Models;
 
 namespace Singapor.Infrastructure.DependencyInjection.Modules
 {

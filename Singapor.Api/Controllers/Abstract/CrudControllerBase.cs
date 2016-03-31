@@ -2,10 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Singapor.Api.Controllers.Abstract;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models;
 
-namespace Singapor.Api.Controllers
+namespace Singapor.Api.Controllers.Abstract
 {
 	public class CrudControllerBase<TService, TModel> : ControllerBase<TModel>
 		where TService : IService<TModel>

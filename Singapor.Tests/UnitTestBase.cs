@@ -12,6 +12,7 @@ using Singapor.Services.Models;
 using Singapor.Services.Models.Maps;
 using Singapor.Services.Responses;
 using Singapor.Tests.Generators;
+using Singapor.Tests.Infrastructure;
 using Singapor.Texts;
 
 namespace Singapor.Tests

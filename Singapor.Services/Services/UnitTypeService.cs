@@ -34,8 +34,8 @@ namespace Singapor.Services.Services
 
 		public override SingleEntityResponse<UnitTypeModel> Create(UnitTypeModel model)
 		{
-			var newUnitValidator = new NewUnitTypeValidator(_companyService, this);
-			var validationResult = newUnitValidator.Validate(model);
+			var validator = new NewUnitTypeValidator(_companyService, this);
+			var validationResult = validator.Validate(model);
 			if (!validationResult.IsValid)
 				return new SingleEntityResponse<UnitTypeModel>(model, validationResult.GetErrorsObjects().ToList());
 			return base.Create(model);

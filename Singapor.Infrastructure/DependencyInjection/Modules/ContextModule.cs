@@ -2,7 +2,7 @@
 using Singapor.Common.Contexts;
 using Singapor.DAL;
 
-namespace Singapor.Infrastructure.DependencyInjection.Module
+namespace Singapor.Infrastructure.DependencyInjection.Modules
 {
 	public class ContextModule : Autofac.Module
 	{

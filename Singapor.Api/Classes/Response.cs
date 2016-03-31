@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Singapor.Services.Abstract;
+using Singapor.Services.Models;
 using Singapor.Services.Responses;
 
 namespace Singapor.Api.Classes

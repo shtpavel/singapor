@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Singapor.Model.Entities.Abstract;
 
 namespace Singapor.Model.Entities
 {

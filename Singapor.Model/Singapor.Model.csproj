@@ -49,6 +49,12 @@
     <Compile Include="Entities\UnitType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Singapor.Common\Singapor.Common.csproj">
+      <Project>{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}</Project>
+      <Name>Singapor.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

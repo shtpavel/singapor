@@ -6,7 +6,7 @@ using Singapor.Infrastructure;
 using Singapor.Model.Entities;
 using Singapor.Tests.Infrastructure.Modules;
 
-namespace Singapor.Tests
+namespace Singapor.Tests.Infrastructure
 {
 	internal class TestsContainer : ApplicationContainer
 	{
