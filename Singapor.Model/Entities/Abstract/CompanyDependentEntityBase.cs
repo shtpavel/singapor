@@ -8,6 +8,7 @@ namespace Singapor.Model.Entities.Abstract
 
 		public Guid CompanyId { get; set; }
 		public virtual Company Company { get; set; }
+		public bool IsDeleted { get; set; }
 
 		#endregion
 	}

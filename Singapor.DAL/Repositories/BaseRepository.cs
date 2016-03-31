@@ -13,18 +13,17 @@ namespace Singapor.DAL.Repositories
 		#region Fields
 
 		private readonly IDataContext _context;
-		private readonly IQueryFilterProvider<TEntity> _queryFilterProvider;
-
+		private readonly IEnumerable<IQueryFilterProvider<CompanyDependentEntityBase>> _companyDependentFilters; 
 		#endregion
 
 		#region Constructors
 
 		public BaseRepository(
 			IDataContext context,
-			IQueryFilterProvider<TEntity> queryFilterProvider)
+			IEnumerable<ICompanyDependentQueryFilterProvider<CompanyDependentEntityBase>> companyDependentFilters)
 		{
 			_context = context;
-			_queryFilterProvider = queryFilterProvider;
+			_companyDependentFilters = companyDependentFilters;
 		}
 
 		#endregion
@@ -65,9 +64,19 @@ namespace Singapor.DAL.Repositories
 
 		private IQueryable<TEntity> GetFilteredEntities()
 		{
-			return _context
-				.Set<TEntity>()
-				.Where(_queryFilterProvider.GetFilter());
+			var queryWithCommonFilter = _context
+				.Set<TEntity>();
+
+			var isCompanyDependenEntity = typeof (CompanyDependentEntityBase).IsAssignableFrom(typeof (TEntity));
+			if (isCompanyDependenEntity)
+			{
+				var companyDependentFilteredQuery = queryWithCommonFilter.Cast<CompanyDependentEntityBase>();
+				foreach (var companyDependentFilter in _companyDependentFilters)
+					companyDependentFilteredQuery = companyDependentFilteredQuery.Where(companyDependentFilter.GetFilter());
+
+				return companyDependentFilteredQuery.Cast<TEntity>();
+			}
+			return queryWithCommonFilter;
 		}
 
 		#endregion

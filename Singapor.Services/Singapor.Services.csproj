@@ -65,6 +65,7 @@
     <Compile Include="Events\Models\UserCreated.cs" />
     <Compile Include="Filters\BaseCompanyDependentQueryFilter.cs" />
     <Compile Include="Filters\EmptyQueryFilterProvider.cs" />
+    <Compile Include="Filters\SoftDeleteFilterProvider.cs" />
     <Compile Include="Helpers\ValidationResultExtensionMethods.cs" />
     <Compile Include="Models\CommonValidator.cs" />
     <Compile Include="Models\CompanyDependentModelBase.cs" />

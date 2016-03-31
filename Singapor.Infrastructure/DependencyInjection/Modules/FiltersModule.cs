@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Singapor.DAL.Filters.Abstract;
 using Singapor.Model.Entities;
+using Singapor.Model.Entities.Abstract;
 using Singapor.Services.Filters;
 
 namespace Singapor.Infrastructure.DependencyInjection.Modules
@@ -9,12 +10,10 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<BaseCompanyDependentQueryFilterProvider<User>>().As<IQueryFilterProvider<User>>();
-			builder.RegisterType<BaseCompanyDependentQueryFilterProvider<Unit>>().As<IQueryFilterProvider<Unit>>();
-			builder.RegisterType<BaseCompanyDependentQueryFilterProvider<Service>>().As<IQueryFilterProvider<Service>>();
-			builder.RegisterType<BaseCompanyDependentQueryFilterProvider<UnitType>>().As<IQueryFilterProvider<UnitType>>();
+			builder.RegisterType<BaseCompanyDependentQueryFilterProvider>().As<ICompanyDependentQueryFilterProvider<CompanyDependentEntityBase>>();
 			builder.RegisterType<EmptyQueryFilterProvider<Role>>().As<IQueryFilterProvider<Role>>();
 			builder.RegisterType<EmptyQueryFilterProvider<Company>>().As<IQueryFilterProvider<Company>>();
+			builder.RegisterType<SoftDeleteFilterProvider>().As<ICompanyDependentQueryFilterProvider<CompanyDependentEntityBase>>();
 		}
 	}
 }

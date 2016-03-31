@@ -56,14 +56,19 @@ namespace Singapor.Services.Services
 		public virtual EmptyResponse Delete(Guid id)
 		{
 			var response = new EmptyResponse();
-			var company = _repository.GetById(id);
-			if (company == null)
+			var entity = _repository.GetById(id);
+			if (entity == null)
 			{
 				response.Errors.Add(new ErrorObject(new string[0], Validation.CompanyNotFound, ErrorType.NotFound));
 				return response;
 			}
 
-			_repository.Delete(company);
+			var companyDependentEntity = (entity as CompanyDependentEntityBase);
+			if (companyDependentEntity != null)
+				(entity as CompanyDependentEntityBase).IsDeleted = true;
+			else
+				_repository.Delete(entity);
+
 			_unitOfWork.SaveChanges();
 			return new EmptyResponse();
 		}
