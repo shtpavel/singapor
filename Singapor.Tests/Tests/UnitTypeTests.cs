@@ -7,7 +7,7 @@ namespace Singapor.Tests.Tests
 	{
 		#region Public methods
 
-		[TestMethod]
+		[TestMethod, Ignore]
 		public void Can_create_unit_type_without_fields()
 		{
 			var companyModel = _companyGenerator.Get();
