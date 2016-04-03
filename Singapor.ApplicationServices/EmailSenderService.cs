@@ -17,7 +17,7 @@ namespace Singapor.ApplicationServices
 				EnableSsl = true,
 				DeliveryMethod = SmtpDeliveryMethod.Network,
 				UseDefaultCredentials = false,
-				Credentials = new NetworkCredential("pavel.shtanko@gmail.com", "zgfif1989")
+				Credentials = new NetworkCredential("pavel.shtanko@gmail.com", "")
 			};
 			using (var message = new MailMessage("pavel.shtanko@gmail.com", toEmailAddress)
 			{
