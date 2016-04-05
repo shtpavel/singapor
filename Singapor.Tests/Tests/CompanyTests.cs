@@ -88,6 +88,12 @@ namespace Singapor.Tests.Tests
 			AssertValidationErrorIsInList(string.Format(Validation.LengthBetween, 6, 20), response);
 		}
 
+        [TestMethod, Ignore]
+        public void User_from_company_created_with_company_creation()
+        {
+
+        }
+
 		[TestInitialize]
 		public override void Setup()
 		{

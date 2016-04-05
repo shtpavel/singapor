@@ -42,7 +42,7 @@ namespace Singapor.Services.Services
 			return base.Create(model);
 		}
 
-		public SingleEntityResponse<UserModel> Create(Guid companyId, string login)
+		public SingleEntityResponse<UserModel> CreateFromCompany(Guid companyId, string login)
 		{
 			var password = StringsGenerators.GenerateString(6);
 			var model = new UserModel

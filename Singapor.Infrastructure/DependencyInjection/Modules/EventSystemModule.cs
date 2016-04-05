@@ -11,6 +11,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 		{
 			builder.RegisterType<EventAggregatorProvider>().As<IEventAggregatorProvider>().SingleInstance();
 			builder.RegisterType<UserCreatedListener>().As<IListener<UserCreated>>();
+            builder.RegisterType<CompanyCreatedListener>().As<IListener<CompanyCreated>>();
 		}
 	}
 }

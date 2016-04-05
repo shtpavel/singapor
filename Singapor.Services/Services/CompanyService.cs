@@ -8,6 +8,8 @@ using Singapor.Services.Helpers;
 using Singapor.Services.Models;
 using Singapor.Services.Models.Validators.Company;
 using Singapor.Services.Responses;
+using Singapor.Services.Events;
+using Singapor.Services.Events.Models;
 
 namespace Singapor.Services.Services
 {
@@ -15,7 +17,7 @@ namespace Singapor.Services.Services
 	{
 		#region Fields
 
-		private readonly IUserService _userService;
+		private readonly IEventAggregatorProvider _eventAggregatorProvider;
 
 		#endregion
 
@@ -24,9 +26,9 @@ namespace Singapor.Services.Services
 		public CompanyService(
 			IUnitOfWork unitOfWork,
 			IRepository<Company> repository,
-			IUserService userService) : base(unitOfWork, repository)
+            IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, repository)
 		{
-			_userService = userService;
+            _eventAggregatorProvider = eventAggregatorProvider;
 		}
 
 		#endregion
@@ -44,9 +46,9 @@ namespace Singapor.Services.Services
 
 			if (response.IsValid)
 			{
-				var userCreationResponse = _userService.Create(response.Data.Id.Value, response.Data.Email);
-				//TODO: handle somehow the fact that user creation failed.
-			}
+                _eventAggregatorProvider.GetEventAggregator().SendMessage(new CompanyCreated(model));
+                //TODO: handle somehow the fact that user creation failed.
+            }
 
 			return response;
 		}

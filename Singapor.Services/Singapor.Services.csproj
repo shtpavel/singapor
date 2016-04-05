@@ -61,6 +61,7 @@
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Events\EventAggregatorProvider.cs" />
     <Compile Include="Events\IEventAggregatorProvider.cs" />
+    <Compile Include="Events\Models\CompanyCreated.cs" />
     <Compile Include="Events\Models\EventBase.cs" />
     <Compile Include="Events\Models\UserCreated.cs" />
     <Compile Include="Filters\BaseCompanyDependentQueryFilter.cs" />

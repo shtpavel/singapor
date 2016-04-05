@@ -8,7 +8,7 @@ namespace Singapor.Services.Abstract
 	{
 		#region Public methods
 
-		SingleEntityResponse<UserModel> Create(Guid companyId, string login);
+		SingleEntityResponse<UserModel> CreateFromCompany(Guid companyId, string login);
 		SingleEntityResponse<UserModel> Get(string login, string password);
 
 		#endregion

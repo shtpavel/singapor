@@ -62,6 +62,7 @@
     <Compile Include="DependencyInjection\Modules\RepositoryModule.cs" />
     <Compile Include="DependencyInjection\Modules\FiltersModule.cs" />
     <Compile Include="DependencyInjection\Modules\ServiceModule.cs" />
+    <Compile Include="Listeners\CompanyCreatedListener.cs" />
     <Compile Include="Listeners\ListenerBase.cs" />
     <Compile Include="Listeners\UserCreatedListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
