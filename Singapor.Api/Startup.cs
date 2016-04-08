@@ -18,6 +18,7 @@ using Owin;
 using Singapor.Api.Auth;
 using Singapor.Infrastructure;
 using Singapor.Services.Models.Maps;
+using Singapor.Services.Events;
 
 [assembly: OwinStartup(typeof (Singapor.Api.Startup))]
 
@@ -86,8 +87,10 @@ namespace Singapor.Api
 			builder.Update(container);
 
 			container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+            container.Resolve<IEventRegisterListeners>().RegisterListeners();
 
-			return container;
+
+            return container;
 		}
 
 		private static void ConfigureFormatters(HttpConfiguration config)

@@ -10,6 +10,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 		protected override void Load(ContainerBuilder builder)
 		{
 			builder.RegisterType<EventAggregatorProvider>().As<IEventAggregatorProvider>().SingleInstance();
+            builder.RegisterType<EventRegisterListeners>().As<IEventRegisterListeners>();
 			builder.RegisterType<UserCreatedListener>().As<IListener<UserCreated>>();
             builder.RegisterType<CompanyCreatedListener>().As<IListener<CompanyCreated>>();
 		}

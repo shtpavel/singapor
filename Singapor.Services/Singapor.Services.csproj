@@ -60,7 +60,9 @@
     <Compile Include="Abstract\IUserService.cs" />
     <Compile Include="Events\EventAggregator.cs" />
     <Compile Include="Events\EventAggregatorProvider.cs" />
+    <Compile Include="Events\EventRegisterListeners.cs" />
     <Compile Include="Events\IEventAggregatorProvider.cs" />
+    <Compile Include="Events\IEventRegisterListeners.cs" />
     <Compile Include="Events\Models\CompanyCreated.cs" />
     <Compile Include="Events\Models\EventBase.cs" />
     <Compile Include="Events\Models\UserCreated.cs" />

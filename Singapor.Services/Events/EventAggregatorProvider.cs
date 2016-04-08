@@ -25,7 +25,7 @@ namespace Singapor.Services.Events
 			_eventAggregator = new EventAggregator(config);
 			_container = container;
 
-			RegisterAllKnownListeners();
+			//RegisterAllKnownListeners();
 		}
 
 		#endregion

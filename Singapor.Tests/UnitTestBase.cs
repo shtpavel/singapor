@@ -14,6 +14,7 @@ using Singapor.Services.Responses;
 using Singapor.Tests.Generators;
 using Singapor.Tests.Infrastructure;
 using Singapor.Texts;
+using Singapor.Services.Events;
 
 namespace Singapor.Tests
 {
@@ -37,8 +38,9 @@ namespace Singapor.Tests
 		{
 			_container = new TestsContainer().GetContainerBuilder();
 			_container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+            _container.Resolve<IEventRegisterListeners>().RegisterListeners();
 
-			HttpContext.Current = HttpContext.Current = new HttpContext(
+            HttpContext.Current = HttpContext.Current = new HttpContext(
 				new HttpRequest("", "http://tempuri.org", ""),
 				new HttpResponse(new StringWriter())
 				);
