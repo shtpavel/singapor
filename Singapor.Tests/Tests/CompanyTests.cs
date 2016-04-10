@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Responses;
 using Singapor.Texts;
+using Singapor.Services.Models;
 
 namespace Singapor.Tests.Tests
 {
@@ -91,7 +92,10 @@ namespace Singapor.Tests.Tests
         [TestMethod, Ignore]
         public void User_from_company_created_with_company_creation()
         {
+            var company = CreateCompany();
+            var userResponse = _userService.Get(c => c.CompanyId == company.Id);
 
+            //Assert.IsTrue(user.IsValid);
         }
 
 		[TestInitialize]
@@ -99,7 +103,6 @@ namespace Singapor.Tests.Tests
 		{
 			base.Setup();
 		}
-
 		#endregion
 	}
 }

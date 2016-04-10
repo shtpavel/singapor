@@ -29,6 +29,7 @@ namespace Singapor.Tests
 		protected IUnitService _unitService;
 		protected IUnitTypeModelGenerator _unitTypeModelGenerator;
 		protected IUnitTypeService _unitTypeService;
+        protected IUserService _userService;
 
 		#endregion
 
@@ -83,7 +84,8 @@ namespace Singapor.Tests
 			_unitModelGenerator = _container.Resolve<IUnitModelGenerator>();
 			_unitTypeModelGenerator = _container.Resolve<IUnitTypeModelGenerator>();
 			_unitTypeService = _container.Resolve<IUnitTypeService>();
-		}
+            _userService = _container.Resolve<IUserService>();
+        }
 
 		#endregion
 
