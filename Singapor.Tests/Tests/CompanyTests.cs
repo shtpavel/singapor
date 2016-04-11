@@ -89,13 +89,13 @@ namespace Singapor.Tests.Tests
 			AssertValidationErrorIsInList(string.Format(Validation.LengthBetween, 6, 20), response);
 		}
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void User_from_company_created_with_company_creation()
         {
             var company = CreateCompany();
-            var userResponse = _userService.Get(c => c.CompanyId == company.Id);
-
-            //Assert.IsTrue(user.IsValid);
+            var userResponse = _userService.Get(c => c.CompanyId == company.Id).Data.FirstOrDefault();
+            Assert.IsNotNull(userResponse.Data);
+            Assert.AreEqual(company.Id, userResponse.Data.CompanyId);
         }
 
 		[TestInitialize]

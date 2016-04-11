@@ -19,7 +19,7 @@ namespace Singapor.Services.Events
 		{
 			var config = new EventAggregator.Config
 			{
-				DefaultThreadMarshaler = action => Task.Factory.StartNew(action)
+				//DefaultThreadMarshaler = action => Task.Factory.StartNew(action)
 			};
 
 			_eventAggregator = new EventAggregator(config);
