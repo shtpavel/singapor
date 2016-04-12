@@ -40,7 +40,7 @@ namespace Singapor.Api.Controllers.Abstract
 			return GetResponse(_service.Get(id), HttpStatusCode.Found);
 		}
 
-		[Authorize]
+		[AllowAnonymous]
 		public virtual HttpResponseMessage Post(TModel model)
 		{
 			return GetResponse(_service.Create(model), HttpStatusCode.Created);
