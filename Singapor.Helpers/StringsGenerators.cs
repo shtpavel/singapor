@@ -11,7 +11,7 @@ namespace Singapor.Helpers
 		public static string GenerateEmail()
 		{
 			var template = "{0}@{1}.{2}";
-			var name = "test";
+			var name = GenerateRandomAlphanumeric(7, "abcdefghijklmnopqrstuvwxyz0123456789");
 			var addr = "gmail";
 			var domain = "com";
 			return string.Format(template, name, addr, domain);
@@ -22,11 +22,46 @@ namespace Singapor.Helpers
 			return GenerateRandomAlphanumeric(charCount);
 		}
 
-		#endregion
+        public static string GeneratePhoneNumber(int charCount)
+        {
+            return GenerateRandomAlphanumeric(charCount, "0123456789");
+        }
 
-		#region Private methods
+        public static string GenerateCountryCode()
+        {
+            var countryCode = ("CA,US,AG,GQ,FR,BE,HU,DE,PL,CN,GL,UA,IT").Split(',');
+            return countryCode[new Random().Next(countryCode.Length)]; 
+        }
 
-		private static string GenerateRandomAlphanumeric(int length, string characterSet = null)
+
+        #region Generate Invalid Values
+
+        public static string GenerateInvalidCountryCode()
+        {
+            return "PO"; //"BlaBla";
+        }
+
+        public static string GenerateInvalidPhoneNumber(int charCount)
+        {
+            return GenerateRandomAlphanumeric(charCount, "89abcdefghijklmnopqrstuvwxyz");
+        }
+
+        public static string GenerateInvalidEmail()
+        {
+            var template = "{0}_{1}.{2}";
+            var name = GenerateRandomAlphanumeric(7, "abcdefghijklmnopqrstuvwxyz0123456789");
+            var addr = "gmail";
+            var domain = "com";
+            return string.Format(template, name, addr, domain);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Private methods
+
+        private static string GenerateRandomAlphanumeric(int length, string characterSet = null)
 		{
 			if (characterSet == null)
 				characterSet =

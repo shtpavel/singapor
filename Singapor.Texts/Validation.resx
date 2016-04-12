@@ -126,14 +126,26 @@
   <data name="DuplicateEmail" xml:space="preserve">
     <value>Email alrieady exists</value>
   </data>
+  <data name="DuplicateName" xml:space="preserve">
+    <value>This name already exists</value>
+  </data>
+  <data name="DuplicatePhone" xml:space="preserve">
+    <value>This phone already exists</value>
+  </data>
   <data name="DuplicateScheduleForDate" xml:space="preserve">
     <value>There is already defined schedule for this date</value>
   </data>
-  <data name="EmailIsNotValid" xml:space="preserve">
-    <value>Email address is not vaild</value>
+  <data name="InvalidCountryCode" xml:space="preserve">
+    <value>This country code is invalid</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Email address is ivaild</value>
+  </data>
+  <data name="InvalidPhone" xml:space="preserve">
+    <value>This phone number is invalid</value>
   </data>
   <data name="LengthBetween" xml:space="preserve">
-    <value>This field should be from {0} to {1} charachers</value>
+    <value>Tis field should be from {0} to {1} charachers</value>
   </data>
   <data name="ParentUnitIsNotContainer" xml:space="preserve">
     <value>Can't create child unit for non-container parent</value>

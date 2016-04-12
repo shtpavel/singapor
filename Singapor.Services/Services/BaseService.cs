@@ -10,6 +10,7 @@ using Singapor.Services.Helpers;
 using Singapor.Services.Models;
 using Singapor.Services.Responses;
 using Singapor.Texts;
+using Singapor.Services.Models.Validators;
 
 namespace Singapor.Services.Services
 {

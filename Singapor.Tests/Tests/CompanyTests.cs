@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Responses;
 using Singapor.Texts;
-using Singapor.Services.Models;
+using Singapor.Helpers;
 
 namespace Singapor.Tests.Tests
 {
@@ -15,26 +15,80 @@ namespace Singapor.Tests.Tests
 		public void Can_create_company()
 		{
 			var companyModel = _companyGenerator.Get();
-
 			var response = _companyService.Create(companyModel);
 
 			Assert.IsTrue(response.IsValid);
 		}
 
-		[TestMethod, Ignore]
+		[TestMethod]
 		public void Can_not_create_company_with_duplicate_id()
 		{
-			var companyModel = _companyGenerator.Get();
-			var response = _companyService.Create(companyModel);
-			response = _companyService.Create(response.Data);
+            var companyModel = _companyGenerator.Get();
+            var response = _companyService.Create(companyModel);
 
+            var newCompanyModel = _companyGenerator.Get();
+            response.Data.Name = newCompanyModel.Name;
+            response.Data.Phone = newCompanyModel.Phone;
+            response.Data.Email = newCompanyModel.Email;
+
+            response = _companyService.Create(response.Data);
+            
 			Assert.IsFalse(response.IsValid);
 			Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.UniqueId));
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.UniqueId)).Type, ErrorType.Validation);
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.UniqueId)).Fields.Count(), 1);
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Can_not_create_company_with_duplicate_email()
+        {
+            var companyModel = _companyGenerator.Get();
+            var response = _companyService.Create(companyModel);
+
+            var newCompanyModel = _companyGenerator.Get();
+            response.Data.Name = newCompanyModel.Name;
+            response.Data.Phone = newCompanyModel.Phone;
+            response.Data.Id = new System.Guid();
+
+            response = _companyService.Create(response.Data);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateEmail));
+        }
+
+        [TestMethod]
+        public void Can_not_create_company_with_duplicate_name()
+        {
+            var companyModel = _companyGenerator.Get();
+            var response = _companyService.Create(companyModel);
+
+            var newCompanyModel = _companyGenerator.Get();
+            response.Data.Email = newCompanyModel.Email;
+            response.Data.Phone = newCompanyModel.Phone;
+            response.Data.Id = new System.Guid();
+
+            response = _companyService.Create(response.Data);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateName));
+        }
+
+        [TestMethod]
+        public void Can_not_create_company_with_duplicate_phone()
+        {
+            var companyModel = _companyGenerator.Get();
+            var response = _companyService.Create(companyModel);
+
+            var newCompanyModel = _companyGenerator.Get();
+            response.Data.Email = newCompanyModel.Email;
+            response.Data.Name = newCompanyModel.Name;
+            response.Data.Id = new System.Guid();
+
+            response = _companyService.Create(response.Data);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicatePhone));
+        }
+
+        [TestMethod]
 		public void Can_not_create_company_with_empty_email()
 		{
 			var companyModel = _companyGenerator.Get();
@@ -82,12 +136,48 @@ namespace Singapor.Tests.Tests
 		public void Can_not_create_company_with_invalid_name_length()
 		{
 			var companyModel = _companyGenerator.Get();
-			companyModel.Name = "123";
+			companyModel.Name = StringsGenerators.GenerateString(3);
 
 			var response = _companyService.Create(companyModel);
 
-			AssertValidationErrorIsInList(string.Format(Validation.LengthBetween, 6, 20), response);
+			AssertValidationErrorIsInList(string.Format(Validation.LengthBetween, 6, 60), response);
 		}
+
+        [TestMethod]
+        public void Can_not_create_company_with_invalid_email()
+        {
+            var companyModel = _companyGenerator.Get();
+            companyModel.Email = StringsGenerators.GenerateInvalidEmail();
+
+            var response = _companyService.Create(companyModel);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.InvalidEmail));
+        }
+
+        [TestMethod]
+        public void Can_not_create_company_with_invalid_country_code()
+        {
+            var companyModel = _companyGenerator.Get();
+            companyModel.Country = StringsGenerators.GenerateInvalidCountryCode();
+
+            var response = _companyService.Create(companyModel);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.InvalidCountryCode));
+        }
+
+        [TestMethod]
+        public void Can_not_create_company_with_invalid_phone_number()
+        {
+            var companyModel = _companyGenerator.Get();
+            companyModel.Phone = StringsGenerators.GenerateInvalidPhoneNumber(9);
+
+            var response = _companyService.Create(companyModel);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.InvalidPhone));
+        }
 
         [TestMethod]
         public void User_from_company_created_with_company_creation()

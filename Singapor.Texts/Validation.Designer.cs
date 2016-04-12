@@ -88,6 +88,24 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This name already exists.
+        /// </summary>
+        public static string DuplicateName {
+            get {
+                return ResourceManager.GetString("DuplicateName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This phone already exists.
+        /// </summary>
+        public static string DuplicatePhone {
+            get {
+                return ResourceManager.GetString("DuplicatePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is already defined schedule for this date.
         /// </summary>
         public static string DuplicateScheduleForDate {
@@ -97,16 +115,34 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address is not vaild.
+        ///   Looks up a localized string similar to This country code is invalid.
         /// </summary>
-        public static string EmailIsNotValid {
+        public static string InvalidCountryCode {
             get {
-                return ResourceManager.GetString("EmailIsNotValid", resourceCulture);
+                return ResourceManager.GetString("InvalidCountryCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This field should be from {0} to {1} charachers.
+        ///   Looks up a localized string similar to Email address is ivaild.
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This phone number is invalid.
+        /// </summary>
+        public static string InvalidPhone {
+            get {
+                return ResourceManager.GetString("InvalidPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tis field should be from {0} to {1} charachers.
         /// </summary>
         public static string LengthBetween {
             get {

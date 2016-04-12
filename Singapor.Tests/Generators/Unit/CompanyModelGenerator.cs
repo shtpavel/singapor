@@ -13,10 +13,10 @@ namespace Singapor.Tests.Generators.Unit
 			{
 				Name = StringsGenerators.GenerateString(10),
 				Address = StringsGenerators.GenerateString(100),
-				Country = StringsGenerators.GenerateString(20),
+				Country = StringsGenerators.GenerateCountryCode(),
 				Description = StringsGenerators.GenerateString(199),
 				Email = StringsGenerators.GenerateEmail(),
-				Phone = StringsGenerators.GenerateString(9)
+				Phone = StringsGenerators.GeneratePhoneNumber(9)
 			};
 
 			return model;

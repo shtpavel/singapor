@@ -71,7 +71,7 @@
     <Compile Include="Filters\EmptyQueryFilterProvider.cs" />
     <Compile Include="Filters\SoftDeleteFilterProvider.cs" />
     <Compile Include="Helpers\ValidationResultExtensionMethods.cs" />
-    <Compile Include="Models\CommonValidator.cs" />
+    <Compile Include="Models\Validators\CommonValidator.cs" />
     <Compile Include="Models\CompanyDependentModelBase.cs" />
     <Compile Include="Models\Maps\CompanyMapper.cs" />
     <Compile Include="Models\Maps\IMapConfiguration.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Models\UnitTypeModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\Validators\Abstract\CompanyBasedValidatorBase.cs" />
+    <Compile Include="Models\Validators\Abstract\CompanyDependentValidatorBase.cs" />
     <Compile Include="Models\Validators\Company\NewCompanyValidator.cs" />
     <Compile Include="Models\Validators\UnitType\NewUnitTypeValidator.cs" />
     <Compile Include="Models\Validators\Unit\NewUnitValidator.cs" />
