@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="Configurations\CompanyDatabaseConfiguration.cs" />
     <Compile Include="Configurations\RoleDatabaseConfiguration.cs" />
-    <Compile Include="Configurations\ServiceDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\UtilityDatabaseConfiguration.cs" />
     <Compile Include="Configurations\UnitDatabaseConfiguration.cs" />
     <Compile Include="Configurations\UnitTypeDatabaseConfiguration.cs" />
     <Compile Include="Configurations\UserDatabaseConfiguration.cs" />

@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Entities\Abstract\CompanyDependentEntityBase.cs" />
     <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\Service.cs" />
+    <Compile Include="Entities\Utility.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Abstract\EntityBase.cs" />
     <Compile Include="Entities\Company.cs" />

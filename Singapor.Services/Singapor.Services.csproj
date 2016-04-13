@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICompanyService.cs" />
-    <Compile Include="Abstract\IServiceService.cs" />
+    <Compile Include="Abstract\IUtilityService.cs" />
     <Compile Include="Abstract\IUnitService.cs" />
     <Compile Include="Abstract\IUnitTypeService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
@@ -75,12 +75,12 @@
     <Compile Include="Models\CompanyDependentModelBase.cs" />
     <Compile Include="Models\Maps\CompanyMapper.cs" />
     <Compile Include="Models\Maps\IMapConfiguration.cs" />
-    <Compile Include="Models\Maps\ServiceMapper.cs" />
+    <Compile Include="Models\Maps\UtilityMapper.cs" />
     <Compile Include="Models\Maps\UnitMapper.cs" />
     <Compile Include="Models\Maps\UserMapper.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\RoleModel.cs" />
-    <Compile Include="Models\ServiceModel.cs" />
+    <Compile Include="Models\UtilityModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Models\UnitTypeModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Abstract\IService.cs" />
     <Compile Include="Services\CompanyService.cs" />
-    <Compile Include="Services\ServiceService.cs" />
+    <Compile Include="Services\UtilityService.cs" />
     <Compile Include="Services\UnitService.cs" />
     <Compile Include="Services\UnitTypeService.cs" />
     <Compile Include="Services\UserService.cs" />

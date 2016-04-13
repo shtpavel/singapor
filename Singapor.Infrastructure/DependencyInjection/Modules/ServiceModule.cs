@@ -12,7 +12,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 			builder.RegisterType<UnitService>().As<IUnitService>();
 			builder.RegisterType<UnitTypeService>().As<IUnitTypeService>();
 			builder.RegisterType<UserService>().As<IUserService>();
-			builder.RegisterType<ServiceService>().As<IServiceService>();
+			builder.RegisterType<UtilityService>().As<IUtilityService>();
 		}
 	}
 }

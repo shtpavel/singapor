@@ -3,11 +3,11 @@ using Singapor.Model.Entities;
 
 namespace Singapor.DAL.Configurations
 {
-	public class ServiceDatabaseConfiguration : EntityTypeConfiguration<Service>
+	public class UtilityDatabaseConfiguration : EntityTypeConfiguration<Utility>
 	{
 		#region Constructors
 
-		public ServiceDatabaseConfiguration()
+		public UtilityDatabaseConfiguration()
 		{
 			ToTable("Service");
 			HasKey(x => x.Id);

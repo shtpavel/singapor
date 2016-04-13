@@ -46,10 +46,10 @@ namespace Singapor.DAL
 			list.ForEach(x => context.Set<Role>().Add(x));
 		}
 
-		private void CreateServices(DataContext context, Company defaultCompany)
+		private void CreateUtilities(DataContext context, Company defaultCompany)
 		{
-			var list = new List<Service>();
-			list.Add(new Service()
+			var list = new List<Utility>();
+			list.Add(new Utility()
 			{
 				Id = Guid.NewGuid(),
 				Name = "Haircut",
@@ -58,7 +58,7 @@ namespace Singapor.DAL
 				Company = defaultCompany
 			});
 
-			list.Add(new Service()
+			list.Add(new Utility()
 			{
 				Id = Guid.NewGuid(),
 				Name = "Manicure",
@@ -66,7 +66,7 @@ namespace Singapor.DAL
 				CompanyId = defaultCompany.Id,
 				Company = defaultCompany
 			});
-			list.ForEach(x => context.Set<Service>().Add(x));
+			list.ForEach(x => context.Set<Utility>().Add(x));
 		}
 
 		private static void CreateSuperUser(DataContext context, Company defaultCompany)

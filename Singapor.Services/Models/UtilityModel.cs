@@ -3,7 +3,7 @@ using Singapor.Services.Abstract;
 
 namespace Singapor.Services.Models
 {
-	public class ServiceModel : ModelBase
+	public class UtilityModel : ModelBase
 	{
 		#region Properties
 

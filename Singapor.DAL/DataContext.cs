@@ -31,7 +31,7 @@ namespace Singapor.DAL
 			modelBuilder.Configurations.Add(new UnitDatabaseConfiguration());
 			modelBuilder.Configurations.Add(new UserDatabaseConfiguration());
 			modelBuilder.Configurations.Add(new UnitTypeDatabaseConfiguration());
-			modelBuilder.Configurations.Add(new ServiceDatabaseConfiguration());
+			modelBuilder.Configurations.Add(new UtilityDatabaseConfiguration());
 		}
 	}
 }

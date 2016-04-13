@@ -2,7 +2,7 @@
 
 namespace Singapor.Model.Entities
 {
-	public class Service : CompanyDependentEntityBase
+	public class Utility : CompanyDependentEntityBase
 	{
 		#region Properties
 

@@ -6,11 +6,11 @@ using Singapor.Services.Models;
 
 namespace Singapor.Services.Services
 {
-	public class ServiceService : BaseService<ServiceModel, Service>, IServiceService
+	public class UtilityService : BaseService<UtilityModel, Utility>, IUtilityService
 	{
 		#region Constructors
 
-		public ServiceService(IUnitOfWork unitOfWork, IRepository<Service> repository) : base(unitOfWork, repository)
+		public UtilityService(IUnitOfWork unitOfWork, IRepository<Utility> repository) : base(unitOfWork, repository)
 		{
 		}
 

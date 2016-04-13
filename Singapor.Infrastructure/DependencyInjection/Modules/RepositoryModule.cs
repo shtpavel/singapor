@@ -12,7 +12,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 			builder.RegisterType<BaseRepository<Unit>>().As<IRepository<Unit>>();
 			builder.RegisterType<BaseRepository<UnitType>>().As<IRepository<UnitType>>();
 			builder.RegisterType<BaseRepository<User>>().As<IRepository<User>>();
-			builder.RegisterType<BaseRepository<Service>>().As<IRepository<Service>>();
+			builder.RegisterType<BaseRepository<Utility>>().As<IRepository<Utility>>();
 			builder.RegisterType<BaseRepository<Role>>().As<IRepository<Role>>();
 		}
 	}
