@@ -151,6 +151,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This field must not be empty.
+        /// </summary>
+        public static string IsEmpty {
+            get {
+                return ResourceManager.GetString("IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tis field should be from {0} to {1} charachers.
         /// </summary>
         public static string LengthBetween {

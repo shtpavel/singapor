@@ -147,6 +147,9 @@
   <data name="InvalidPhone" xml:space="preserve">
     <value>This phone number is invalid</value>
   </data>
+  <data name="IsEmpty" xml:space="preserve">
+    <value>This field must not be empty</value>
+  </data>
   <data name="LengthBetween" xml:space="preserve">
     <value>Tis field should be from {0} to {1} charachers</value>
   </data>

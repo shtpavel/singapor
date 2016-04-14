@@ -106,7 +106,7 @@ namespace Singapor.DAL
 				Company = defaultCompany,
 				CompanyId = defaultCompany.Id,
 				IsContainer = true,
-				IsServiceable = true
+				IsUtilityProvider = true
 			});
 
 			list.Add(new UnitType
@@ -125,7 +125,7 @@ namespace Singapor.DAL
 				Company = defaultCompany,
 				CompanyId = defaultCompany.Id,
 				IsContainer = false,
-				IsServiceable = true
+				IsUtilityProvider = true
 			});
 
 			list.ForEach(x => context.Set<UnitType>().Add(x));
