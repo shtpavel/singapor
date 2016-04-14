@@ -6,24 +6,24 @@ namespace Singapor.Tests.Generators.Unit
 {
 	internal class UnitTypeModelGenerator : IUnitTypeModelGenerator
 	{
-		#region Fields
+        #region Fields
 
-		private readonly ICompanyService _companyService;
+        private readonly ICompanyService _companyService;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		public UnitTypeModelGenerator(ICompanyService companyService)
-		{
-			_companyService = companyService;
-		}
+        public UnitTypeModelGenerator(ICompanyService companyService)
+        {
+            _companyService = companyService;
+        }
 
-		#endregion
+        #endregion
 
-		#region Public methods
+        #region Public methods
 
-		public UnitTypeModel Get()
+        public UnitTypeModel Get()
 		{
 			var model = new UnitTypeModel();
 			model.Description = StringsGenerators.GenerateString(199);

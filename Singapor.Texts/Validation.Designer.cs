@@ -88,6 +88,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already have the record with the same id.
+        /// </summary>
+        public static string DuplicateId {
+            get {
+                return ResourceManager.GetString("DuplicateId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This name already exists.
         /// </summary>
         public static string DuplicateName {
@@ -151,6 +160,15 @@ namespace Singapor.Texts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This field must be less than {0} charachers.
+        /// </summary>
+        public static string LessThan {
+            get {
+                return ResourceManager.GetString("LessThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t create child unit for non-container parent.
         /// </summary>
         public static string ParentUnitIsNotContainer {
@@ -165,15 +183,6 @@ namespace Singapor.Texts {
         public static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Already have the record with the same id.
-        /// </summary>
-        public static string UniqueId {
-            get {
-                return ResourceManager.GetString("UniqueId", resourceCulture);
             }
         }
         

@@ -3,17 +3,42 @@ using Singapor.DAL.Repositories;
 using Singapor.Model.Entities;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
+using Singapor.Services.Models.Validators.Utility;
+using Singapor.Services.Responses;
+using Singapor.Services.Helpers;
+using System.Linq;
 
 namespace Singapor.Services.Services
 {
 	public class UtilityService : BaseService<UtilityModel, Utility>, IUtilityService
 	{
-		#region Constructors
+        #region Fields
 
-		public UtilityService(IUnitOfWork unitOfWork, IRepository<Utility> repository) : base(unitOfWork, repository)
+        private readonly ICompanyService _companyService;
+
+        #endregion
+
+        #region Constructors
+
+        public UtilityService(ICompanyService companyService, 
+            IUnitOfWork unitOfWork, IRepository<Utility> repository) : base(unitOfWork, repository)
 		{
-		}
+            _companyService = companyService;
+        }
 
-		#endregion
-	}
+        #endregion
+
+        #region Public methods
+
+        public override SingleEntityResponse<UtilityModel> Create(UtilityModel model)
+        {
+            var newUtilityValidator = new NewUtilityValidator(this, _companyService);
+            var validationResult = newUtilityValidator.Validate(model);
+            if (!validationResult.IsValid)
+                return new SingleEntityResponse<UtilityModel>(model, validationResult.GetErrorsObjects().ToList());
+            return base.Create(model);
+        }
+
+        #endregion
+    }
 }

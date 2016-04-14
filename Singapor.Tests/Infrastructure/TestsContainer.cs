@@ -18,14 +18,17 @@ namespace Singapor.Tests.Infrastructure
 			var unitDbSet = new FakeDbSet<Unit>();
 			var unitTypeDbSet = new FakeDbSet<UnitType>();
 			var userDbSet = new FakeDbSet<User>();
+            var utilityDbSet = new FakeDbSet<Utility>();
 
 			var mockDataContext = new Mock<IDataContext>();
 			mockDataContext.Setup(x => x.Set<Company>()).Returns(companyDbSet);
 			mockDataContext.Setup(x => x.Set<Unit>()).Returns(unitDbSet);
 			mockDataContext.Setup(x => x.Set<UnitType>()).Returns(unitTypeDbSet);
 			mockDataContext.Setup(x => x.Set<User>()).Returns(userDbSet);
+            mockDataContext.Setup(x => x.Set<Utility>()).Returns(utilityDbSet);
 
-			return mockDataContext.Object;
+
+            return mockDataContext.Object;
 		}
 
 		#endregion

@@ -34,7 +34,7 @@ namespace Singapor.Tests.Tests
             response = _companyService.Create(response.Data);
             
 			Assert.IsFalse(response.IsValid);
-			Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.UniqueId));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateId));
 		}
 
         [TestMethod]

@@ -142,7 +142,7 @@ namespace Singapor.DAL
 			CreateRoles(context);
 			CreateSuperUser(context, defaultCompany);
 			CreateUnitTypes(context, defaultCompany);
-			CreateServices(context, defaultCompany);
+            CreateUtilities(context, defaultCompany);
 
 			base.Seed(context);
 		}

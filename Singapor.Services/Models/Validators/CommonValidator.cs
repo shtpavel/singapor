@@ -19,7 +19,7 @@ namespace Singapor.Services.Models.Validators
 					return service.Get(x.Value).Data == null;
 				}
 				return true;
-			}).WithMessage(Validation.UniqueId);
+			}).WithMessage(Validation.DuplicateId);
 		}
 
 		#endregion

@@ -9,7 +9,7 @@ namespace Singapor.DAL.Configurations
 
 		public UtilityDatabaseConfiguration()
 		{
-			ToTable("Service");
+			ToTable("Utility");
 			HasKey(x => x.Id);
 		}
 

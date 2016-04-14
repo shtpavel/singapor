@@ -20,22 +20,29 @@ namespace Singapor.Tests
 {
 	public class UnitTestBase
 	{
-		#region Fields
+        #region Fields
 
-		protected IGenerator<CompanyModel> _companyGenerator;
+        protected IContainer _container;
+
+        protected IGenerator<CompanyModel> _companyGenerator;
 		protected ICompanyService _companyService;
-		protected IContainer _container;
+
 		protected IUnitModelGenerator _unitModelGenerator;
 		protected IUnitService _unitService;
+
 		protected IUnitTypeModelGenerator _unitTypeModelGenerator;
 		protected IUnitTypeService _unitTypeService;
+
         protected IUserService _userService;
 
-		#endregion
+        protected IUtilityModelGenerator _utilityModelGenerator;
+        protected IUtilityService _utilitySerivce;
 
-		#region Constructors
+        #endregion
 
-		public UnitTestBase()
+        #region Constructors
+
+        public UnitTestBase()
 		{
 			_container = new TestsContainer().GetContainerBuilder();
 			_container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
@@ -80,11 +87,17 @@ namespace Singapor.Tests
 		{
 			_companyGenerator = _container.Resolve<IGenerator<CompanyModel>>();
 			_companyService = _container.Resolve<ICompanyService>();
-			_unitService = _container.Resolve<IUnitService>();
-			_unitModelGenerator = _container.Resolve<IUnitModelGenerator>();
+
+            _unitModelGenerator = _container.Resolve<IUnitModelGenerator>();
+            _unitService = _container.Resolve<IUnitService>();
+			
 			_unitTypeModelGenerator = _container.Resolve<IUnitTypeModelGenerator>();
 			_unitTypeService = _container.Resolve<IUnitTypeService>();
+
             _userService = _container.Resolve<IUserService>();
+
+            _utilityModelGenerator = _container.Resolve<IUtilityModelGenerator>();
+            _utilitySerivce = _container.Resolve<IUtilityService>();
         }
 
 		#endregion

@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Generators\IUnitModelGenerator.cs" />
     <Compile Include="Generators\IUnitTypeModelGenerator.cs" />
+    <Compile Include="Generators\IUtilityModelGenerator.cs" />
+    <Compile Include="Generators\Unit\UtilityModelGenerator.cs" />
     <Compile Include="Infrastructure\Modules\GeneratorsModule.cs" />
     <Compile Include="Tests\CompanyTests.cs" />
     <Compile Include="Generators\Unit\CompanyModelGenerator.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Tests\UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\TestsContainer.cs" />
+    <Compile Include="Tests\UtilityTests.cs" />
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
