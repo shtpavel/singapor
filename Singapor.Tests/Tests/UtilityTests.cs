@@ -9,11 +9,6 @@ namespace Singapor.Tests.Tests
     [TestClass]
     public class UtilityTests : UnitTestBase
     {
-        //public Guid? Id { get; set; }
-        //public string Name { get; set; }
-        //public string Description { get; set; }
-        //public Guid? CompanyId
-
         #region Public methods
 
         [TestMethod]
