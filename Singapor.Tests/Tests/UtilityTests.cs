@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Responses;
-using Singapor.Texts;
+using Singapor.Resources;
 using Singapor.Helpers;
 
 namespace Singapor.Tests.Tests

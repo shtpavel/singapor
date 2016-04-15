@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
+using Singapor.Resources;
 
 namespace Singapor.Helpers
 {
@@ -29,8 +31,8 @@ namespace Singapor.Helpers
 
         public static string GenerateCountryCode()
         {
-            var countryCode = ("CA,US,AG,GQ,FR,BE,HU,DE,PL,CN,GL,UA,IT").Split(',');
-            return countryCode[new Random().Next(countryCode.Length)]; 
+            var countryCodes = new CulturesProvider().Cultures.Select(c => c.Code).ToArray();
+            return countryCodes[new Random().Next(countryCodes.Length - 1)];
         }
 
 

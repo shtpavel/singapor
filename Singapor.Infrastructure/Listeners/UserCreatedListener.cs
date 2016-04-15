@@ -1,6 +1,6 @@
 ﻿using Singapor.ApplicationServices;
 using Singapor.Services.Events.Models;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Infrastructure.Listeners
 {

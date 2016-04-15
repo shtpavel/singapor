@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Common.Contexts
 {

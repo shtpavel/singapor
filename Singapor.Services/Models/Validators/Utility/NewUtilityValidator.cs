@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models.Validators.Abstract;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Services.Models.Validators.Utility
 {

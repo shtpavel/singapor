@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Model", "Singapor.Model\Singapor.Model.csproj", "{A511AF82-EE61-4704-816D-BF0779FAD21E}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Tests", "Singapor.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Infrastructure", "Singapor.Infrastructure\Singapor.Infrastructure.csproj", "{F61F11A8-7D5F-41CD-9717-3D20FAC7FFDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Texts", "Singapor.Texts\Singapor.Texts.csproj", "{F7DB7DBC-C6C8-4836-8665-23C5545663A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Resources", "Singapor.Resources\Singapor.Resources.csproj", "{F7DB7DBC-C6C8-4836-8665-23C5545663A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EF917988-22A2-49F1-B514-18D0F0C5E507}"
 EndProject

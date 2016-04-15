@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Tests.Tests
 {

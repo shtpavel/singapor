@@ -13,7 +13,7 @@ using Singapor.Services.Models.Maps;
 using Singapor.Services.Responses;
 using Singapor.Tests.Generators;
 using Singapor.Tests.Infrastructure;
-using Singapor.Texts;
+using Singapor.Resources;
 using Singapor.Services.Events;
 
 namespace Singapor.Tests
@@ -104,7 +104,8 @@ namespace Singapor.Tests
 
 		protected CompanyModel CreateCompany()
 		{
-			return _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get()).Data;
+            return _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get()).Data;
+            //return _companyService.Create(_companyGenerator.Get()).Data;
 		}
 
 		protected UnitTypeModel CreateUnitType(CompanyModel companyModel)

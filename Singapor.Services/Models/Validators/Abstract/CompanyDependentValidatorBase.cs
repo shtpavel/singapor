@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Singapor.Services.Abstract;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Services.Models.Validators.Abstract
 {

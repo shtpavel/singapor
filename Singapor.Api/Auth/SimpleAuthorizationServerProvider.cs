@@ -7,7 +7,7 @@ using Autofac;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Singapor.Services.Abstract;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Api.Auth
 {

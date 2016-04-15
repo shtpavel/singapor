@@ -44,6 +44,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringsGenerators.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Singapor.Resources\Singapor.Resources.csproj">
+      <Project>{f7db7dbc-c6c8-4836-8665-23c5545663a5}</Project>
+      <Name>Singapor.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

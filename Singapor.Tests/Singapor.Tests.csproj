@@ -116,9 +116,9 @@
       <Project>{eb9947e2-52d4-481a-9500-1f7d6a9ead46}</Project>
       <Name>Singapor.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Singapor.Texts\Singapor.Texts.csproj">
+    <ProjectReference Include="..\Singapor.Resources\Singapor.Resources.csproj">
       <Project>{f7db7dbc-c6c8-4836-8665-23c5545663a5}</Project>
-      <Name>Singapor.Texts</Name>
+      <Name>Singapor.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

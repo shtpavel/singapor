@@ -1,4 +1,4 @@
-﻿namespace Singapor.Texts
+﻿namespace Singapor.Resources
 {
 	public static class CustomClaims
 	{

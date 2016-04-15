@@ -4,7 +4,7 @@ using Singapor.Common.Contexts;
 using Singapor.Common.Exceptions;
 using Singapor.DAL.Filters.Abstract;
 using Singapor.Model.Entities.Abstract;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.Services.Filters
 {

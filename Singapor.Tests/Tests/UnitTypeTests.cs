@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Singapor.Texts;
+using Singapor.Resources;
 using System.Linq;
 using Singapor.Helpers;
 

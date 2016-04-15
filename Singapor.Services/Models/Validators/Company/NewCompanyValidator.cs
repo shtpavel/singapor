@@ -2,7 +2,7 @@
 using System.Linq;
 using FluentValidation;
 using Singapor.DAL.Repositories;
-using Singapor.Texts;
+using Singapor.Resources;
 using System.Globalization;
 
 namespace Singapor.Services.Models.Validators.Company

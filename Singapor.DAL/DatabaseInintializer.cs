@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using Singapor.Helpers.Auth;
 using Singapor.Model.Entities;
-using Singapor.Texts;
+using Singapor.Resources;
 
 namespace Singapor.DAL
 {
