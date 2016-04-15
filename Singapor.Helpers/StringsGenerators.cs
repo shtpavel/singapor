@@ -31,7 +31,7 @@ namespace Singapor.Helpers
 
         public static string GenerateCountryCode()
         {
-            var countryCodes = new CulturesProvider().Cultures.Select(c => c.Code).ToArray();
+            var countryCodes = new CountriesProvider().Countries.Select(c => c.Code).ToArray();
             return countryCodes[new Random().Next(countryCodes.Length - 1)];
         }
 

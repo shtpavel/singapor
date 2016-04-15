@@ -33,8 +33,7 @@ namespace Singapor.Services.Models.Validators.Company
             RuleFor(x => x.Country).NotEmpty().WithMessage(Validation.Required);
             RuleFor(x => x.Country).Must(x =>
             {
-                try { return x == new RegionInfo(x).TwoLetterISORegionName; }
-                catch { return false; }
+	            return new CountriesProvider().Countries.Any(y => y.Code == x);
             }
             ).WithMessage(Validation.InvalidCountryCode);
 

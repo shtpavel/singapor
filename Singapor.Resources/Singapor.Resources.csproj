@@ -45,7 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppResources.cs" />
-    <Compile Include="CulturesProvider.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="CountriesProvider.cs" />
     <Compile Include="CustomClaims.cs" />
     <Compile Include="EmailTexts.Designer.cs">
       <AutoGen>True</AutoGen>
