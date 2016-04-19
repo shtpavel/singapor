@@ -188,6 +188,7 @@ namespace Singapor.Tests.Tests
 
             Assert.IsNotNull(userResponse.Data);
             Assert.AreEqual(company.Id, userResponse.Data.CompanyId);
+            Assert.AreEqual(company.Email, userResponse.Data.Email);
         }
 
 		[TestInitialize]

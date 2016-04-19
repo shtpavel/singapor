@@ -44,7 +44,7 @@ namespace Singapor.Services.Services
 
 		public SingleEntityResponse<UserModel> CreateFromCompany(Guid companyId, string login)
 		{
-			var password = StringsGenerators.GenerateString(6);
+			var password = StringsGenerators.GenerateString(8);
 			var model = new UserModel
 			{
 				Email = login,
@@ -54,7 +54,7 @@ namespace Singapor.Services.Services
 
 			var response = base.Create(model);
 
-			//TODO: this is dirty hack
+			//TODO: this is dirty hack, need to unhash password form db
 			model.Password = password;
 
 			if (response.IsValid)
