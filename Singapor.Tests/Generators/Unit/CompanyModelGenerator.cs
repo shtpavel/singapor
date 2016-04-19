@@ -15,7 +15,7 @@ namespace Singapor.Tests.Generators.Unit
 				Address = StringsGenerators.GenerateString(100),
 				Country = StringsGenerators.GenerateCountryCode(),
 				Description = StringsGenerators.GenerateString(199),
-				Email = StringsGenerators.GenerateEmail(),
+				Email = StringsGenerators.GenerateEmail(9),
 				Phone = StringsGenerators.GeneratePhoneNumber(9)
 			};
 

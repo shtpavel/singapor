@@ -47,9 +47,19 @@ namespace Singapor.Services.Services
 			return base.Create(model);
 		}
 
-		public ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> units)
+		public override ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> models)
 		{
-			throw new NotImplementedException();
+            var newUnitValidator = new NewUnitValidator(_companyService, this, _unitTypeService);
+            var responses = new List<SingleEntityResponse<UnitModel>>();
+            foreach (var model in models)
+            {
+                var validationResult = newUnitValidator.Validate(model);
+                if (!validationResult.IsValid)
+                    responses.Add(new SingleEntityResponse<UnitModel>(model, validationResult.GetErrorsObjects().ToList()));
+            }
+            if(!responses.All(r => r.Errors == null)) return new ListEntityResponse<UnitModel>(responses);
+
+            return base.Create(models);
 		}
 
 		#endregion

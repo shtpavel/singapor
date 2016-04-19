@@ -12,7 +12,6 @@ namespace Singapor.Tests.Generators.Unit
 		{
 			var model = new UnitModel();
 			model.Description = StringsGenerators.GenerateString(199);
-			model.IsContainer = false;
 			model.Name = StringsGenerators.GenerateString(10);
 
 			return model;

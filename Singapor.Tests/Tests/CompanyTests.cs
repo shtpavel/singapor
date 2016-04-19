@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Responses;
 using Singapor.Resources;
 using Singapor.Helpers;
+using System.Threading;
 
 namespace Singapor.Tests.Tests
 {
@@ -184,6 +185,7 @@ namespace Singapor.Tests.Tests
         {
             var company = CreateCompany();
             var userResponse = _userService.Get(c => c.CompanyId == company.Id).Data.FirstOrDefault();
+
             Assert.IsNotNull(userResponse.Data);
             Assert.AreEqual(company.Id, userResponse.Data.CompanyId);
         }

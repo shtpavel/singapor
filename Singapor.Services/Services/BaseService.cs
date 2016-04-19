@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using AutoMapper;
 using Singapor.DAL;
 using Singapor.DAL.Repositories;
@@ -54,7 +55,28 @@ namespace Singapor.Services.Services
 			return new SingleEntityResponse<TModel>(Mapper.Map(entity, model));
 		}
 
-		public virtual EmptyResponse Delete(Guid id)
+        public virtual ListEntityResponse<TModel> Create(IEnumerable<TModel> models)
+        {
+            var responses = new List<SingleEntityResponse<TModel>>();
+            foreach (var model in models)
+            {
+                if (model.Id == null || model.Id == Guid.Empty)
+                    model.Id = Guid.NewGuid();
+                var data = Mapper.Map(model, Activator.CreateInstance<TEntity>());
+                var validationResult = new CommonValidator<TModel>(this).Validate(model);
+                if (!validationResult.IsValid)
+                    responses.Add(new SingleEntityResponse<TModel>(model, validationResult.GetErrorsObjects().ToList()));
+                else
+                    responses.Add(new SingleEntityResponse<TModel>(Mapper.Map(_repository.Add(data), model)));
+            }
+
+            if (!responses.All(r => r.Errors == null)) return new ListEntityResponse<TModel>(responses);
+
+            _unitOfWork.SaveChanges(); 
+            return new ListEntityResponse<TModel>(responses);
+        }
+
+        public virtual EmptyResponse Delete(Guid id)
 		{
 			var response = new EmptyResponse();
 			var entity = _repository.GetById(id);

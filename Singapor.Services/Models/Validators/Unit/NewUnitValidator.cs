@@ -2,6 +2,7 @@
 using Singapor.Services.Abstract;
 using Singapor.Services.Models.Validators.Abstract;
 using Singapor.Resources;
+using System.Linq;
 
 namespace Singapor.Services.Models.Validators.Unit
 {
@@ -9,9 +10,7 @@ namespace Singapor.Services.Models.Validators.Unit
 	{
 		#region Constructors
 
-		public NewUnitValidator(
-			ICompanyService companyService,
-			IUnitService unitService,
+		public NewUnitValidator(ICompanyService companyService, IUnitService unitService,
 			IUnitTypeService unitTypeService) : base(companyService)
 		{
 			RuleFor(x => x.ParentUnitId).Must(x =>
@@ -36,6 +35,7 @@ namespace Singapor.Services.Models.Validators.Unit
 				}
 				return true;
 			}).WithMessage(Validation.ParentUnitIsNotContainer);
+
 			RuleFor(x => x.TypeId).NotNull().WithMessage(Validation.Required);
 			RuleFor(x => x.TypeId).Must(x =>
 			{
@@ -48,7 +48,10 @@ namespace Singapor.Services.Models.Validators.Unit
 			}).WithMessage(Validation.UnitTypeNotFound);
 
 			RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
-		}
+            RuleFor(x => x.Name).Must(x => !unitService.Get(n => n.Name.Equals(x)).Data.Any())
+                .WithMessage(Validation.DuplicateName);
+
+        }
 
 		#endregion
 	}

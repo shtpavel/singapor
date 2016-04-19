@@ -36,16 +36,5 @@ namespace Singapor.Services.Events
 		}
 
 		#endregion
-
-		#region Private methods
-
-		private void RegisterAllKnownListeners()
-		{
-			_eventAggregator.AddListener(_container.Resolve<IListener<UserCreated>>());
-            _eventAggregator.AddListener(_container.Resolve<IListener<CompanyCreated>>());
-
-        }
-
-		#endregion
 	}
 }

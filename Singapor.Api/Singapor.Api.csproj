@@ -160,6 +160,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\Abstract\CrudControllerBase.cs" />
+    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UtilityController.cs" />
     <Compile Include="Controllers\UnitTypesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

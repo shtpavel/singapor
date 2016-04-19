@@ -10,10 +10,10 @@ namespace Singapor.Helpers
 	{
 		#region Public methods
 
-		public static string GenerateEmail()
+		public static string GenerateEmail(int charCount)
 		{
 			var template = "{0}@{1}.{2}";
-			var name = GenerateRandomAlphanumeric(7, "abcdefghijklmnopqrstuvwxyz0123456789");
+			var name = GenerateRandomAlphanumeric(charCount, "abcdefghijklmnopqrstuvwxyz");
 			var addr = "gmail";
 			var domain = "com";
 			return string.Format(template, name, addr, domain);
@@ -40,7 +40,7 @@ namespace Singapor.Helpers
 
         public static string GenerateInvalidCountryCode()
         {
-            return "PO"; //"BlaBla";
+            return "PO";
         }
 
         public static string GenerateInvalidPhoneNumber(int charCount)

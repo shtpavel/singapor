@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Singapor.Services.Abstract;
 using Singapor.Services.Models;
 using Singapor.Resources;
+using Singapor.Helpers;
 
 namespace Singapor.Tests.Tests
 {
@@ -44,13 +45,16 @@ namespace Singapor.Tests.Tests
 			Assert.IsTrue(childResponse.IsValid);
 		}
 
-		[TestMethod, Ignore]
+		[TestMethod]
 		public void Can_create_multiple_units_at_one_time()
 		{
-			var models = new List<UnitModel>();
+            var companyModel = CreateCompany();
+            var unitTypeModel = CreateUnitType(companyModel);
+
+            var models = new List<UnitModel>();
 			for (var i = 0; i < new Random().Next(10, 20); i++)
 			{
-				models.Add(_unitModelGenerator.Get());
+                models.Add(_unitModelGenerator.Get(companyModel, unitTypeModel));
 			}
 
 			var response = _unitService.Create(models);
@@ -58,7 +62,26 @@ namespace Singapor.Tests.Tests
 			Assert.IsTrue(response.IsValid);
 		}
 
-		[TestMethod]
+
+        [TestMethod]
+        public void Can_not_create_unit_with_duplicate_id()
+        {
+            var companyModel = CreateCompany();
+            var unitTypeModel = CreateUnitType(companyModel);
+
+            var model = _unitModelGenerator.Get(companyModel, unitTypeModel);
+            var response = _unitService.Create(model);
+
+            response.Data.Name = StringsGenerators.GenerateString(10);
+            response.Data.Description = StringsGenerators.GenerateString(100);
+
+            response = _unitService.Create(response.Data);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateId));
+        }
+
+        [TestMethod]
 		public void Can_not_create_child_unit_for_non_container_unit()
 		{
 			var companyModel = CreateCompany();
@@ -120,7 +143,67 @@ namespace Singapor.Tests.Tests
 				&& x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
 		}
 
-		[TestInitialize]
+        [TestMethod]
+        public void Can_not_create_unit_without_unit_type_id()
+        {
+            var company = CreateCompany();
+            var model = _unitModelGenerator.Get(company);
+
+            var response = _unitService.Create(model);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x =>
+                x.Fields.Any(f => f.Equals("TypeId", StringComparison.InvariantCultureIgnoreCase))
+                && x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
+        }
+
+        [TestMethod]
+        public void Can_not_create_unit_with_wrong_unit_type_id()
+        {
+            var company = CreateCompany();
+            var model = _unitModelGenerator.Get(company);
+            model.TypeId = Guid.NewGuid();
+            var response = _unitService.Create(model);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x =>
+                x.Fields.Any(f => f.Equals("TypeId", StringComparison.InvariantCultureIgnoreCase))
+                && x.Message.Equals(Validation.UnitTypeNotFound, StringComparison.InvariantCultureIgnoreCase)));
+        }
+
+        [TestMethod]
+        public void Can_not_create_unit_with_duplicate_name()
+        {
+            var company = CreateCompany();
+            var unitType = CreateUnitType(company);
+            var model = _unitModelGenerator.Get(company, unitType);
+
+            var response = _unitService.Create(model);
+            response = _unitService.Create(model);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x =>
+                x.Fields.Any(f => f.Equals("Name", StringComparison.InvariantCultureIgnoreCase))
+                && x.Message.Equals(Validation.DuplicateName, StringComparison.InvariantCultureIgnoreCase)));
+        }
+
+        [TestMethod]
+        public void Can_not_create_unit_without_name()
+        {
+            var company = CreateCompany();
+            var unitType = CreateUnitType(company);
+            var model = _unitModelGenerator.Get(company, unitType);
+            model.Name = null;
+            var response = _unitService.Create(model);
+
+            Assert.IsFalse(response.IsValid);
+            Assert.IsTrue(response.Errors.Any(x =>
+                x.Fields.Any(f => f.Equals("Name", StringComparison.InvariantCultureIgnoreCase))
+                && x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
+
+        }
+
+        [TestInitialize]
 		public override void Setup()
 		{
 			base.Setup();

@@ -105,7 +105,6 @@ namespace Singapor.Tests
 		protected CompanyModel CreateCompany()
 		{
             return _companyService.Create(_container.Resolve<IGenerator<CompanyModel>>().Get()).Data;
-            //return _companyService.Create(_companyGenerator.Get()).Data;
 		}
 
 		protected UnitTypeModel CreateUnitType(CompanyModel companyModel)
