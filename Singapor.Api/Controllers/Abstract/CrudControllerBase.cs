@@ -24,11 +24,12 @@ namespace Singapor.Api.Controllers.Abstract
 			_service = service;
 		}
 
-		#endregion
+        #endregion
 
-		#region Base CRUD operations
+        #region Base CRUD operations
 
-		public virtual HttpResponseMessage Get()
+        [Authorize]
+        public virtual HttpResponseMessage Get()
 		{
 			return GetResponse(_service.Get(), HttpStatusCode.OK);
 		}

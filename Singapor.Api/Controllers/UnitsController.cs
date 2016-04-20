@@ -21,7 +21,7 @@ namespace Singapor.Api.Controllers
 
         #region Public methods
 
-        [AllowAnonymous]
+        [Authorize]
         public virtual HttpResponseMessage Post(IEnumerable<UnitModel> models)
         {
             return GetResponse(_service.Create(models), HttpStatusCode.Created);
