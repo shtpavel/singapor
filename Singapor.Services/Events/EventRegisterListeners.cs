@@ -21,8 +21,10 @@ namespace Singapor.Services.Events
 
         public void RegisterListeners()
         {
-            _eventAggregatorProvider.GetEventAggregator().AddListener(_container.Resolve<IListener<UserCreated>>());
-            _eventAggregatorProvider.GetEventAggregator().AddListener(_container.Resolve<IListener<CompanyCreated>>());
+	        var userCreateListener = _container.Resolve<IListener<UserCreated>>();
+	        _eventAggregatorProvider.GetEventAggregator().AddListener(userCreateListener,true);
+	        var companyCreatedListener = _container.Resolve<IListener<CompanyCreated>>();
+	        _eventAggregatorProvider.GetEventAggregator().AddListener(companyCreatedListener,true);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace Singapor.Api.Controllers.Abstract
 
 		#region Base CRUD operations
 
-		[Authorize]
 		public virtual HttpResponseMessage Get()
 		{
 			return GetResponse(_service.Get(), HttpStatusCode.OK);

@@ -8,8 +8,8 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<DataContext>().As<IDataContext>().As<IUnitOfWork>().InstancePerRequest();
-			builder.RegisterType<UserContext>().As<IUserContext>().InstancePerRequest();
+			builder.RegisterType<DataContext>().As<IDataContext>().As<IUnitOfWork>().InstancePerLifetimeScope();
+			builder.RegisterType<UserContext>().As<IUserContext>().InstancePerLifetimeScope();
 		}
 	}
 }

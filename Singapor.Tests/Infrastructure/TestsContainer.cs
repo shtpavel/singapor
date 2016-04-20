@@ -39,7 +39,7 @@ namespace Singapor.Tests.Infrastructure
 			builder.RegisterModule<GeneratorsModule>();
 
 			var context = CreateDataContext();
-			builder.RegisterInstance(context).As<IDataContext>().As<IUnitOfWork>().SingleInstance();
+			builder.RegisterInstance(context).As<IDataContext>().As<IUnitOfWork>().InstancePerRequest();
 			builder.RegisterType<UserContext>().As<IUserContext>();
 		}
 	}
