@@ -44,6 +44,7 @@ namespace Singapor.DAL
 			});
 
 			list.ForEach(x => context.Set<Role>().Add(x));
+			context.SaveChanges();
 		}
 
 		private void CreateUtilities(DataContext context, Company defaultCompany)
@@ -67,12 +68,11 @@ namespace Singapor.DAL
 				Company = defaultCompany
 			});
 			list.ForEach(x => context.Set<Utility>().Add(x));
+			context.SaveChanges();
 		}
 
 		private static void CreateSuperUser(DataContext context, Company defaultCompany)
 		{
-			context.Set<Company>().Add(defaultCompany);
-
 			var superAdmin = new User()
 			{
 				Id = Guid.NewGuid(),
@@ -85,6 +85,8 @@ namespace Singapor.DAL
 			superAdmin.Roles.Add(context.Set<Role>().First(x => x.Id == RoleIds.SuperAdmin));
 
 			context.Set<User>().Add(superAdmin);
+			context.SaveChanges();
+
 		}
 
 		private void CreateUnitTypes(DataContext context, Company defaultCompany)
@@ -129,6 +131,7 @@ namespace Singapor.DAL
 			});
 
 			list.ForEach(x => context.Set<UnitType>().Add(x));
+			context.SaveChanges();
 		}
 
 		#endregion

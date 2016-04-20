@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Singapor.Model/Singapor.Model.csproj",
+      "bin": {
+        "assembly": "../../Singapor.Model/obj/{configuration}/Singapor.Model.dll",
+        "pdb": "../../Singapor.Model/obj/{configuration}/Singapor.Model.pdb"
+      },
+      "dependencies": {
+        "Singapor.Common": "1.0.0-*"
+      }
+    }
+  }
+}

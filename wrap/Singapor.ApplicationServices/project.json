@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Singapor.ApplicationServices/Singapor.ApplicationServices.csproj",
+      "bin": {
+        "assembly": "../../Singapor.ApplicationServices/obj/{configuration}/Singapor.ApplicationServices.dll",
+        "pdb": "../../Singapor.ApplicationServices/obj/{configuration}/Singapor.ApplicationServices.pdb"
+      }
+    }
+  }
+}

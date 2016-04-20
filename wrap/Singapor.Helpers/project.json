@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Singapor.Helpers/Singapor.Helpers.csproj",
+      "bin": {
+        "assembly": "../../Singapor.Helpers/obj/{configuration}/Singapor.Helpers.dll",
+        "pdb": "../../Singapor.Helpers/obj/{configuration}/Singapor.Helpers.pdb"
+      }
+    }
+  }
+}
