@@ -4,11 +4,11 @@ using Singapor.Services.Models;
 
 namespace Singapor.Api.Controllers
 {
-	public class UtilityController : CrudControllerBase<IUtilityService, UtilityModel>
+	public class UtilitiesController : CrudControllerBase<IUtilityService, UtilityModel>
 	{
 		#region Constructors
 
-		public UtilityController(IUtilityService utilityService) : base(utilityService)
+		public UtilitiesController(IUtilityService utilityService) : base(utilityService)
 		{
 		}
 

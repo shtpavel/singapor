@@ -8,11 +8,11 @@ using System.Web.Http;
 
 namespace Singapor.Api.Controllers
 {
-    public class UnitController : CrudControllerBase<IUnitService, UnitModel>
+    public class UnitsController : CrudControllerBase<IUnitService, UnitModel>
     {
         #region Constructors
 
-        public UnitController(IUnitService service)
+        public UnitsController(IUnitService service)
             : base(service)
         {
         }
