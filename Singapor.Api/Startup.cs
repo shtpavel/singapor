@@ -19,6 +19,7 @@ using Singapor.Api.Auth;
 using Singapor.Infrastructure;
 using Singapor.Services.Models.Maps;
 using Singapor.Services.Events;
+using Swashbuckle.Application;
 
 [assembly: OwinStartup(typeof (Singapor.Api.Startup))]
 
@@ -41,6 +42,10 @@ namespace Singapor.Api
 				= IncludeErrorDetailPolicy.Always;
 			config.DependencyResolver = dependencyResolver;
 			config.EnableCors(new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS, PUT, DELETE"));
+
+			config
+				.EnableSwagger(c => c.SingleApiVersion("v1", "A title for your API"))
+				.EnableSwaggerUi();
 
 			appBuilder.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 			appBuilder.UseAutofacMiddleware(container);
