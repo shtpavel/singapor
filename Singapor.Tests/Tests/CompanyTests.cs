@@ -191,7 +191,27 @@ namespace Singapor.Tests.Tests
             Assert.AreEqual(company.Email, userResponse.Data.Email);
         }
 
-		[TestInitialize]
+        [TestMethod, Ignore]
+        public void Email_notification_sended_after_user_from_company_created()
+        {
+            bool checker;
+            var emailServiceMoq = new Moq.Mock<Singapor.ApplicationServices.IEmailSenderService>();
+            emailServiceMoq.Setup(x => x.Send(string.Empty, string.Empty, string.Empty)).Callback(() => Check(out checker));
+
+            var company = CreateCompany();
+            var userResponse = _userService.Get(c => c.CompanyId == company.Id).Data.FirstOrDefault();
+
+            Assert.IsNotNull(userResponse.Data);
+            Assert.AreEqual(company.Id, userResponse.Data.CompanyId);
+            Assert.AreEqual(company.Email, userResponse.Data.Email);
+        }
+
+        private void Check(out bool checker)
+        {
+            checker = true;
+        }
+
+        [TestInitialize]
 		public override void Setup()
 		{
 			base.Setup();

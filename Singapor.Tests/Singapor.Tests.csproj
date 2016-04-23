@@ -92,6 +92,10 @@
     <Compile Include="UnitTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Singapor.ApplicationServices\Singapor.ApplicationServices.csproj">
+      <Project>{ffcdc36d-0831-4138-8648-fa4689283f78}</Project>
+      <Name>Singapor.ApplicationServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Singapor.Common\Singapor.Common.csproj">
       <Project>{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}</Project>
       <Name>Singapor.Common</Name>
