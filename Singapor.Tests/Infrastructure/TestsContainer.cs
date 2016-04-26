@@ -11,9 +11,24 @@ namespace Singapor.Tests.Infrastructure
 {
 	internal class TestsContainer : ApplicationContainer
 	{
-		#region Private methods
+        #region Fields
 
-		private IDataContext CreateDataContext()
+        private Mock<IEmailSenderService> _emailMoq;
+
+        #endregion
+
+        #region Prop
+
+        public Mock<IEmailSenderService> EmailSenderMoq
+        {
+            get { return _emailMoq; }
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private IDataContext CreateDataContext()
 		{
 			var companyDbSet = new FakeDbSet<Company>();
 			var unitDbSet = new FakeDbSet<Unit>();
@@ -38,9 +53,12 @@ namespace Singapor.Tests.Infrastructure
 			base.RegisterModules(builder);
 			builder.RegisterModule<GeneratorsModule>();
 
-			var context = CreateDataContext();
+            _emailMoq = new Mock<IEmailSenderService>();        
+            builder.RegisterInstance(_emailMoq.Object).As<IEmailSenderService>();
+
+            var context = CreateDataContext();
             builder.RegisterInstance(context).As<IDataContext>().As<IUnitOfWork>().SingleInstance();
 			builder.RegisterType<UserContext>().As<IUserContext>();
-		}
+        }
 	}
 }
