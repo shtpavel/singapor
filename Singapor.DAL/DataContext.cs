@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using Singapor.DAL.Configurations;
+using Singapor.DAL.Migrations;
 
 namespace Singapor.DAL
 {
@@ -9,7 +10,7 @@ namespace Singapor.DAL
 
 		public DataContext() : base("name=Default")
 		{
-			Database.SetInitializer(new DatabaseInintializer());
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
 		}
 
 		#endregion
