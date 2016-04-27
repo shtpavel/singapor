@@ -30,7 +30,12 @@ namespace Singapor.Services.Services
         public string GetTranslationByKey(string key)
         {
             var data = (JObject)JsonConvert.DeserializeObject(_translationsJson);
-            return data.SelectToken(key).Value<string>();
+
+            var translation = data.SelectToken(key, false);
+            if (translation == null)
+                return $"#no translation - key: {key}";
+
+            return translation.Value<string>();
         }
     }
 }
