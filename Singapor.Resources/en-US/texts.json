@@ -1,0 +1,24 @@
+﻿{
+  "validations": {
+    "companyNotFound": "Can't find required company",
+    "duplicateName": "This name already exists",
+    "duplicateEmail": "Email already exists",
+    "duplicateId": "Already have the record with the same id",
+    "duplicatePhone": "Phone already exists",
+    "duplicateScheduleForDate": "There is already defined schedule for this date",
+    "invalidCountryCode": "This country code is invalid",
+    "invalidEmail": "Email address is ivaild",
+    "invalidPhone": "This phone number is invalid",
+    "isEmpty": "This field must not be empty,",
+    "lengthBetween": "This field should be from {0} to {1} charachers",
+    "lessThan": "This field must be less than {0} charachers",
+    "parentUnitIsNotContainer": "Can't create child unit for non-container parent",
+    "required": "This field is required",
+    "unitNotFound": "Unit not found",
+    "unitTypeNotFound": "Unit type not found"
+  },
+  "email": {
+    "companyRegisteredBody": "Thank you for registering. Your login: {0}. Your password: {1}.",
+    "companyRegisteredSubject": "The best startup. Company registered."
+  }
+}

@@ -41,7 +41,7 @@ namespace Singapor.Tests.Tests
             var response = _unitTypeService.Create(unitTypeModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace Singapor.Tests.Tests
             var response = _unitTypeService.Create(unitTypeModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace Singapor.Tests.Tests
             var response = _unitTypeService.Create(unitTypeModel);
 
             Assert.IsFalse(response.IsValid);
-            AssertValidationErrorIsInList(string.Format(Validation.LessThan, 100), response);
+            AssertValidationErrorIsInList(string.Format(_translationsService.GetTranslationByKey("validations.lessThan"), 100), response);
         }
 
         [TestInitialize]

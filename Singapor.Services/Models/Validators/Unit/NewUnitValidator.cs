@@ -10,8 +10,11 @@ namespace Singapor.Services.Models.Validators.Unit
 	{
 		#region Constructors
 
-		public NewUnitValidator(ICompanyService companyService, IUnitService unitService,
-			IUnitTypeService unitTypeService) : base(companyService)
+		public NewUnitValidator(
+            ICompanyService companyService, 
+            ITranslationsService translationsService,
+            IUnitService unitService,
+			IUnitTypeService unitTypeService) : base(companyService, translationsService)
 		{
 			RuleFor(x => x.ParentUnitId).Must(x =>
 			{
@@ -21,7 +24,7 @@ namespace Singapor.Services.Models.Validators.Unit
 					return unit.Data != null;
 				}
 				return true;
-			}).WithMessage(Validation.UnitNotFound);
+			}).WithMessage(translationsService.GetTranslationByKey("validations.unitNotFound"));
 			RuleFor(x => x.ParentUnitId).Must(x =>
 			{
 				if (x.HasValue)
@@ -34,9 +37,9 @@ namespace Singapor.Services.Models.Validators.Unit
 					}
 				}
 				return true;
-			}).WithMessage(Validation.ParentUnitIsNotContainer);
+			}).WithMessage(translationsService.GetTranslationByKey("validations.parentUnitIsNotContainer"));
 
-			RuleFor(x => x.TypeId).NotNull().WithMessage(Validation.Required);
+			RuleFor(x => x.TypeId).NotNull().WithMessage(translationsService.GetTranslationByKey("validations.required"));
 			RuleFor(x => x.TypeId).Must(x =>
 			{
 				if (x.HasValue)
@@ -45,11 +48,11 @@ namespace Singapor.Services.Models.Validators.Unit
 					return type.Data != null;
 				}
 				return true;
-			}).WithMessage(Validation.UnitTypeNotFound);
+			}).WithMessage(translationsService.GetTranslationByKey("validations.unitTypeNotFound"));
 
-			RuleFor(x => x.Name).NotEmpty().WithMessage(Validation.Required);
+			RuleFor(x => x.Name).NotEmpty().WithMessage(translationsService.GetTranslationByKey("validations.required"));
             RuleFor(x => x.Name).Must(x => !unitService.Get(n => n.Name.Equals(x)).Data.Any())
-                .WithMessage(Validation.DuplicateName);
+                .WithMessage(translationsService.GetTranslationByKey("validations.duplicateName"));
 
         }
 

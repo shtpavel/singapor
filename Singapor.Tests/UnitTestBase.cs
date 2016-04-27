@@ -37,16 +37,18 @@ namespace Singapor.Tests
 
         protected IUtilityModelGenerator _utilityModelGenerator;
         protected IUtilityService _utilitySerivce;
+	    protected ITranslationsService _translationsService;
 
-        #endregion
+	    #endregion
 
         #region Constructors
 
         public UnitTestBase()
 		{
-			_container = new TestsContainer().GetContainerBuilder();
-			_container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+            _container = new TestsContainer().GetContainerBuilder();
+            _container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
             _container.Resolve<IEventRegisterListeners>().RegisterListeners();
+            _translationsService = _container.Resolve<ITranslationsService>();
 
             HttpContext.Current = HttpContext.Current = new HttpContext(
 				new HttpRequest("", "http://tempuri.org", ""),

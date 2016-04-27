@@ -18,8 +18,7 @@ namespace Singapor.Infrastructure
 			var newContainerBuilder = new ContainerBuilder();
 			newContainerBuilder.RegisterInstance(container).SingleInstance();
 			newContainerBuilder.Update(container);
-
-			return container;
+            return container;
 		}
 
 		#endregion

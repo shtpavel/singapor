@@ -5,13 +5,15 @@ using Singapor.Resources;
 namespace Singapor.Services.Models.Validators.Abstract
 {
 	internal class CompanyDependentValidatorBase<T>
-		: AbstractValidator<T> where T : CompanyDependentModelBase
+		: BaseValidator<T> where T: CompanyDependentModelBase
 	{
 		#region Constructors
 
-		public CompanyDependentValidatorBase(ICompanyService companyService)
+		protected CompanyDependentValidatorBase(
+            ICompanyService companyService, 
+            ITranslationsService translationsService) : base(translationsService)
 		{
-			RuleFor(x => x.CompanyId).NotNull().WithMessage(Validation.Required);
+			RuleFor(x => x.CompanyId).NotNull().WithMessage(translationsService.GetTranslationByKey("validations.required"));
 			RuleFor(x => x.CompanyId).Must(x =>
 			{
 				if (x.HasValue)
@@ -20,7 +22,7 @@ namespace Singapor.Services.Models.Validators.Abstract
 					return company.Data != null;
 				}
 				return true;
-			}).WithMessage(Validation.CompanyNotFound);
+			}).WithMessage(translationsService.GetTranslationByKey("validations.companyNotFound"));
 		}
 
 		#endregion

@@ -36,7 +36,7 @@ namespace Singapor.Tests.Tests
             response = _utilitySerivce.Create(response.Data);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateId));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.duplicateId")));
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace Singapor.Tests.Tests
             var response = _utilitySerivce.Create(utilityModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace Singapor.Tests.Tests
             var response = _utilitySerivce.Create(utilityModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace Singapor.Tests.Tests
             utilityModel.Name = StringsGenerators.GenerateString(65);
             var response = _utilitySerivce.Create(utilityModel);
 
-            AssertValidationErrorIsInList(string.Format(Validation.LengthBetween, 1, 60), response);
+            AssertValidationErrorIsInList(string.Format(_translationsService.GetTranslationByKey("validations.lengthBetween"), 1, 60), response);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Singapor.Tests.Tests
             var response = _utilitySerivce.Create(utilityModel);
 
             Assert.IsFalse(response.IsValid);
-            AssertValidationErrorIsInList(string.Format(Validation.LessThan, 200), response);
+            AssertValidationErrorIsInList(string.Format(_translationsService.GetTranslationByKey("validations.lessThan"), 200), response);
         }
 
         [TestInitialize]

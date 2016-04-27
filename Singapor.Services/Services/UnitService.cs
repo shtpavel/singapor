@@ -26,9 +26,10 @@ namespace Singapor.Services.Services
 
 		public UnitService(
 			IUnitOfWork unitOfWork,
+            ITranslationsService translationsService,
 			IRepository<Unit> repository,
 			ICompanyService companyService,
-			IUnitTypeService unitTypeService) : base(unitOfWork, repository)
+			IUnitTypeService unitTypeService) : base(unitOfWork, translationsService, repository)
 		{
 			_companyService = companyService;
 			_unitTypeService = unitTypeService;
@@ -40,7 +41,7 @@ namespace Singapor.Services.Services
 
 		public override SingleEntityResponse<UnitModel> Create(UnitModel model)
 		{
-			var newUnitValidator = new NewUnitValidator(_companyService, this, _unitTypeService);
+			var newUnitValidator = new NewUnitValidator(_companyService, _translationsService, this, _unitTypeService);
 			var validationResult = newUnitValidator.Validate(model);
 			if (!validationResult.IsValid)
 				return new SingleEntityResponse<UnitModel>(model, validationResult.GetErrorsObjects().ToList());
@@ -49,7 +50,7 @@ namespace Singapor.Services.Services
 
 		public override ListEntityResponse<UnitModel> Create(IEnumerable<UnitModel> models)
 		{
-            var newUnitValidator = new NewUnitValidator(_companyService, this, _unitTypeService);
+            var newUnitValidator = new NewUnitValidator(_companyService, _translationsService, this, _unitTypeService);
             var responses = new List<SingleEntityResponse<UnitModel>>();
             foreach (var model in models)
             {
@@ -57,7 +58,9 @@ namespace Singapor.Services.Services
                 if (!validationResult.IsValid)
                     responses.Add(new SingleEntityResponse<UnitModel>(model, validationResult.GetErrorsObjects().ToList()));
             }
-            if(!responses.All(r => r.Errors == null)) return new ListEntityResponse<UnitModel>(responses);
+
+            if(responses.Any(r => r.Errors != null))
+                return new ListEntityResponse<UnitModel>(responses);
 
             return base.Create(models);
 		}

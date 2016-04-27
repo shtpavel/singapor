@@ -9,5 +9,10 @@ namespace Singapor.Resources
     public static class AppResources
     {
         public static string CulturesPath = @"..\..\..\Singapor.Resources\cultures.json";
+
+        /// <summary>
+        /// Parameter requiers language code
+        /// </summary>
+        public static string TranslationsPath = @"..\..\..\Singapor.Resources\{0}\texts.json";
     }
 }

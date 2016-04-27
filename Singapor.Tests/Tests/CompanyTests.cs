@@ -4,6 +4,8 @@ using Singapor.Services.Responses;
 using Singapor.Resources;
 using Singapor.Helpers;
 using System.Threading;
+using Moq;
+using Singapor.ApplicationServices;
 
 namespace Singapor.Tests.Tests
 {
@@ -35,7 +37,7 @@ namespace Singapor.Tests.Tests
             response = _companyService.Create(response.Data);
             
 			Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateId));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.duplicateId")));
 		}
 
         [TestMethod]
@@ -52,7 +54,7 @@ namespace Singapor.Tests.Tests
             response = _companyService.Create(response.Data);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateEmail));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.duplicateEmail")));
         }
 
         [TestMethod]
@@ -69,7 +71,7 @@ namespace Singapor.Tests.Tests
             response = _companyService.Create(response.Data);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateName));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.duplicateName")));
         }
 
         [TestMethod]
@@ -86,7 +88,7 @@ namespace Singapor.Tests.Tests
             response = _companyService.Create(response.Data);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicatePhone));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.duplicatePhone")));
         }
 
         [TestMethod]
@@ -98,10 +100,10 @@ namespace Singapor.Tests.Tests
 			var response = _companyService.Create(companyModel);
 
 			Assert.IsFalse(response.IsValid);
-			Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Type, ErrorType.Validation);
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.Count(), 1);
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.First(), "Email");
+			Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Type, ErrorType.Validation);
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Fields.Count(), 1);
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Fields.First(), "Email");
 		}
 
 		[TestMethod]
@@ -113,9 +115,9 @@ namespace Singapor.Tests.Tests
 			var response = _companyService.Create(companyModel);
 
 			Assert.IsFalse(response.IsValid);
-			Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Type, ErrorType.Validation);
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.Count(), 1);
+			Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Type, ErrorType.Validation);
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Fields.Count(), 1);
 		}
 
 		[TestMethod]
@@ -127,10 +129,10 @@ namespace Singapor.Tests.Tests
 			var response = _companyService.Create(companyModel);
 
 			Assert.IsFalse(response.IsValid);
-			Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.Required));
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Type, ErrorType.Validation);
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.Count(), 1);
-			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(Validation.Required)).Fields.First(), "Phone");
+			Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.required")));
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Type, ErrorType.Validation);
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Fields.Count(), 1);
+			Assert.AreEqual(response.Errors.First(x => x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"))).Fields.First(), "Phone");
 		}
 
 		[TestMethod]
@@ -141,7 +143,7 @@ namespace Singapor.Tests.Tests
 
 			var response = _companyService.Create(companyModel);
 
-			AssertValidationErrorIsInList(string.Format(Validation.LengthBetween, 6, 60), response);
+			AssertValidationErrorIsInList(string.Format(_translationsService.GetTranslationByKey("validations.lengthBetween"), 6, 60), response);
 		}
 
         [TestMethod]
@@ -153,7 +155,7 @@ namespace Singapor.Tests.Tests
             var response = _companyService.Create(companyModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.InvalidEmail));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.invalidEmail")));
         }
 
         [TestMethod]
@@ -165,7 +167,7 @@ namespace Singapor.Tests.Tests
             var response = _companyService.Create(companyModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.InvalidCountryCode));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.invalidCountryCode")));
         }
 
         [TestMethod]
@@ -177,7 +179,7 @@ namespace Singapor.Tests.Tests
             var response = _companyService.Create(companyModel);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.InvalidPhone));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.invalidPhone")));
         }
 
         [TestMethod]
@@ -194,9 +196,7 @@ namespace Singapor.Tests.Tests
         [TestMethod, Ignore]
         public void Email_notification_sended_after_user_from_company_created()
         {
-            bool checker;
-            var emailServiceMoq = new Moq.Mock<Singapor.ApplicationServices.IEmailSenderService>();
-            emailServiceMoq.Setup(x => x.Send(string.Empty, string.Empty, string.Empty)).Callback(() => Check(out checker));
+            var emailMoq = new Mock<IEmailSenderService>();
 
             var company = CreateCompany();
             var userResponse = _userService.Get(c => c.CompanyId == company.Id).Data.FirstOrDefault();
@@ -204,11 +204,6 @@ namespace Singapor.Tests.Tests
             Assert.IsNotNull(userResponse.Data);
             Assert.AreEqual(company.Id, userResponse.Data.CompanyId);
             Assert.AreEqual(company.Email, userResponse.Data.Email);
-        }
-
-        private void Check(out bool checker)
-        {
-            checker = true;
         }
 
         [TestInitialize]

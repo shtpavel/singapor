@@ -10,11 +10,11 @@ namespace Singapor.Services.Models.Validators.UnitType
 		#region Constructors
 
 		public NewUnitTypeValidator(
-            IUnitTypeService unitTypeService,
-            ICompanyService companyService) : base(companyService)
+            ITranslationsService translationsService,
+            ICompanyService companyService) : base(companyService, translationsService)
 		{
-			RuleFor(x => x.Name).NotNull().NotEmpty().WithMessage(Validation.Required);
-            RuleFor(x => x.Name).Length(1, 100).WithMessage(string.Format(Validation.LessThan, 100));
+			RuleFor(x => x.Name).NotNull().NotEmpty().WithMessage(translationsService.GetTranslationByKey("validations.required"));
+            RuleFor(x => x.Name).Length(1, 100).WithMessage(string.Format(translationsService.GetTranslationByKey("validations.lessThan"), 100));
 		}
 
 		#endregion

@@ -25,8 +25,9 @@ namespace Singapor.Services.Services
 
 		public CompanyService(
 			IUnitOfWork unitOfWork,
+            ITranslationsService translationsService,
 			IRepository<Company> repository,
-            IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, repository)
+            IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, translationsService, repository)
 		{
             _eventAggregatorProvider = eventAggregatorProvider;
 		}
@@ -37,7 +38,7 @@ namespace Singapor.Services.Services
 
 		public override SingleEntityResponse<CompanyModel> Create(CompanyModel model)
 		{
-			var newCopmanyValidator = new NewCompanyValidator(_repository);
+			var newCopmanyValidator = new NewCompanyValidator(_repository, _translationsService);
 			var validationResult = newCopmanyValidator.Validate(model);
 			if (!validationResult.IsValid)
 				return new SingleEntityResponse<CompanyModel>(model, validationResult.GetErrorsObjects().ToList());

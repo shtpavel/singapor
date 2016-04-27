@@ -22,8 +22,9 @@ namespace Singapor.Services.Services
 
 		public UnitTypeService(
 			ICompanyService companyService,
+            ITranslationsService translationsService,
 			IUnitOfWork unitOfWork,
-			IRepository<UnitType> repository) : base(unitOfWork, repository)
+			IRepository<UnitType> repository) : base(unitOfWork, translationsService, repository)
 		{
 			_companyService = companyService;
 		}
@@ -34,7 +35,7 @@ namespace Singapor.Services.Services
 
 		public override SingleEntityResponse<UnitTypeModel> Create(UnitTypeModel model)
 		{
-			var validator = new NewUnitTypeValidator(this, _companyService);
+			var validator = new NewUnitTypeValidator(_translationsService, _companyService);
 			var validationResult = validator.Validate(model);
 			if (!validationResult.IsValid)
 				return new SingleEntityResponse<UnitTypeModel>(model, validationResult.GetErrorsObjects().ToList());

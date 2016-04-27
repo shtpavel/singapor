@@ -1,6 +1,7 @@
 ﻿using Singapor.ApplicationServices;
 using Singapor.Services.Events.Models;
 using Singapor.Resources;
+using Singapor.Services.Abstract;
 
 namespace Singapor.Infrastructure.Listeners
 {
@@ -9,17 +10,19 @@ namespace Singapor.Infrastructure.Listeners
 		#region Fields
 
 		private readonly IEmailSenderService _emailSenderService;
+	    private readonly ITranslationsService _translationsService;
 
-		#endregion
+	    #endregion
 
 		#region Constructors
 
-		public UserCreatedListener(IEmailSenderService emailSenderService)
+		public UserCreatedListener(IEmailSenderService emailSenderService, ITranslationsService translationsService)
 		{
-			_emailSenderService = emailSenderService;
+		    _emailSenderService = emailSenderService;
+		    _translationsService = translationsService;
 		}
 
-		#endregion
+	    #endregion
 
 		#region Public methods
 
@@ -28,8 +31,8 @@ namespace Singapor.Infrastructure.Listeners
 			var password = message.Data.Password;
 			var login = message.Data.Email;
 
-			var subject = EmailTexts.CompanyRegisteredSubject;
-			var body = string.Format(EmailTexts.CompanyRegisteredBody, login, password);
+			var subject = _translationsService.GetTranslationByKey("email.companyRegisteredSubject");
+			var body = string.Format(_translationsService.GetTranslationByKey("email.companyRegisteredBody"), login, password);
 			_emailSenderService.Send(login, subject, body);
 		}
 

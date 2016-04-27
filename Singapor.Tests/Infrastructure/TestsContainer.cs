@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Moq;
+using Singapor.ApplicationServices;
 using Singapor.Common.Contexts;
 using Singapor.DAL;
 using Singapor.Infrastructure;
@@ -27,7 +28,6 @@ namespace Singapor.Tests.Infrastructure
 			mockDataContext.Setup(x => x.Set<User>()).Returns(userDbSet);
             mockDataContext.Setup(x => x.Set<Utility>()).Returns(utilityDbSet);
 
-
             return mockDataContext.Object;
 		}
 
@@ -39,7 +39,7 @@ namespace Singapor.Tests.Infrastructure
 			builder.RegisterModule<GeneratorsModule>();
 
 			var context = CreateDataContext();
-			builder.RegisterInstance(context).As<IDataContext>().As<IUnitOfWork>().SingleInstance();
+            builder.RegisterInstance(context).As<IDataContext>().As<IUnitOfWork>().SingleInstance();
 			builder.RegisterType<UserContext>().As<IUserContext>();
 		}
 	}

@@ -14,12 +14,14 @@ namespace Singapor.Services.Models.Validators.Utility
 
         #region Constructors
 
-        public NewUtilityValidator(IUtilityService utilityService, ICompanyService companyService) : base(companyService)
+        public NewUtilityValidator(
+            ICompanyService companyService, 
+            ITranslationsService translationsService) : base(companyService, translationsService)
         {
-            RuleFor(x => x.Name).NotNull().NotEmpty().WithMessage(Validation.Required);
-            RuleFor(x => x.Name).Length(1, 60).WithMessage(string.Format(Validation.LengthBetween, 1, 60));
+            RuleFor(x => x.Name).NotNull().NotEmpty().WithMessage(translationsService.GetTranslationByKey("validations.required"));
+            RuleFor(x => x.Name).Length(1, 60).WithMessage(string.Format(translationsService.GetTranslationByKey("validations.lengthBetween"), 1, 60));
 
-            RuleFor(x => x.Description).Length(0, 200).WithMessage(string.Format(Validation.LessThan, 200));
+            RuleFor(x => x.Description).Length(0, 200).WithMessage(string.Format(translationsService.GetTranslationByKey("validations.lessThan"), 200));
         }
 
         #endregion

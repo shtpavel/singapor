@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Contexts\IUserContext.cs" />
     <Compile Include="Contexts\UserContext.cs" />
+    <Compile Include="Contexts\UserSettingsContext.cs" />
     <Compile Include="Enums\TimeIntervalUnit.cs" />
     <Compile Include="Exceptions\SingaporException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

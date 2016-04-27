@@ -10,6 +10,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 		{
 			builder.RegisterType<DataContext>().As<IDataContext>().As<IUnitOfWork>().InstancePerLifetimeScope();
 			builder.RegisterType<UserContext>().As<IUserContext>().InstancePerLifetimeScope();
+			builder.RegisterType<UserSettingsContext>().As<IUserSettingsContext>().As<IUserSettingsContextSettable>().InstancePerLifetimeScope();
 		}
 	}
 }

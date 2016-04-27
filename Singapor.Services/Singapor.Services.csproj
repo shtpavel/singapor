@@ -43,6 +43,10 @@
       <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -71,6 +75,7 @@
     <Compile Include="Filters\EmptyQueryFilterProvider.cs" />
     <Compile Include="Filters\SoftDeleteFilterProvider.cs" />
     <Compile Include="Helpers\ValidationResultExtensionMethods.cs" />
+    <Compile Include="Models\Validators\Abstract\BaseValidator.cs" />
     <Compile Include="Models\Validators\CommonValidator.cs" />
     <Compile Include="Models\CompanyDependentModelBase.cs" />
     <Compile Include="Models\Maps\CompanyMapper.cs" />
@@ -98,6 +103,8 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Abstract\IService.cs" />
     <Compile Include="Services\CompanyService.cs" />
+    <Compile Include="Abstract\ITranslationsService.cs" />
+    <Compile Include="Services\TranslationsService.cs" />
     <Compile Include="Services\UtilityService.cs" />
     <Compile Include="Services\UnitService.cs" />
     <Compile Include="Services\UnitTypeService.cs" />

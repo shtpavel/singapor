@@ -26,8 +26,9 @@ namespace Singapor.Services.Services
 
 		public UserService(
 			IUnitOfWork unitOfWork,
+            ITranslationsService translationsService,
 			IRepository<User> repository,
-			IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, repository)
+			IEventAggregatorProvider eventAggregatorProvider) : base(unitOfWork, translationsService, repository)
 		{
 			_eventAggregatorProvider = eventAggregatorProvider;
 		}

@@ -23,17 +23,20 @@ namespace Singapor.Services.Services
 
 		protected readonly IRepository<TEntity> _repository;
 		protected readonly IUnitOfWork _unitOfWork;
+	    protected readonly ITranslationsService _translationsService;
 
-		#endregion
+	    #endregion
 
 		#region Constructors
 
 		public BaseService(
 			IUnitOfWork unitOfWork,
+            ITranslationsService translationsService,
 			IRepository<TEntity> repository)
 		{
 			_unitOfWork = unitOfWork;
-			_repository = repository;
+		    _translationsService = translationsService;
+		    _repository = repository;
 		}
 
 		#endregion
@@ -46,7 +49,7 @@ namespace Singapor.Services.Services
 				model.Id = Guid.NewGuid();
 			var data = Mapper.Map(model, Activator.CreateInstance<TEntity>());
 
-			var validationResult = new CommonValidator<TModel>(this).Validate(model);
+			var validationResult = new CommonValidator<TModel>(this, _translationsService).Validate(model);
 			if (!validationResult.IsValid)
 				return new SingleEntityResponse<TModel>(model, validationResult.GetErrorsObjects().ToList());
 
@@ -63,14 +66,15 @@ namespace Singapor.Services.Services
                 if (model.Id == null || model.Id == Guid.Empty)
                     model.Id = Guid.NewGuid();
                 var data = Mapper.Map(model, Activator.CreateInstance<TEntity>());
-                var validationResult = new CommonValidator<TModel>(this).Validate(model);
+                var validationResult = new CommonValidator<TModel>(this, _translationsService).Validate(model);
                 if (!validationResult.IsValid)
                     responses.Add(new SingleEntityResponse<TModel>(model, validationResult.GetErrorsObjects().ToList()));
                 else
                     responses.Add(new SingleEntityResponse<TModel>(Mapper.Map(_repository.Add(data), model)));
             }
 
-            if (!responses.All(r => r.Errors == null)) return new ListEntityResponse<TModel>(responses);
+            if (responses.Any(r => r.Errors != null))
+                return new ListEntityResponse<TModel>(responses);
 
             _unitOfWork.SaveChanges(); 
             return new ListEntityResponse<TModel>(responses);
@@ -82,7 +86,7 @@ namespace Singapor.Services.Services
 			var entity = _repository.GetById(id);
 			if (entity == null)
 			{
-				response.Errors.Add(new ErrorObject(new string[0], Validation.CompanyNotFound, ErrorType.NotFound));
+				response.Errors.Add(new ErrorObject(new string[0], _translationsService.GetTranslationByKey("validations.companyNotFound"), ErrorType.NotFound));
 				return response;
 			}
 

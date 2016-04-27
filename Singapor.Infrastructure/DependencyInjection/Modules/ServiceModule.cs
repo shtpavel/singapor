@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Singapor.Resources.Providers;
 using Singapor.Services.Abstract;
 using Singapor.Services.Services;
 
@@ -13,6 +14,9 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 			builder.RegisterType<UnitTypeService>().As<IUnitTypeService>();
 			builder.RegisterType<UserService>().As<IUserService>();
 			builder.RegisterType<UtilityService>().As<IUtilityService>();
+
+			builder.RegisterType<TranslationsService>().As<ITranslationsService>().InstancePerLifetimeScope();
+			builder.RegisterType<TranslationsProvider>().As<ITranslationsProvider>().InstancePerLifetimeScope();
 		}
 	}
 }

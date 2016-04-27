@@ -78,7 +78,7 @@ namespace Singapor.Tests.Tests
             response = _unitService.Create(response.Data);
 
             Assert.IsFalse(response.IsValid);
-            Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.DuplicateId));
+            Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.duplicateId")));
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Singapor.Tests.Tests
 			Assert.IsFalse(childResponse.IsValid);
 			Assert.IsTrue(childResponse.Errors.Any(x =>
 				x.Fields.Any(f => f.Equals("ParentUnitId", StringComparison.InvariantCultureIgnoreCase))
-				&& x.Message.Equals(Validation.ParentUnitIsNotContainer, StringComparison.InvariantCultureIgnoreCase)));
+				&& x.Message.Equals(_translationsService.GetTranslationByKey("validations.parentUnitIsNotContainer"), StringComparison.InvariantCultureIgnoreCase)));
 		}
 
 		[TestMethod, Ignore]
@@ -113,7 +113,7 @@ namespace Singapor.Tests.Tests
 			var response = _unitService.Create(models);
 
 			Assert.IsFalse(response.IsValid);
-			Assert.IsTrue(response.Errors.Any(x => x.Message == Validation.CantCreateMuchUnitsAtOneTime));
+			Assert.IsTrue(response.Errors.Any(x => x.Message == _translationsService.GetTranslationByKey("validations.cantCreateMuchUnitsAtOneTime")));
 		}
 
 		[TestMethod]
@@ -127,7 +127,7 @@ namespace Singapor.Tests.Tests
 			Assert.IsFalse(response.IsValid);
 			Assert.IsTrue(response.Errors.Any(x =>
 				x.Fields.Any(f => f.Equals("ParentUnitId", StringComparison.InvariantCultureIgnoreCase))
-				&& x.Message.Equals(Validation.UnitNotFound, StringComparison.InvariantCultureIgnoreCase)));
+				&& x.Message.Equals(_translationsService.GetTranslationByKey("validations.unitNotFound"), StringComparison.InvariantCultureIgnoreCase)));
 		}
 
 		[TestMethod]
@@ -140,7 +140,7 @@ namespace Singapor.Tests.Tests
 			Assert.IsFalse(response.IsValid);
 			Assert.IsTrue(response.Errors.Any(x =>
 				x.Fields.Any(f => f.Equals("CompanyId", StringComparison.InvariantCultureIgnoreCase))
-				&& x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
+				&& x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"), StringComparison.InvariantCultureIgnoreCase)));
 		}
 
         [TestMethod]
@@ -154,7 +154,7 @@ namespace Singapor.Tests.Tests
             Assert.IsFalse(response.IsValid);
             Assert.IsTrue(response.Errors.Any(x =>
                 x.Fields.Any(f => f.Equals("TypeId", StringComparison.InvariantCultureIgnoreCase))
-                && x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
+                && x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"), StringComparison.InvariantCultureIgnoreCase)));
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@ namespace Singapor.Tests.Tests
             Assert.IsFalse(response.IsValid);
             Assert.IsTrue(response.Errors.Any(x =>
                 x.Fields.Any(f => f.Equals("TypeId", StringComparison.InvariantCultureIgnoreCase))
-                && x.Message.Equals(Validation.UnitTypeNotFound, StringComparison.InvariantCultureIgnoreCase)));
+                && x.Message.Equals(_translationsService.GetTranslationByKey("validations.unitTypeNotFound"), StringComparison.InvariantCultureIgnoreCase)));
         }
 
         [TestMethod]
@@ -184,7 +184,7 @@ namespace Singapor.Tests.Tests
             Assert.IsFalse(response.IsValid);
             Assert.IsTrue(response.Errors.Any(x =>
                 x.Fields.Any(f => f.Equals("Name", StringComparison.InvariantCultureIgnoreCase))
-                && x.Message.Equals(Validation.DuplicateName, StringComparison.InvariantCultureIgnoreCase)));
+                && x.Message.Equals(_translationsService.GetTranslationByKey("validations.duplicateName"), StringComparison.InvariantCultureIgnoreCase)));
         }
 
         [TestMethod]
@@ -199,7 +199,7 @@ namespace Singapor.Tests.Tests
             Assert.IsFalse(response.IsValid);
             Assert.IsTrue(response.Errors.Any(x =>
                 x.Fields.Any(f => f.Equals("Name", StringComparison.InvariantCultureIgnoreCase))
-                && x.Message.Equals(Validation.Required, StringComparison.InvariantCultureIgnoreCase)));
+                && x.Message.Equals(_translationsService.GetTranslationByKey("validations.required"), StringComparison.InvariantCultureIgnoreCase)));
 
         }
 

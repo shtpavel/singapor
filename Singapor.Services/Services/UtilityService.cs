@@ -20,8 +20,11 @@ namespace Singapor.Services.Services
 
         #region Constructors
 
-        public UtilityService(ICompanyService companyService, 
-            IUnitOfWork unitOfWork, IRepository<Utility> repository) : base(unitOfWork, repository)
+        public UtilityService(
+            ICompanyService companyService, 
+            ITranslationsService translationsService,
+            IUnitOfWork unitOfWork, 
+            IRepository<Utility> repository) : base(unitOfWork, translationsService, repository)
 		{
             _companyService = companyService;
         }
@@ -32,7 +35,7 @@ namespace Singapor.Services.Services
 
         public override SingleEntityResponse<UtilityModel> Create(UtilityModel model)
         {
-            var newUtilityValidator = new NewUtilityValidator(this, _companyService);
+            var newUtilityValidator = new NewUtilityValidator(_companyService, _translationsService);
             var validationResult = newUtilityValidator.Validate(model);
             if (!validationResult.IsValid)
                 return new SingleEntityResponse<UtilityModel>(model, validationResult.GetErrorsObjects().ToList());
