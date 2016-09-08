@@ -13,9 +13,6 @@ namespace Singapor.Model.Entities
 		public bool IsContainer { get; set; }
 		public Guid? TypeId { get; set; }
 		public UnitType Type { get; set; }
-		public Guid? ParentUnitId { get; set; }
-		public Unit ParentUnit { get; set; }
-		public virtual ICollection<Unit> Units { get; set; }
 
 		#endregion
 	}

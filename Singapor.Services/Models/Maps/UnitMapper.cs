@@ -16,7 +16,6 @@ namespace Singapor.Services.Models.Maps
 				.ForMember(dst => dst.CompanyId, src => src.MapFrom(x => x.CompanyId))
 				.ForMember(dst => dst.Description, src => src.MapFrom(x => x.Description))
 				.ForMember(dst => dst.IsContainer, src => src.MapFrom(x => x.IsContainer))
-				.ForMember(dst => dst.ParentUnitId, src => src.MapFrom(x => x.ParentUnitId))
 				.ForMember(dst => dst.TypeId, src => src.MapFrom(x => x.TypeId));
 
 			Mapper.CreateMap<Unit, UnitModel>();

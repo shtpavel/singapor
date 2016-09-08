@@ -16,29 +16,6 @@ namespace Singapor.Services.Models.Validators.Unit
             IUnitService unitService,
 			IUnitTypeService unitTypeService) : base(companyService, translationsService)
 		{
-			RuleFor(x => x.ParentUnitId).Must(x =>
-			{
-				if (x.HasValue)
-				{
-					var unit = unitService.Get(x.Value);
-					return unit.Data != null;
-				}
-				return true;
-			}).WithMessage(translationsService.GetTranslationByKey("validations.unitNotFound"));
-			RuleFor(x => x.ParentUnitId).Must(x =>
-			{
-				if (x.HasValue)
-				{
-					var unit = unitService.Get(x.Value);
-
-					if (unit.Data != null)
-					{
-						return unit.Data.IsContainer;
-					}
-				}
-				return true;
-			}).WithMessage(translationsService.GetTranslationByKey("validations.parentUnitIsNotContainer"));
-
 			RuleFor(x => x.TypeId).NotNull().WithMessage(translationsService.GetTranslationByKey("validations.required"));
 			RuleFor(x => x.TypeId).Must(x =>
 			{
