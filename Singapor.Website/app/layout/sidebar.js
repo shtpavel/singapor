@@ -2,7 +2,9 @@
     'use strict';
     
     var controllerId = 'sidebar';
-    angular.module('app').controller(controllerId,
+    angular
+        .module('app')
+        .controller(controllerId,
         ['$route', 'config', 'routes', sidebar]);
 
     function sidebar($route, config, routes) {
@@ -12,7 +14,10 @@
 
         activate();
 
-        function activate() { getNavRoutes(); }
+        function activate() {
+            getNavRoutes();
+            $('#side-menu').metisMenu();
+        }
         
         function getNavRoutes() {
             vm.navRoutes = routes.filter(function(r) {

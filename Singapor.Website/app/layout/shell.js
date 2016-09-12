@@ -25,11 +25,12 @@
         activate();
 
         function activate() {
-            logSuccess('Hot Towel Angular loaded!', null, true);
             common.activateController([], controllerId);
         }
 
-        function toggleSpinner(on) { vm.isBusy = on; }
+        function toggleSpinner(on) {
+             vm.isBusy = on;
+        }
 
         $rootScope.$on('$routeChangeStart',
             function (event, next, current) { toggleSpinner(true); }
