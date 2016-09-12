@@ -5,14 +5,12 @@ using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(Singapor.Api.Startup))]
-
 namespace Singapor.Api
 {
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
         }
     }
 }
