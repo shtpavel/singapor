@@ -8,7 +8,6 @@
     toastr.options.positionClass = 'toast-bottom-right';
 
     // For use with the HotTowel-Angular-Breeze add-on that uses Breeze
-    var remoteServiceName = 'breeze/Breeze';
 
     var events = {
         controllerActivateSuccess: 'controller.activateSuccess',
@@ -16,11 +15,9 @@
     };
 
     var config = {
-        appErrorPrefix: '[HT Error] ', //Configure the exceptionHandler decorator
-        docTitle: 'HotTowel: ',
+        appErrorPrefix: '[SG Error] ', //Configure the exceptionHandler decorator
+        docTitle: 'Singapor: ',
         events: events,
-        remoteServiceName: remoteServiceName,
-        version: '2.1.0'
     };
 
     app.value('config', config);

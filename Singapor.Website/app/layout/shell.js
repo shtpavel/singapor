@@ -3,9 +3,9 @@
     
     var controllerId = 'shell';
     angular.module('app').controller(controllerId,
-        ['$rootScope', 'common', 'config', shell]);
+        ['$rootScope', 'common', 'config', 'settingsProvider', shell]);
 
-    function shell($rootScope, common, config) {
+    function shell($rootScope, common, config, settingsProvider) {
         var vm = this;
         var logSuccess = common.logger.getLogFn(controllerId, 'success');
         var events = config.events;
@@ -25,7 +25,45 @@
         activate();
 
         function activate() {
-            common.activateController([], controllerId);
+            common.activateController([loadSettings()], controllerId);
+            initDom();
+        }
+
+        function loadSettings() {
+            return settingsProvider.getSettings().then(function(data) {
+                localStorage.setItem("settings", JSON.stringify(data));
+            });
+        }
+
+        function fix_height() {
+            var heightWithoutNavbar = $("body > #wrapper").height() - 61;
+            $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
+
+            var navbarHeigh = $('nav.navbar-default').height();
+            var wrapperHeigh = $('#page-wrapper').height();
+
+            if (navbarHeigh > wrapperHeigh) {
+                $('#page-wrapper').css("min-height", navbarHeigh + "px");
+            }
+
+            if (navbarHeigh < wrapperHeigh) {
+                $('#page-wrapper').css("min-height", $(window).height() + "px");
+            }
+
+            if ($('body').hasClass('fixed-nav')) {
+                if (navbarHeigh > wrapperHeigh) {
+                    $('#page-wrapper').css("min-height", navbarHeigh - 60 + "px");
+                } else {
+                    $('#page-wrapper').css("min-height", $(window).height() - 60 + "px");
+                }
+            }
+        }
+
+        function toggleSpinner(on) {
+             vm.isBusy = on;
+        }
+
+        function initDom(){
 
             fix_height();
 
@@ -68,34 +106,6 @@
                     ibox.find('[id^=map-]').resize();
                 }, 50);
             });
-        }
-
-        function fix_height() {
-            var heightWithoutNavbar = $("body > #wrapper").height() - 61;
-            $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
-
-            var navbarHeigh = $('nav.navbar-default').height();
-            var wrapperHeigh = $('#page-wrapper').height();
-
-            if (navbarHeigh > wrapperHeigh) {
-                $('#page-wrapper').css("min-height", navbarHeigh + "px");
-            }
-
-            if (navbarHeigh < wrapperHeigh) {
-                $('#page-wrapper').css("min-height", $(window).height() + "px");
-            }
-
-            if ($('body').hasClass('fixed-nav')) {
-                if (navbarHeigh > wrapperHeigh) {
-                    $('#page-wrapper').css("min-height", navbarHeigh - 60 + "px");
-                } else {
-                    $('#page-wrapper').css("min-height", $(window).height() - 60 + "px");
-                }
-            }
-        }
-
-        function toggleSpinner(on) {
-             vm.isBusy = on;
         }
 
         $rootScope.$on('$routeChangeStart',

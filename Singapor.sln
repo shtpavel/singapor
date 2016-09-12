@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Resources", "Singapor.Resources\Singapor.Resources.csproj", "{F7DB7DBC-C6C8-4836-8665-23C5545663A5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EF917988-22A2-49F1-B514-18D0F0C5E507}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Core", "2 - Core", "{EF917988-22A2-49F1-B514-18D0F0C5E507}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Helpers", "Singapor.Helpers\Singapor.Helpers.csproj", "{3369F802-1889-4A27-91A4-89DDEE682FB4}"
 EndProject
@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.ApplicationService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Common", "Singapor.Common\Singapor.Common.csproj", "{D93560EE-1DD5-44CE-B75A-B5CD7B5303F5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{8E461330-A92F-4D65-AF5A-9DD2828E9FA7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Web", "1 - Web", "{8E461330-A92F-4D65-AF5A-9DD2828E9FA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singapor.Website", "Singapor.Website\Singapor.Website.csproj", "{371EEE55-EDC0-43D0-820D-23089034CF1D}"
 EndProject
