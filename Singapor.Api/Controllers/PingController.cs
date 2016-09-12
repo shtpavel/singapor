@@ -8,7 +8,6 @@ using System.Web.Http.Cors;
 
 namespace Singapor.Api.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/ping")]
     public class PingController : ApiController
     {

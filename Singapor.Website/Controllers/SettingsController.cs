@@ -14,7 +14,7 @@ namespace Singapor.Website.Controllers
         [HttpGet, Route("")]
         public object ApiUrl()
         {
-            var api_url = WebConfigurationManager.AppSettings["apiurl"];
+            var api_url = WebConfigurationManager.AppSettings["api_url"];
             return new {api_url = api_url};
         }
     }
