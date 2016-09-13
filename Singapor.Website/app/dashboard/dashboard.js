@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'dashboard';
-    angular.module('app').controller(controllerId, ['common', 'pingProvider', dashboard]);
+    angular.module('app').controller(controllerId, ['common', 'pingResource', dashboard]);
 
-    function dashboard(common, pingProvider) {
+    function dashboard(common, pingResource) {
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
 
@@ -17,7 +17,7 @@
         }
 
         function ping() {
-            return pingProvider.get().$promise.then(function (data) {
+            return pingResource.get().$promise.then(function (data) {
                 console.log(data.message);
                 return data;
             });

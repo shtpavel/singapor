@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\CompanyDatabaseConfiguration.cs" />
+    <Compile Include="Configurations\ProjectDatabaseConfiguration.cs" />
     <Compile Include="Configurations\RoleDatabaseConfiguration.cs" />
     <Compile Include="Configurations\UtilityDatabaseConfiguration.cs" />
     <Compile Include="Configurations\UnitDatabaseConfiguration.cs" />
@@ -60,6 +61,11 @@
     <Compile Include="Filters\Abstract\IEmptyQueryFilterProvider.cs" />
     <Compile Include="Filters\Abstract\IQueryFilter.cs" />
     <Compile Include="IDataContext.cs" />
+    <Compile Include="Migrations\201609131211142_InitialMigration.cs" />
+    <Compile Include="Migrations\201609131211142_InitialMigration.Designer.cs">
+      <DependentUpon>201609131211142_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -81,6 +87,11 @@
       <Project>{F7DB7DBC-C6C8-4836-8665-23C5545663A5}</Project>
       <Name>Singapor.Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609131211142_InitialMigration.resx">
+      <DependentUpon>201609131211142_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

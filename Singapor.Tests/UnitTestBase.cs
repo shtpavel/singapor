@@ -49,7 +49,8 @@ namespace Singapor.Tests
         public UnitTestBase()
 		{
             var testContainer = new TestsContainer();
-            _container = testContainer.GetContainerBuilder();
+            var builder = testContainer.GetContainerBuilder();
+            _container = builder.Build();
             _container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
             _container.Resolve<IEventRegisterListeners>().RegisterListeners();
             _translationsService = _container.Resolve<ITranslationsService>();

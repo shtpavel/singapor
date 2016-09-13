@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var serviceId = 'pingProvider';
+    var serviceId = 'pingResource';
 
     angular
         .module('app')

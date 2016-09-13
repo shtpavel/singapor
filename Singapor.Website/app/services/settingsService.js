@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var serviceId = 'settingsProvider';
+    var serviceId = 'settingsService';
     angular.module('app').factory(serviceId, ['common', '$http', settingsProvider]);
 
     function settingsProvider(common, $http) {

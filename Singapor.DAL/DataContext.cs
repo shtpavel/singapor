@@ -9,7 +9,6 @@ namespace Singapor.DAL
 
 		public DataContext() : base("name=Default")
 		{
-//			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DataContext, Configuration>());
 		}
 
 		#endregion
@@ -32,6 +31,7 @@ namespace Singapor.DAL
 			modelBuilder.Configurations.Add(new UserDatabaseConfiguration());
 			modelBuilder.Configurations.Add(new UnitTypeDatabaseConfiguration());
 			modelBuilder.Configurations.Add(new UtilityDatabaseConfiguration());
+			modelBuilder.Configurations.Add(new ProjectDatabaseConfiguration());
 		}
 	}
 }

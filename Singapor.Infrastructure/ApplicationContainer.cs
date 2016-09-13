@@ -7,18 +7,12 @@ namespace Singapor.Infrastructure
 	{
 		#region Public methods
 
-		public IContainer GetContainerBuilder()
+		public ContainerBuilder GetContainerBuilder()
 		{
 			var builder = new ContainerBuilder();
 			RegisterModules(builder);
 
-			var container = builder.Build();
-
-			//Register container itself
-			var newContainerBuilder = new ContainerBuilder();
-			newContainerBuilder.RegisterInstance(container).SingleInstance();
-			newContainerBuilder.Update(container);
-            return container;
+            return builder;
 		}
 
 		#endregion

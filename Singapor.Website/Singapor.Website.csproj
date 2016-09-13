@@ -138,10 +138,8 @@
     <Content Include="app\layout\sidebar.html" />
     <Content Include="app\layout\sidebar.js" />
     <Content Include="app\layout\topnav.html" />
-    <Content Include="app\services\datacontext.js" />
-    <Content Include="app\services\directives.js" />
-    <Content Include="app\services\pingProvider.js" />
-    <Content Include="app\services\settingsProvider.js" />
+    <Content Include="app\resources\pingResource.js" />
+    <Content Include="app\services\settingsService.js" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

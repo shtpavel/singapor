@@ -14,6 +14,7 @@ namespace Singapor.Infrastructure.DependencyInjection.Modules
 			builder.RegisterType<UnitTypeService>().As<IUnitTypeService>();
 			builder.RegisterType<UserService>().As<IUserService>();
 			builder.RegisterType<UtilityService>().As<IUtilityService>();
+			builder.RegisterType<ProjectService>().As<IProjectService>();
 
 			builder.RegisterType<TranslationsService>().As<ITranslationsService>().InstancePerLifetimeScope();
 			builder.RegisterType<TranslationsProvider>().As<ITranslationsProvider>().InstancePerLifetimeScope();

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppResources.cs" />
+    <Compile Include="Auth\UserIds.cs" />
     <Compile Include="Classes\Country.cs" />
     <Compile Include="Providers\CountriesProvider.cs" />
     <Compile Include="Auth\CustomClaims.cs" />

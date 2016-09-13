@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using Singapor.Resources;
+using Singapor.Resources.Auth;
 
 namespace Singapor.Common.Contexts
 {
@@ -14,8 +15,9 @@ namespace Singapor.Common.Contexts
 		{
 			get
 			{
-				var identifier = ((ClaimsPrincipal) HttpContext.Current.User).FindFirst(ClaimTypes.NameIdentifier).Value;
-				return string.IsNullOrEmpty(identifier) ? (Guid?) null : Guid.Parse(identifier);
+			    return UserIds.SuperAdmin;
+//				var identifier = ((ClaimsPrincipal) HttpContext.Current.User).FindFirst(ClaimTypes.NameIdentifier).Value;
+//				return string.IsNullOrEmpty(identifier) ? (Guid?) null : Guid.Parse(identifier);
 			}
 		}
 

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICompanyService.cs" />
+    <Compile Include="Abstract\IProjectService.cs" />
     <Compile Include="Abstract\IUtilityService.cs" />
     <Compile Include="Abstract\IUnitService.cs" />
     <Compile Include="Abstract\IUnitTypeService.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Filters\EmptyQueryFilterProvider.cs" />
     <Compile Include="Filters\SoftDeleteFilterProvider.cs" />
     <Compile Include="Helpers\ValidationResultExtensionMethods.cs" />
+    <Compile Include="Models\Maps\ProjectMapper.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\Validators\Abstract\BaseValidator.cs" />
     <Compile Include="Models\Validators\CommonValidator.cs" />
     <Compile Include="Models\CompanyDependentModelBase.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Abstract\IService.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Abstract\ITranslationsService.cs" />
+    <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\TranslationsService.cs" />
     <Compile Include="Services\UtilityService.cs" />
     <Compile Include="Services\UnitService.cs" />

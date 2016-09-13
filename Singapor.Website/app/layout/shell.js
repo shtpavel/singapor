@@ -3,9 +3,9 @@
     
     var controllerId = 'shell';
     angular.module('app').controller(controllerId,
-        ['$rootScope', 'common', 'config', 'settingsProvider', shell]);
+        ['$rootScope', 'common', 'config', 'settingsService', shell]);
 
-    function shell($rootScope, common, config, settingsProvider) {
+    function shell($rootScope, common, config, settingsService) {
         var vm = this;
         var logSuccess = common.logger.getLogFn(controllerId, 'success');
         var events = config.events;
@@ -25,12 +25,14 @@
         activate();
 
         function activate() {
-            common.activateController([loadSettings()], controllerId);
-            initDom();
+            common.activateController([loadSettings()], controllerId)
+                .then(function() {
+                        initDom();
+                    });
         }
 
         function loadSettings() {
-            return settingsProvider.getSettings().then(function(data) {
+            return settingsService.getSettings().then(function (data) {
                 localStorage.setItem("settings", JSON.stringify(data));
             });
         }
