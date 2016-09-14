@@ -25,8 +25,9 @@ namespace Singapor.Common.Contexts
 		{
 			get
 			{
-				var identifier = ((ClaimsPrincipal) HttpContext.Current.User).FindFirst(CustomClaims.CompanyId).Value;
-				return string.IsNullOrEmpty(identifier) ? (Guid?) null : Guid.Parse(identifier);
+			    return CompanyIds.DefaultCompanyId;
+//				var identifier = ((ClaimsPrincipal) HttpContext.Current.User).FindFirst(CustomClaims.CompanyId).Value;
+//				return string.IsNullOrEmpty(identifier) ? (Guid?) null : Guid.Parse(identifier);
 			}
 		}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Singapor.DAL.Filters.Abstract;
@@ -9,7 +10,7 @@ using Singapor.Model.Entities.Abstract;
 namespace Singapor.DAL.Repositories
 {
 	public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
-	{
+    {
 		#region Fields
 
 		private readonly IDataContext _context;
@@ -64,19 +65,24 @@ namespace Singapor.DAL.Repositories
 
 		private IQueryable<TEntity> GetFilteredEntities()
 		{
-			var queryWithCommonFilter = _context
-				.Set<TEntity>();
-
-			var isCompanyDependenEntity = typeof (CompanyDependentEntityBase).IsAssignableFrom(typeof (TEntity));
+		    var list = _context.Set<TEntity>();
+			var isCompanyDependenEntity = typeof(CompanyDependentEntityBase).IsAssignableFrom(typeof (TEntity));
 			if (isCompanyDependenEntity)
 			{
-				var companyDependentFilteredQuery = queryWithCommonFilter.Cast<CompanyDependentEntityBase>();
+				var companyDependentFilteredQuery = list
+                    .AsEnumerable()
+                    .Cast<CompanyDependentEntityBase>()
+                    .AsQueryable();
+
 				foreach (var companyDependentFilter in _companyDependentFilters)
 					companyDependentFilteredQuery = companyDependentFilteredQuery.Where(companyDependentFilter.GetFilter());
 
-				return companyDependentFilteredQuery.Cast<TEntity>();
+			    return companyDependentFilteredQuery.
+                    AsEnumerable()
+                    .Cast<TEntity>()
+                    .AsQueryable();
 			}
-			return queryWithCommonFilter;
+			return list.AsQueryable();
 		}
 
 		#endregion

@@ -9,8 +9,8 @@ namespace Singapor.DAL.Filters.Abstract
 	{
 		#region Public methods
 
-		Expression<Func<T, bool>> GetFilter();
+	    Expression<Func<T, bool>> GetFilter();
 
-		#endregion
+	    #endregion
 	}
 }

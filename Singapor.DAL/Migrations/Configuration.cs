@@ -20,21 +20,40 @@ namespace Singapor.DAL.Migrations
 
         protected override void Seed(DataContext context)
         {
+            if (context.Set<Company>().Any())
+                return;
+
             var defaultCompany = CreateCompany();
             context.Set<Company>().Add(defaultCompany);
             CreateRoles(context);
             CreateSuperUser(context, defaultCompany);
+            CreateProject(context, defaultCompany);
             CreateUnitTypes(context, defaultCompany);
             CreateUtilities(context, defaultCompany);
         }
 
+
+
         #region Private methods
+        private static void CreateProject(DataContext context, Company defaultCompany)
+        {
+            var project = new Project()
+            {
+                Id = Guid.NewGuid(),
+                CompanyId = defaultCompany.Id,
+                CreatedAt = DateTime.UtcNow,
+                Name = "BarberShop",
+                Description = Guid.NewGuid().ToString("n")
+            };
+
+            context.Set<Project>().Add(project);
+        }
 
         private static Company CreateCompany()
         {
             var defaultCompany = new Company()
             {
-                Id = Guid.NewGuid(),
+                Id = CompanyIds.DefaultCompanyId,
                 Address = "5th Avenu, 12",
                 Country = "USA",
                 CreatedAt = DateTime.UtcNow,

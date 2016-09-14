@@ -116,7 +116,7 @@ namespace Singapor.Services.Services
 
 		public ListEntityResponse<TModel> Get()
 		{
-			return
+            return
 				new ListEntityResponse<TModel>(
 					_repository.GetAll()
 						.Select(x => new SingleEntityResponse<TModel>(Mapper.Map(x, Activator.CreateInstance<TModel>()))));
@@ -139,8 +139,9 @@ namespace Singapor.Services.Services
 				return new SingleEntityResponse<TModel>(null);
 
 			var existingItem = _repository.GetById(data.Id.Value);
-
-			return new SingleEntityResponse<TModel>(Mapper.Map(existingItem, data));
+		    Mapper.Map(data, existingItem);
+		    _unitOfWork.SaveChanges();
+            return new SingleEntityResponse<TModel>(data);
 		}
 
 		#endregion

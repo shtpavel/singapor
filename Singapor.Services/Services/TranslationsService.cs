@@ -29,8 +29,10 @@ namespace Singapor.Services.Services
 
         public string GetTranslationByKey(string key)
         {
-            var data = (JObject)JsonConvert.DeserializeObject(_translationsJson);
+            if (string.IsNullOrEmpty(_translationsJson))
+                return key;
 
+            var data = (JObject)JsonConvert.DeserializeObject(_translationsJson);
             var translation = data.SelectToken(key, false);
             if (translation == null)
                 return $"#no translation - key: {key}";

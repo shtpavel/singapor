@@ -10,6 +10,8 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Singapor.Infrastructure;
+using Singapor.Services.Events;
+using Singapor.Services.Models.Maps;
 
 namespace Singapor.Api
 {
@@ -22,7 +24,7 @@ namespace Singapor.Api
             ConfigureDependencyInjection();
         }
 
-        private static void ConfigureDependencyInjection()
+        private void ConfigureDependencyInjection()
         {
             var applicationContainer = new ApplicationContainer();
             var builder = applicationContainer.GetContainerBuilder();
@@ -32,11 +34,12 @@ namespace Singapor.Api
 
             var container = builder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            
-            //Register container itself
             var newContainerBuilder = new ContainerBuilder();
             newContainerBuilder.RegisterInstance(container).SingleInstance();
             newContainerBuilder.Update(container);
+
+            container.Resolve<IEnumerable<IMapConfiguration>>().ToList().ForEach(x => x.Map());
+            container.Resolve<IEventRegisterListeners>().RegisterListeners();
         }
     }
 }
