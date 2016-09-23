@@ -121,8 +121,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\admin\admin.html" />
-    <Content Include="app\admin\admin.js" />
     <Content Include="app\app.js" />
     <Content Include="app\app.route.js" />
     <Content Include="app\common\bootstrap\bootstrap.dialog.js" />
@@ -133,13 +131,18 @@
     <Content Include="app\config.js" />
     <Content Include="app\dashboard\dashboard.html" />
     <Content Include="app\dashboard\dashboard.js" />
+    <Content Include="app\layout\common\itemContainer.html" />
+    <Content Include="app\layout\common\itemContainer.js" />
     <Content Include="app\layout\shell.html" />
     <Content Include="app\layout\shell.js" />
     <Content Include="app\layout\sidebar.html" />
     <Content Include="app\layout\sidebar.js" />
     <Content Include="app\layout\topnav.html" />
+    <Content Include="app\projects\projects.html" />
+    <Content Include="app\projects\projects.js" />
     <Content Include="app\resources\pingResource.js" />
     <Content Include="app\services\settingsService.js" />
+    <Content Include="app\services\tableService.js" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -16,8 +16,7 @@ namespace Singapor.Api
         {
             var cors = new EnableCorsAttribute(Settings.ClientUrl, "*", "*");
             config.EnableCors(cors);
-//            config.EnableCors();
-            // Web API routes
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
